@@ -27,7 +27,7 @@
             android:id="@+id/checkBox1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hola desde Android" />
+            android:text="Hola desde branchgonzo" />
 
         <ImageView
             android:id="@+id/imageView1"
