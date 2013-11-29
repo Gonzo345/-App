@@ -27,11 +27,7 @@
             android:id="@+id/checkBox1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text="Gannon_Aitor" />
-=======
             android:text="Esto no se toca, cojones" />
->>>>>>> 5ca4c21496f0b6210a6d1d8d36ac3f8faa663cea
 
         <ImageView
             android:id="@+id/imageView1"
