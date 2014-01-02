@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Inicial" >
+    tools:context=".Inicial" android:scrollbars="vertical">
 
     <TextView
         android:id="@+id/textView1"
@@ -19,40 +19,62 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Esto no se toca, cojones" />
+        <TextView android:text="TextView"
+            android:id="@+id/num1"
+            android:layout_width="10px"
+            android:layout_height="10px"
+            android:background="#000000" >
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ruleta" />
+            <requestFocus />
+        </TextView>
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <Spinner
-                android:id="@+id/spi1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:prompt="@array/num" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btinsetar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="insertar" />
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/ima1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ruleta" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Spinner
+                        android:id="@+id/spi1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:prompt="@array/num" />
+
+                    <Button
+                        android:id="@+id/btinsetar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="insertar" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btestadistica"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ver estadisticas" />
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </AbsoluteLayout>
