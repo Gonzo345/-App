@@ -26,6 +26,11 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// Se ejecuta la sentencia SQL de creación de la tabla
 
+		 db.execSQL( "CREATE TABLE ruleta(" +
+		          " id INTEGER PRIMARY KEY AUTOINCREMENT," +
+		          " id_ruleta TEXT NOT NULL, " +
+		          " num TEXT NOT NULL, " +
+		          " fecha TEXT)" );
 		MCount(db);
 
 	}
