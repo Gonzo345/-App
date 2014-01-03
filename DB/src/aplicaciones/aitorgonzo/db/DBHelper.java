@@ -51,10 +51,10 @@ public class DBHelper extends SQLiteOpenHelper {
 		// ser más elaborado.
 
 		// Se elimina la versión anterior de la tabla
-		// db.execSQL("DROP TABLE IF EXISTS ruleta");
+		db.execSQL("DROP TABLE IF EXISTS ruleta");
 
 		// Se crea la nueva versión de la tabla
-		// db.execSQL(sqlCreate);
+		db.execSQL(sqlCreate);
 	}
 
 	public void Insertar(int id_ruleta, String num, String fecha) {
