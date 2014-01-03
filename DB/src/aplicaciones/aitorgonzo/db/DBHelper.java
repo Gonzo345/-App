@@ -77,7 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	public String leer() {
 
-//		String result[] = new String[COUNT];
+		// String result[] = new String[COUNT];
 		String result;
 		String columnas[] = { _ID, "id_ruleta", "num", "fecha" };
 		Cursor c = this.getReadableDatabase().query("ruleta", columnas, null,
@@ -88,20 +88,45 @@ public class DBHelper extends SQLiteOpenHelper {
 		idr = c.getColumnIndex("id_ruleta");
 		inum = c.getColumnIndex("num");
 		ifecha = c.getColumnIndex("fecha");
-		
-		 c.moveToLast();
-		
-		 result = c.getString(idr)+ " "+c.getString(idr)+" "+c.getString(inum)+ " "+c.getString(ifecha);
-		
-		 return result;
-//		int contador = 0;
-//		for (c.moveToFirst(); !c.moveToLast(); c.moveToNext()) {
-//			result[contador] = c.getString(idr) + " " + c.getString(idr) + " "
-//					+ c.getString(inum) + " " + c.getString(ifecha);
-//			contador++;
-//		}
-//		return result;
 
+		c.moveToLast();
+
+		result = c.getString(idr) + " " + c.getString(idr) + " "
+				+ c.getString(inum) + " " + c.getString(ifecha);
+
+		return result;
+		// int contador = 0;
+		// for (c.moveToFirst(); !c.moveToLast(); c.moveToNext()) {
+		// result[contador] = c.getString(idr) + " " + c.getString(idr) + " "
+		// + c.getString(inum) + " " + c.getString(ifecha);
+		// contador++;
+		// }
+		// return result;
+
+	}
+
+	public String[] getData(String Id) {
+		Cursor c = null;
+
+		String[] row = new String[10];
+
+		c = this.getReadableDatabase().rawQuery("Select * FROM ruleta ", null);
+		c.moveToFirst();
+		// while(!c.isAfterLast())
+		// {
+		// arrayListProductName.add(c.getString(c.getColumnIndex("Column1")));
+		// arrayListProductId.add(c.getString(c.getColumnIndex("Column2 ")));
+		// c.moveToNext();
+		// }
+
+		for (int j = 0; j < 10; j++) {
+			row[j] = c.getString(c.getColumnIndex("num"));
+			c.moveToNext();
+		}
+		c.close();
+		this.close();
+
+		return row;
 	}
 
 	public void abrir() {
