@@ -35,7 +35,6 @@ public final class R {
     public static final class id {
         public static final int AbsoluteLayout1=0x7f0a002d;
         public static final int LinearLayout1=0x7f0a000b;
-        public static final int ListView1=0x7f0a002c;
         public static final int TableRow01=0x7f0a0015;
         public static final int TableRow02=0x7f0a0010;
         public static final int action_settings=0x7f0a002e;
@@ -66,6 +65,7 @@ public final class R {
         public static final int btvermesa=0x7f0a002b;
         public static final int ima1=0x7f0a000c;
         public static final int lblnum=0x7f0a000e;
+        public static final int listView1=0x7f0a002c;
         public static final int radio_mesas=0x7f0a0025;
         public static final int radiomesa1=0x7f0a0026;
         public static final int radiomesa2=0x7f0a0027;

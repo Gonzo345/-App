@@ -50,6 +50,7 @@ public class Estadistica extends Activity {
 						+ GestionarPorcentages(numtotal, cad0_36[j]) + "%");
 			}
 		}
+		DBH.close();
 
 	}
 

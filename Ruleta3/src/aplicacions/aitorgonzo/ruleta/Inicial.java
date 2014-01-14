@@ -177,6 +177,21 @@ public class Inicial extends Activity {
 
 		// ****************************************************************************************
 		// ****************************************************************************************
+		btvermesa.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int selectedId = radioMesas.getCheckedRadioButtonId();
+				// find the radiobutton by returned id
+		        radioMesasbt = (RadioButton) findViewById(selectedId);
+		        
+		        MostarMesa(radioMesasbt.getHint().toString());
+				
+			}
+		});
+		
+		
+		
 		// ****************************************************************************************
 
 		// Boton insertar en la ruleta
@@ -333,6 +348,8 @@ public class Inicial extends Activity {
 			txLista.setText("");
 
 			DBH.BuscarSiExiste("hola");
+			
+			DBH.close();
 
 		} else {
 			Toast.makeText(Inicial.this, "no se han insertado números...",
@@ -343,14 +360,8 @@ public class Inicial extends Activity {
 	public void MostarMesa(String num) {
 		Intent i = new Intent(Inicial.this, MostrarNumerosMesa.class);
 		
-		int selectedId = radioMesas.getCheckedRadioButtonId();
-		// find the radiobutton by returned id
-        radioMesasbt = (RadioButton) findViewById(selectedId);
-		
-		
-		i.putExtra("Mesa", radioMesasbt.getHint());
+		i.putExtra("Mesa", num);
 		startActivity(i);
-		this.finish();
 	}
 
 	@Override
