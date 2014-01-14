@@ -33,17 +33,18 @@ public final class R {
         public static final int ruleta=0x7f020002;
     }
     public static final class id {
-        public static final int AbsoluteLayout1=0x7f0a0025;
+        public static final int AbsoluteLayout1=0x7f0a0027;
         public static final int LinearLayout1=0x7f0a000b;
         public static final int TableRow01=0x7f0a0015;
         public static final int TableRow02=0x7f0a0010;
-        public static final int action_settings=0x7f0a0026;
+        public static final int action_settings=0x7f0a0028;
         public static final int bt1=0x7f0a0005;
         public static final int bt2=0x7f0a0006;
         public static final int bt3=0x7f0a0007;
         public static final int bt4=0x7f0a0008;
         public static final int btborrar=0x7f0a0023;
         public static final int btestadistica=0x7f0a0021;
+        public static final int btinsertar=0x7f0a0025;
         public static final int btinsertar2=0x7f0a001d;
         public static final int btinsertar3=0x7f0a001f;
         public static final int btinsertar4=0x7f0a0020;
@@ -61,6 +62,7 @@ public final class R {
         public static final int btnborrar=0x7f0a000f;
         public static final int btno=0x7f0a0004;
         public static final int btsi=0x7f0a0003;
+        public static final int btvermesa=0x7f0a0026;
         public static final int ima1=0x7f0a000c;
         public static final int lblnum=0x7f0a000e;
         public static final int scrollView1=0x7f0a0009;
@@ -79,7 +81,8 @@ public final class R {
         public static final int grafico=0x7f030002;
         public static final int inicial=0x7f030003;
         public static final int inicial2=0x7f030004;
-        public static final int slash=0x7f030005;
+        public static final int inicial3=0x7f030005;
+        public static final int slash=0x7f030006;
     }
     public static final class menu {
         public static final int inicial=0x7f090000;
@@ -99,8 +102,10 @@ public final class R {
         public static final int ins2=0x7f070004;
         public static final int ins3=0x7f070005;
         public static final int ins4=0x7f070006;
+        public static final int insertarnum=0x7f070010;
         public static final int mesas=0x7f07000f;
         public static final int pregunta_borrar=0x7f07000c;
+        public static final int vermesa=0x7f070011;
     }
     public static final class style {
         /** 

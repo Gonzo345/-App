@@ -31,7 +31,7 @@ public class Inicial extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.inicial2);
+		setContentView(R.layout.inicial3);
 
 		// seek = (SeekBar) findViewById(R.id.seek);
 		btinsertar = (Button) findViewById(R.id.btinsetar);

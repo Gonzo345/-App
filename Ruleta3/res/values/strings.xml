@@ -17,6 +17,8 @@
     <string name="Si">Sí</string>
     <string name="No">No</string>
     <string name="mesas">Insertar en:</string>
+    <string name="insertarnum">Insertar número</string>
+    <string name="vermesa">Comprobar números de la mesa</string>
     
 
 </resources>
