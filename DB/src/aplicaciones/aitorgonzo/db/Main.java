@@ -26,7 +26,12 @@ public class Main extends Activity {
 		Button bt2 = (Button) findViewById(R.id.bt2);
 		Button bt3 = (Button) findViewById(R.id.bt3);
 		tv1 = (TextView) findViewById(R.id.tv1);
-		dbh = new DBHelper(this);
+		dbh = new DBHelper(this, "ruletadb",null,1);
+//		db.execSQL( "CREATE TABLE ruleta(" +
+//		          " id INTEGER PRIMARY KEY AUTOINCREMENT," +
+//		          " id_ruleta TEXT NOT NULL, " +
+//		          " num TEXT NOT NULL, " +
+//		          " fecha TEXT)" );
 
 		tv1.setText("hola");
 		dbh.abrir();// abre la bd
@@ -41,7 +46,8 @@ public class Main extends Activity {
 
 		tv1.setText(dbh.leer());
 		dbh.cerrar();// cierra la bd
-		db=dbh.getReadableDatabase();// con esto hacemos que la bd pueda ser accedida con los metodos rawquery o query del objeto SQLiteDatabase
+		
+		db=dbh.getWritableDatabase();// con esto hacemos que la bd pueda ser accedida con los metodos rawquery o query del objeto SQLiteDatabase
 
 		bt1.setOnClickListener(new OnClickListener() {
 

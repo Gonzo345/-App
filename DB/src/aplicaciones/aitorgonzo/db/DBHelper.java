@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -14,24 +15,19 @@ public class DBHelper extends SQLiteOpenHelper {
 	int COUNT;
 
 	// Sentencia SQL para crear la tabla de Usuarios
-	String sqlCreate = "CREATE TABLE ruleta ("
-			+ _ID
-			+ " INTEGER PRIMARY KEY AUTOINCREMENT, id_ruleta INTEGER, num TEXT, fecha TEXT)";
-
-	public DBHelper(Context contexto) {
-		super(contexto, "ruleta", null, 1);
+//	String sqlCreate = "CREATE TABLE ruleta ("+ _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, id_ruleta INTEGER, num TEXT, fecha TEXT)";//diferente
+	String sqlCreate = "CREATE TABLE ruleta (id INTEGER PRIMARY KEY AUTOINCREMENT , id_ruleta INTEGER, num TEXT, fecha TEXT)";//diferente
+	
+	public DBHelper(Context contexto, String nombre,CursorFactory factory,int version) {
+		super(contexto, nombre, factory, version);//diferente
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// Se ejecuta la sentencia SQL de creación de la tabla
 
-		 db.execSQL( "CREATE TABLE ruleta(" +
-		          " id INTEGER PRIMARY KEY AUTOINCREMENT," +
-		          " id_ruleta TEXT NOT NULL, " +
-		          " num TEXT NOT NULL, " +
-		          " fecha TEXT)" );
-		MCount(db);
+		 db.execSQL( sqlCreate);
+//		MCount(db);
 
 	}
 

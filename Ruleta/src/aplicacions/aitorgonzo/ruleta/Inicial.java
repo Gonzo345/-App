@@ -22,9 +22,9 @@ public class Inicial extends Activity {
 	SeekBar seek;
 	Button btinsertar, btestadistica;
 	String numsel;
-	TextView num1;
+	TextView num1, txLista;
 	// Llamamos a la clase de base de datos
-	DBHelper DBH = new DBHelper(Inicial.this);
+	Handler_sqlite DBH = new Handler_sqlite(Inicial.this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,8 @@ public class Inicial extends Activity {
 		// seek = (SeekBar) findViewById(R.id.seek);
 		btinsertar = (Button) findViewById(R.id.btinsetar);
 		btestadistica = (Button) findViewById(R.id.btestadistica);
-		num1 = (TextView) findViewById(R.id.num1);
+		
+		txLista= (TextView)findViewById(R.id.txLista);
 
 		// creamos el combobox
 		Spinner spin = (Spinner) findViewById(R.id.spi1);
@@ -60,36 +61,41 @@ public class Inicial extends Activity {
 			}
 		});
 
-		findViewById(R.id.btinsetar).setOnClickListener(new OnClickListener() {
+		btinsertar.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				Toast.makeText(Inicial.this, "el num es: " + numsel,
 						Toast.LENGTH_SHORT).show();
+				String id_ruleta = "Hola";
 
-				DBH.insertar(1, numsel, "aa/aa");
+				DBH.Insertar("1", numsel, "FECHA");
+				
+				txLista.setText("");
+				String x[] = DBH.leerArray();
+				for (int j = 0; j < x.length; j++) {
+					txLista.setText(txLista.getText()+"\n"+x[j]);
+				}
+				
+			   DBH.BuscarSiExiste("hola");
+			   
+			   Toast.makeText(Inicial.this,  DBH.BuscarSiExiste("hola"),
+						Toast.LENGTH_SHORT).show();
+			   
 
 			}
 		});
 
-		findViewById(R.id.btestadistica).setOnClickListener(
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-
-						Intent i = new Intent(Inicial.this, Estadistica.class);
-						startActivity(i);
-
-					}
-				});
-
-	}
-
-	public void VerEstadistica() {
-
-		Intent i = new Intent(Inicial.this, Estadistica.class);
-		startActivity(i);
+		// btestadistica.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		//
+		// Intent i = new Intent(Inicial.this, Estadistica.class);
+		// startActivity(i);
+		//
+		// }
+		// });
 
 	}
 
