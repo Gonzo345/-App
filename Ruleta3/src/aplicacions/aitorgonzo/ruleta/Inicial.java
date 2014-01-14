@@ -6,17 +6,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import aplicacions.acj.ruleta.R;
 
 public class Inicial extends Activity {
+	private RadioGroup radioMesas;
+	private RadioButton radioMesasbt;
 
 	int contadornums = 0;
 	SeekBar seek;
@@ -35,10 +35,8 @@ public class Inicial extends Activity {
 		setContentView(R.layout.inicial3);
 
 		// seek = (SeekBar) findViewById(R.id.seek);
-		btinsertar = (Button) findViewById(R.id.btinsetar);
-		btinsertar2 = (Button) findViewById(R.id.btinsertar2);
-		btinsertar3 = (Button) findViewById(R.id.btinsertar3);
-		btinsertar4 = (Button) findViewById(R.id.btinsertar4);
+		radioMesas = (RadioGroup) findViewById(R.id.radio_mesas);
+		btinsertar = (Button) findViewById(R.id.btinsertar);
 		btestadistica = (Button) findViewById(R.id.btestadistica);
 		btborrar = (Button) findViewById(R.id.btborrar);
 		btn0 = (Button) findViewById(R.id.btn0);
@@ -180,46 +178,23 @@ public class Inicial extends Activity {
 		// ****************************************************************************************
 		// ****************************************************************************************
 
-		// Boton insertar en la ruleta 1
+		// Boton insertar en la ruleta
 		btinsertar.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
-
-				LlamadaInsert("1");
-
-			}
-		});
-		// Boton insertar en la ruleta 2
-		btinsertar2.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-
-				LlamadaInsert("2");
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				int selectedId = radioMesas.getCheckedRadioButtonId();
+				// find the radiobutton by returned id
+		        radioMesasbt = (RadioButton) findViewById(selectedId);
+				
+				
+				LlamadaInsert(radioMesasbt.getHint() + "");
+				
 
 			}
 		});
-		// Boton insertar en la ruleta 3
-		btinsertar3.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-
-				LlamadaInsert("3");
-
-			}
-		});
-		// Boton insertar en la ruleta 4
-		btinsertar4.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-
-				LlamadaInsert("4");
-
-			}
-		});
+		
 
 		btestadistica.setOnClickListener(new OnClickListener() {
 

@@ -117,7 +117,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		return result;
 	}
 	
-public String BuscarSiExiste(String barcode){
+public String BuscarSiExiste(String barcode){//devuelve el número total de registros entre todos las mesas
 		
 		SQLiteDatabase db;
 		
@@ -136,7 +136,7 @@ public String BuscarSiExiste(String barcode){
 
 	}
 	
-public String BuscarExistentes(String id){
+public String BuscarExistentes(String id){// con este método nos devuelve el número de registros que tenemos en una id concreto
 		
 		SQLiteDatabase db;
 		
