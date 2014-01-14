@@ -182,33 +182,38 @@
                         android:orientation="vertical" >
 
                         <RadioGroup
+                            android:id="@+id/radio_mesas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" >
 
                             <RadioButton
-                                android:id="@+id/btinsetar"
+                                android:id="@+id/radiomesa1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
-                                android:text="@string/ins1" />
+                                android:text="@string/ins1"
+                                android:hint="1" />
 
                             <RadioButton
-                                android:id="@+id/btinsertar2"
+                                android:id="@+id/radiomesa2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ins2" />
+                                android:text="@string/ins2"
+                                android:hint="2" />
 
                             <RadioButton
-                                android:id="@+id/btinsertar3"
+                                android:id="@+id/radiomesa3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ins3" />
+                                android:text="@string/ins3"
+                                android:hint="3" />
 
                             <RadioButton
-                                android:id="@+id/btinsertar4"
+                                android:id="@+id/radiomesa4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ins4" />
+                                android:text="@string/ins4"
+                                android:hint="4" />
                         </RadioGroup>
                     </LinearLayout>
 
