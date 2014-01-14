@@ -23,7 +23,7 @@ public class Inicial extends Activity {
 	
 	Button btinsertar, btinsertar2, btinsertar3, btinsertar4, btestadistica,
 			btborrar, btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8,
-			btn9, btnborrar;
+			btn9, btnborrar, btvermesa;
 	String numsel;
 	TextView num1, txLista, lblnum;
 	// Llamamos a la clase de base de datos
@@ -50,6 +50,7 @@ public class Inicial extends Activity {
 		btn8 = (Button) findViewById(R.id.btn8);
 		btn9 = (Button) findViewById(R.id.btn9);
 		btnborrar = (Button) findViewById(R.id.btnborrar);
+		btvermesa = (Button) findViewById(R.id.btvermesa);
 
 		txLista = (TextView) findViewById(R.id.txLista);
 		lblnum = (TextView) findViewById(R.id.lblnum);
@@ -337,6 +338,19 @@ public class Inicial extends Activity {
 			Toast.makeText(Inicial.this, "no se han insertado números...",
 					Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	public void MostarMesa(String num) {
+		Intent i = new Intent(Inicial.this, MostrarNumerosMesa.class);
+		
+		int selectedId = radioMesas.getCheckedRadioButtonId();
+		// find the radiobutton by returned id
+        radioMesasbt = (RadioButton) findViewById(selectedId);
+		
+		
+		i.putExtra("Mesa", radioMesasbt.getHint());
+		startActivity(i);
+		this.finish();
 	}
 
 	@Override

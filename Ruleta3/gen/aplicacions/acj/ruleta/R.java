@@ -33,11 +33,12 @@ public final class R {
         public static final int ruleta=0x7f020002;
     }
     public static final class id {
-        public static final int AbsoluteLayout1=0x7f0a002c;
+        public static final int AbsoluteLayout1=0x7f0a002d;
         public static final int LinearLayout1=0x7f0a000b;
+        public static final int ListView1=0x7f0a002c;
         public static final int TableRow01=0x7f0a0015;
         public static final int TableRow02=0x7f0a0010;
-        public static final int action_settings=0x7f0a002d;
+        public static final int action_settings=0x7f0a002e;
         public static final int bt1=0x7f0a0005;
         public static final int bt2=0x7f0a0006;
         public static final int bt3=0x7f0a0007;
@@ -87,7 +88,8 @@ public final class R {
         public static final int inicial=0x7f030003;
         public static final int inicial2=0x7f030004;
         public static final int inicial3=0x7f030005;
-        public static final int slash=0x7f030006;
+        public static final int mostrarnumsmesa=0x7f030006;
+        public static final int slash=0x7f030007;
     }
     public static final class menu {
         public static final int inicial=0x7f090000;
