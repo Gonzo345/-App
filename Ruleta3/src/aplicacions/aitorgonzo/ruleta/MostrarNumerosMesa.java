@@ -19,7 +19,7 @@ public class MostrarNumerosMesa extends Activity{
 	Button btBorrarSeleccionados;
 	ListView listnumeros;
 	Handler_sqlite DBH = new Handler_sqlite(MostrarNumerosMesa.this);
-	String num_id_concreto;
+	String IdRuletaDeterminada;
 	String []x={};
 	
 
@@ -28,10 +28,10 @@ public class MostrarNumerosMesa extends Activity{
 		setContentView(R.layout.mostrarnumsmesa);
 
 		Bundle bundle = getIntent().getExtras();
-		num_id_concreto = bundle.getString("Mesa");
+		IdRuletaDeterminada = bundle.getString("Mesa");
 
-		String numtotal = DBH.BuscarExistentes(num_id_concreto);
-		x = DBH.leerArrayConIdConcreto(num_id_concreto, numtotal);
+		String numtotal = DBH.BuscarExistentes(IdRuletaDeterminada);//buscar numeros que pertenecen a una mesa en concreto
+		x = DBH.leerArrayConIdConcreto(IdRuletaDeterminada, numtotal);//recuperar los valores de una mesa en concreto
 		
 		btBorrarSeleccionados= (Button)findViewById(R.id.btborrarseleccionados);
 		listnumeros = (ListView) findViewById(R.id.listView1);
@@ -61,7 +61,7 @@ public class MostrarNumerosMesa extends Activity{
 				// TODO Auto-generated method stub
 				SparseBooleanArray seleccionados = listnumeros.getCheckedItemPositions();
 				
-				EliminarSeleccionados(seleccionados, num_id_concreto);
+				EliminarSeleccionados(seleccionados, IdRuletaDeterminada);
 				
 				
 			}
@@ -85,7 +85,7 @@ public class MostrarNumerosMesa extends Activity{
  
             //Esto es para ir creando un mensaje largo que mostraré al final
             StringBuilder resultado=new StringBuilder();
-            resultado.append("Se eliminarán los siguientes elementos:\n");
+            resultado.append("Se eliminarán los siguientes elementos:\n VALOR         Posicion \n");
  
             //Recorro my "array" de elementos seleccionados
             final int size=seleccionados.size();
@@ -93,14 +93,16 @@ public class MostrarNumerosMesa extends Activity{
                 //Si valueAt(i) es true, es que estaba seleccionado
                 if (seleccionados.valueAt(i)) {
                     //en keyAt(i) obtengo su posición
-                    resultado.append(seleccionados.keyAt(i)+"   "+ i+"\n");
+                	Toast.makeText(this, "Vuelta empezada", Toast.LENGTH_SHORT).show();	//Valor de la fila
+                    resultado.append(listnumeros.getItemAtPosition(i).toString()+"   ----------->  "+seleccionados.keyAt(i)+"\n");
                     
                     
                     //Toast.makeText(this,  "El numero de la fila seleccionada es el "+seleccionados.keyAt(i)+"", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, listnumeros.getItemAtPosition(i).toString() + "\n", Toast.LENGTH_SHORT).show();	//Valor de la fila
+                    Toast.makeText(this, "Valor "+listnumeros.getItemAtPosition(seleccionados.keyAt(i)).toString() +" Posición "+seleccionados.keyAt(i)+ "\n", Toast.LENGTH_SHORT).show();	//Valor de la fila
                     
-                    //Eliminamos de la BBDD el valor de la ListView marcados.
-                    DBH.Buscar_Eliminar(num_id_concreto, listnumeros.getItemAtPosition(i).toString());
+//                    //Eliminamos de la BBDD el valor de la ListView marcados.
+                    DBH.Buscar_Eliminar(num_id_concreto, listnumeros.getItemAtPosition(seleccionados.keyAt(i)).toString());
+//                    DBH.Buscar_Eliminar(num_id_concreto, seleccionados.keyAt(i)+"");
                 }
             }
             Toast.makeText(this,resultado.toString(),Toast.LENGTH_LONG).show();
