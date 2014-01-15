@@ -19,6 +19,7 @@
     <string name="mesas">Insertar en:</string>
     <string name="insertarnum">Insertar número</string>
     <string name="vermesa">Comprobar números de la mesa</string>
+    <string name="borrarseleccionados">Borrar los elementos seleccionados</string>
     
 
 </resources>

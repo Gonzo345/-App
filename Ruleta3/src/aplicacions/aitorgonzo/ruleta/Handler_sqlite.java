@@ -115,6 +115,30 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		}
 		
 		return result;
+		
+		
+	}	
+	//este método se encarga de eliminar los numeros seleccionados
+	public void Buscar_Eliminar(String idruleta, String numero_eliminar) {
+		
+		SQLiteDatabase db= this.getWritableDatabase();
+		
+		String columnas[]={"idnombre","id_ruleta", "num", "fecha"};// declaramos las columnas
+//		Cursor c = this.getReadableDatabase().query("ruleta", columnas, null, null, null, null, null);
+		Cursor c = this.getReadableDatabase().rawQuery("SELECT * FROM ruleta WHERE id_ruleta='"+idruleta+"'", null);
+		
+		int id, idr, num, fecha; // aqui ponemos los indices de las columnas en cada integer que hemos creado
+		id=c.getColumnIndex("idnombre");
+		idr=c.getColumnIndex("id_ruleta");
+		num=c.getColumnIndex("num");
+		fecha=c.getColumnIndex("fecha");
+		
+		c.moveToLast();
+		
+			String result=c.getString(id);
+			
+			db.execSQL("DELETE FROM ruleta WHERE idnombre='"+result+"' AND num='"+numero_eliminar+"'");
+			
 	}
 	
 public String BuscarSiExiste(String barcode){//devuelve el número total de registros entre todos las mesas

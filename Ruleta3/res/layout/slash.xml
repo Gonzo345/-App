@@ -11,6 +11,15 @@
         android:layout_x="2dp"
         android:layout_y="-1dp"
         android:src="@drawable/logo" />
+    
+<!--     <ImageView -->
+<!--         android:id="@+id/ima2" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_x="2dp" -->
+<!--         android:layout_y="-1dp" -->
+<!--         android:src="@drawable/ruleta" -->
+<!--         android:visibility="invisible"/> -->
 
 
 </AbsoluteLayout>

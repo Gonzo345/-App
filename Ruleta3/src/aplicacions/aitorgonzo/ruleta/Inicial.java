@@ -340,8 +340,8 @@ public class Inicial extends Activity {
 			numsel = lblnum.getText().toString();
 			BorrarNumTeclado();
 
-			Toast.makeText(Inicial.this, numsel + " en la mesa " + idruleta,
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(Inicial.this, numsel + " en la mesa " + idruleta,
+//					Toast.LENGTH_SHORT).show();
 
 			DBH.Insertar(idruleta, numsel, "FECHA");
 
