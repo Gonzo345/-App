@@ -41,6 +41,7 @@ public class MostrarNumerosMesa extends Activity{
 		listnumeros.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		
+		
 		listnumeros.setOnItemClickListener(new OnItemClickListener(){
 			 
 		    @Override
@@ -94,9 +95,12 @@ public class MostrarNumerosMesa extends Activity{
                     //en keyAt(i) obtengo su posición
                     resultado.append(seleccionados.keyAt(i)+"   "+ i+"\n");
                     
-                    Toast.makeText(this,  "El numero de la fila seleccionada es el "+seleccionados.keyAt(i)+"", Toast.LENGTH_SHORT).show();
                     
-                    DBH.Buscar_Eliminar(num_id_concreto, seleccionados.keyAt(i)+"");
+                    //Toast.makeText(this,  "El numero de la fila seleccionada es el "+seleccionados.keyAt(i)+"", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, listnumeros.getItemAtPosition(i).toString() + "\n", Toast.LENGTH_SHORT).show();	//Valor de la fila
+                    
+                    //Eliminamos de la BBDD el valor de la ListView marcados.
+                    DBH.Buscar_Eliminar(num_id_concreto, listnumeros.getItemAtPosition(i).toString());
                 }
             }
             Toast.makeText(this,resultado.toString(),Toast.LENGTH_LONG).show();
