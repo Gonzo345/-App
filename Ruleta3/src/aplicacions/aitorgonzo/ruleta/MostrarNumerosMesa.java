@@ -94,9 +94,9 @@ public class MostrarNumerosMesa extends Activity{
                     //en keyAt(i) obtengo su posición
                     resultado.append(seleccionados.keyAt(i)+"   "+ i+"\n");
                     
-                    Toast.makeText(this,  "El numero de la fila seleccionada es el "+x[i]+"", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,  "El numero de la fila seleccionada es el "+seleccionados.keyAt(i)+"", Toast.LENGTH_SHORT).show();
                     
-                    DBH.Buscar_Eliminar(num_id_concreto, x[i]);
+                    DBH.Buscar_Eliminar(num_id_concreto, seleccionados.keyAt(i)+"");
                 }
             }
             Toast.makeText(this,resultado.toString(),Toast.LENGTH_LONG).show();
