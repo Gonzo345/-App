@@ -1,7 +1,6 @@
 package aplicacions.aitorgonzo.ruleta;
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.TextView;
 import aplicacions.acj.ruleta.R;
@@ -55,13 +54,28 @@ public class Estadistica extends Activity {
 
 	}
 
-	private float GestionarPorcentages(String numtotal, int cad0_36) {
+	private String GestionarPorcentages(String numtotal, int cad0_36) {
 
 		float total = Integer.parseInt(numtotal);
 		float cad=cad0_36;
 		
 		float resultado = (cad / total )* 100;
-		return resultado;
+		
+		
+		//Eliminar decimales
+		String tofilter =resultado + "";	//Pasamos el resultado con decimales a String para ser escaneado
+		
+		int pospunto=tofilter.indexOf(".", 0);	//Encontramos la posición del decimal
+		String resultfiltrado ="";
+		try{
+			resultfiltrado = tofilter.substring(0,pospunto+3);	//Guardamos el decimal filtrado	
+		}catch (Exception e){
+			resultfiltrado = resultado+"";
+		}
+		
+		
+		
+		return resultfiltrado;
 	}
 
 }
