@@ -31,7 +31,7 @@ public class MostrarNumerosMesa extends Activity{
 		IdRuletaDeterminada = bundle.getString("Mesa");
 
 		String numtotal = DBH.BuscarExistentes(IdRuletaDeterminada);//buscar numeros que pertenecen a una mesa en concreto
-		x = DBH.leerArrayConIdConcreto(IdRuletaDeterminada, numtotal);//recuperar los valores de una mesa en concreto
+		x = DBH.leerArrayConIdConcreto___Fecha(IdRuletaDeterminada, numtotal);//recuperar los valores de una mesa en concreto
 		
 		btBorrarSeleccionados= (Button)findViewById(R.id.btborrarseleccionados);
 		listnumeros = (ListView) findViewById(R.id.listView1);
@@ -105,7 +105,7 @@ public class MostrarNumerosMesa extends Activity{
 //                    DBH.Buscar_Eliminar(num_id_concreto, seleccionados.keyAt(i)+"");
                 }
             }
-            Toast.makeText(this,resultado.toString(),Toast.LENGTH_LONG).show();
+//            Toast.makeText(this,resultado.toString(),Toast.LENGTH_LONG).show();
             
             this.finish();
         }

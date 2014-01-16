@@ -1,5 +1,8 @@
 package aplicacions.aitorgonzo.ruleta;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -207,6 +210,8 @@ public class Inicial extends Activity {
 				
 				LlamadaInsert(radioMesasbt.getHint() + "");
 				
+				
+				
 
 			}
 		});
@@ -342,8 +347,13 @@ public class Inicial extends Activity {
 
 //			Toast.makeText(Inicial.this, numsel + " en la mesa " + idruleta,
 //					Toast.LENGTH_SHORT).show();
+			
+			SimpleDateFormat s = new SimpleDateFormat("hh:mm:ss - dd/MM/yyyy");
+			String format = s.format(new Date());
+			
+//			Toast.makeText(Inicial.this, format, Toast.LENGTH_SHORT).show();
 
-			DBH.Insertar(idruleta, numsel, "FECHA");
+			DBH.Insertar(idruleta, numsel, format);
 
 			txLista.setText("");
 
