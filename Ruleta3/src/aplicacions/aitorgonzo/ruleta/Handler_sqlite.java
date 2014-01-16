@@ -125,7 +125,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		
 		String columnas[]={"idnombre","id_ruleta", "num", "fecha"};// declaramos las columnas
 //		Cursor c = this.getReadableDatabase().query("ruleta", columnas, null, null, null, null, null);
-		Cursor c = this.getReadableDatabase().rawQuery("SELECT * FROM ruleta WHERE id_ruleta='"+idruleta+"'", null);
+		Cursor c = this.getReadableDatabase().rawQuery("SELECT * FROM ruleta WHERE id_ruleta='"+idruleta+"' AND num='"+numero_eliminar+"' ", null);
 		
 		int id, idr, num, fecha; // aqui ponemos los indices de las columnas en cada integer que hemos creado
 		id=c.getColumnIndex("idnombre");
@@ -133,8 +133,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		num=c.getColumnIndex("num");
 		fecha=c.getColumnIndex("fecha");
 		
-		c.moveToFirst();
-		
+		c.moveToLast();
 			String result=c.getString(id);
 			
 			db.execSQL("DELETE FROM ruleta WHERE idnombre='"+result+"' AND num='"+numero_eliminar+"'");

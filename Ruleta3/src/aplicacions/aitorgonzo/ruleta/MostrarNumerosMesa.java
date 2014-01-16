@@ -93,12 +93,12 @@ public class MostrarNumerosMesa extends Activity{
                 //Si valueAt(i) es true, es que estaba seleccionado
                 if (seleccionados.valueAt(i)) {
                     //en keyAt(i) obtengo su posición
-                	Toast.makeText(this, "Vuelta empezada", Toast.LENGTH_SHORT).show();	//Valor de la fila
-                    resultado.append(listnumeros.getItemAtPosition(i).toString()+"   ----------->  "+seleccionados.keyAt(i)+"\n");
+//                	Toast.makeText(this, "Vuelta empezada", Toast.LENGTH_SHORT).show();	//Valor de la fila
+                    resultado.append(listnumeros.getItemAtPosition(seleccionados.keyAt(i)).toString()+"   ----------->  "+seleccionados.keyAt(i)+"\n");
                     
                     
                     //Toast.makeText(this,  "El numero de la fila seleccionada es el "+seleccionados.keyAt(i)+"", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "Valor "+listnumeros.getItemAtPosition(seleccionados.keyAt(i)).toString() +" Posición "+seleccionados.keyAt(i)+ "\n", Toast.LENGTH_SHORT).show();	//Valor de la fila
+//                    Toast.makeText(this, "Valor "+listnumeros.getItemAtPosition(seleccionados.keyAt(i)).toString() +" Posición "+seleccionados.keyAt(i)+ "\n", Toast.LENGTH_SHORT).show();	//Valor de la fila
                     
 //                    //Eliminamos de la BBDD el valor de la ListView marcados.
                     DBH.Buscar_Eliminar(num_id_concreto, listnumeros.getItemAtPosition(seleccionados.keyAt(i)).toString());
