@@ -1,13 +1,10 @@
 package aplicacions.aitorgonzo.ruleta;
 
-import static android.provider.BaseColumns._ID;
-import static android.provider.BaseColumns._COUNT;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 public class Handler_sqlite extends SQLiteOpenHelper {
 	int COUNT;
@@ -167,15 +164,27 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	public String Buscar_Eliminar(String idruleta, String numero_eliminar) {
 
 		SQLiteDatabase db = this.getWritableDatabase();
+		
+		//Eliminar la fecha del String de entrada
+				
+				int posespacio=numero_eliminar.indexOf(" ", 0);	//Encontramos la posición del espacio (separador para fecha)
+				String numerofiltrado="";
+				try{
+					numerofiltrado= numero_eliminar.substring(0,posespacio);
+					numero_eliminar = numerofiltrado;
+				}catch (Exception e){
+					//Aquí debería ir un toast, un log o qué cojones
+					numero_eliminar="69";
+				}
+				
+				
 
 		String columnas[] = { "idnombre", "id_ruleta", "num", "fecha" };// declaramos
 																		// las
 																		// columnas
 		// Cursor c = this.getReadableDatabase().query("ruleta", columnas, null,
 		// null, null, null, null);
-		Cursor c = this.getReadableDatabase().rawQuery(
-				"SELECT * FROM ruleta WHERE id_ruleta='" + idruleta
-						+ "' AND num='" + numero_eliminar + "' ", null);
+		Cursor c = this.getReadableDatabase().rawQuery("SELECT * FROM ruleta WHERE id_ruleta='" + idruleta+ "' AND num='" + numero_eliminar + "' ", null);
 
 		int id, idr, num, fecha; // aqui ponemos los indices de las columnas en
 									// cada integer que hemos creado
