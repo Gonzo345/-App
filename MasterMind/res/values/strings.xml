@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MasterMind</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="title_activity_inici">MasterMind</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_segona">Segona</string>
+    <string name="title_activity_instruccions">Instruccions</string>
+    <string name="instru1">La finalidad del juego es acertar le combinacion de colores que ha generado, para ello tenemos 7 intentos. Tenemos 10 colores y al enviar la combinación, nos devolvera una combinación de bolas negras, blancas o grises.</string>
+	<string name="instru2">El color negro significa que ese color no existe dentro de la combinación, el  gris que existe pero no en la posición que lo hemos introducido, y el blanco significa que existe y que esta en la posición correcta.</string>
+    <string name="instru3">Hay que tener en cuenta que un color se puede repetir dentro de una combinación.</string>
+    <string name="Salir">Salir</string>
+    <string name="Jugar">Jugar</string>
+    <string name="Instrucciones">Instrucciones</string>
+    
+</resources>

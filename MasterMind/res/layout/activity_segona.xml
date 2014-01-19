@@ -1,0 +1,62 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:gravity="center_vertical"
+    tools:context=".Segona" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/lytMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/instruccions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Instrucciones" />
+
+            <Button
+                android:id="@+id/jugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Jugar" />
+
+            <Button
+                android:id="@+id/sortir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Salir" />
+        </LinearLayout>
+    </TableRow>
+
+</TableLayout>
