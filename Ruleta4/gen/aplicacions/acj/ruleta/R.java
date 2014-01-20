@@ -13,9 +13,17 @@ public final class R {
         public static final int vi=0x7f040001;
     }
     public static final class array {
-        public static final int num=0x7f050000;
+        public static final int num=0x7f070000;
     }
     public static final class attr {
+    }
+    public static final class bool {
+        /** Enable automatic activity tracking
+         */
+        public static final int ga_autoActivityTracking=0x7f060000;
+        /** Enable automatic exception tracking
+         */
+        public static final int ga_reportUncaughtExceptions=0x7f060001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -24,8 +32,8 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static final int activity_horizontal_margin=0x7f080000;
+        public static final int activity_vertical_margin=0x7f080001;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
@@ -33,55 +41,55 @@ public final class R {
         public static final int ruleta=0x7f020002;
     }
     public static final class id {
-        public static final int AbsoluteLayout1=0x7f0a002f;
-        public static final int LinearLayout1=0x7f0a000c;
-        public static final int TableRow01=0x7f0a0016;
-        public static final int TableRow02=0x7f0a0011;
-        public static final int action_settings=0x7f0a0030;
-        public static final int bt1=0x7f0a0006;
-        public static final int bt2=0x7f0a0007;
-        public static final int bt3=0x7f0a0008;
-        public static final int bt4=0x7f0a0009;
-        public static final int btborrar=0x7f0a0024;
-        public static final int btborrarseleccionados=0x7f0a002d;
-        public static final int btestadistica=0x7f0a0022;
-        public static final int btinsertar=0x7f0a002b;
-        public static final int btinsertar2=0x7f0a001e;
-        public static final int btinsertar3=0x7f0a0020;
-        public static final int btinsertar4=0x7f0a0021;
-        public static final int btinsetar=0x7f0a001d;
-        public static final int btn0=0x7f0a001c;
-        public static final int btn1=0x7f0a0012;
-        public static final int btn2=0x7f0a0013;
-        public static final int btn3=0x7f0a0014;
-        public static final int btn4=0x7f0a0015;
-        public static final int btn5=0x7f0a0017;
-        public static final int btn6=0x7f0a0018;
-        public static final int btn7=0x7f0a0019;
-        public static final int btn8=0x7f0a001a;
-        public static final int btn9=0x7f0a001b;
-        public static final int btnborrar=0x7f0a0010;
-        public static final int btno=0x7f0a0004;
-        public static final int btsi=0x7f0a0003;
-        public static final int btvermesa=0x7f0a002c;
-        public static final int ima1=0x7f0a000d;
-        public static final int lblnum=0x7f0a000f;
-        public static final int listView1=0x7f0a002e;
-        public static final int lytMain=0x7f0a0005;
-        public static final int radio_mesas=0x7f0a0026;
-        public static final int radiomesa1=0x7f0a0027;
-        public static final int radiomesa2=0x7f0a0028;
-        public static final int radiomesa3=0x7f0a0029;
-        public static final int radiomesa4=0x7f0a002a;
-        public static final int scrollView1=0x7f0a000a;
-        public static final int tableRow1=0x7f0a0000;
-        public static final int tableRow2=0x7f0a0002;
-        public static final int tableRow3=0x7f0a001f;
-        public static final int tableRow4=0x7f0a000e;
-        public static final int textView1=0x7f0a0025;
-        public static final int txLista=0x7f0a0023;
-        public static final int txlista=0x7f0a000b;
-        public static final int txpreg=0x7f0a0001;
+        public static final int AbsoluteLayout1=0x7f0b002f;
+        public static final int LinearLayout1=0x7f0b000c;
+        public static final int TableRow01=0x7f0b0016;
+        public static final int TableRow02=0x7f0b0011;
+        public static final int action_settings=0x7f0b0030;
+        public static final int bt1=0x7f0b0006;
+        public static final int bt2=0x7f0b0007;
+        public static final int bt3=0x7f0b0008;
+        public static final int bt4=0x7f0b0009;
+        public static final int btborrar=0x7f0b0024;
+        public static final int btborrarseleccionados=0x7f0b002d;
+        public static final int btestadistica=0x7f0b0022;
+        public static final int btinsertar=0x7f0b002b;
+        public static final int btinsertar2=0x7f0b001e;
+        public static final int btinsertar3=0x7f0b0020;
+        public static final int btinsertar4=0x7f0b0021;
+        public static final int btinsetar=0x7f0b001d;
+        public static final int btn0=0x7f0b001c;
+        public static final int btn1=0x7f0b0012;
+        public static final int btn2=0x7f0b0013;
+        public static final int btn3=0x7f0b0014;
+        public static final int btn4=0x7f0b0015;
+        public static final int btn5=0x7f0b0017;
+        public static final int btn6=0x7f0b0018;
+        public static final int btn7=0x7f0b0019;
+        public static final int btn8=0x7f0b001a;
+        public static final int btn9=0x7f0b001b;
+        public static final int btnborrar=0x7f0b0010;
+        public static final int btno=0x7f0b0004;
+        public static final int btsi=0x7f0b0003;
+        public static final int btvermesa=0x7f0b002c;
+        public static final int ima1=0x7f0b000d;
+        public static final int lblnum=0x7f0b000f;
+        public static final int listView1=0x7f0b002e;
+        public static final int lytMain=0x7f0b0005;
+        public static final int radio_mesas=0x7f0b0026;
+        public static final int radiomesa1=0x7f0b0027;
+        public static final int radiomesa2=0x7f0b0028;
+        public static final int radiomesa3=0x7f0b0029;
+        public static final int radiomesa4=0x7f0b002a;
+        public static final int scrollView1=0x7f0b000a;
+        public static final int tableRow1=0x7f0b0000;
+        public static final int tableRow2=0x7f0b0002;
+        public static final int tableRow3=0x7f0b001f;
+        public static final int tableRow4=0x7f0b000e;
+        public static final int textView1=0x7f0b0025;
+        public static final int txLista=0x7f0b0023;
+        public static final int txlista=0x7f0b000b;
+        public static final int txpreg=0x7f0b0001;
     }
     public static final class layout {
         public static final int borrar=0x7f030000;
@@ -94,28 +102,31 @@ public final class R {
         public static final int slash=0x7f030007;
     }
     public static final class menu {
-        public static final int inicial=0x7f090000;
+        public static final int inicial=0x7f0a0000;
     }
     public static final class string {
-        public static final int No=0x7f07000e;
-        public static final int Si=0x7f07000d;
-        public static final int action_settings=0x7f070001;
-        public static final int app_name=0x7f070000;
-        public static final int borrar=0x7f07000b;
-        public static final int borrarseleccionados=0x7f070012;
-        public static final int estadistica1=0x7f070007;
-        public static final int estadistica2=0x7f070008;
-        public static final int estadistica3=0x7f070009;
-        public static final int estadistica4=0x7f07000a;
-        public static final int hello_world=0x7f070002;
-        public static final int ins1=0x7f070003;
-        public static final int ins2=0x7f070004;
-        public static final int ins3=0x7f070005;
-        public static final int ins4=0x7f070006;
-        public static final int insertarnum=0x7f070010;
-        public static final int mesas=0x7f07000f;
-        public static final int pregunta_borrar=0x7f07000c;
-        public static final int vermesa=0x7f070011;
+        public static final int No=0x7f05000f;
+        public static final int Si=0x7f05000e;
+        public static final int action_settings=0x7f050002;
+        public static final int app_name=0x7f050001;
+        public static final int borrar=0x7f05000c;
+        public static final int borrarseleccionados=0x7f050013;
+        public static final int estadistica1=0x7f050008;
+        public static final int estadistica2=0x7f050009;
+        public static final int estadistica3=0x7f05000a;
+        public static final int estadistica4=0x7f05000b;
+        /** Replace placeholder ID with your tracking ID
+         */
+        public static final int ga_trackingId=0x7f050000;
+        public static final int hello_world=0x7f050003;
+        public static final int ins1=0x7f050004;
+        public static final int ins2=0x7f050005;
+        public static final int ins3=0x7f050006;
+        public static final int ins4=0x7f050007;
+        public static final int insertarnum=0x7f050011;
+        public static final int mesas=0x7f050010;
+        public static final int pregunta_borrar=0x7f05000d;
+        public static final int vermesa=0x7f050012;
     }
     public static final class style {
         /** 
@@ -139,10 +150,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f090001;
     }
 }

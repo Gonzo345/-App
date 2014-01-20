@@ -3,6 +3,8 @@ package aplicacions.aitorgonzo.ruleta;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -379,6 +381,18 @@ public class Inicial extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.inicial, menu);
 		return true;
+	}
+	
+	@Override
+	public void onStart() {
+	    super.onStart();
+	    EasyTracker.getInstance(this).activityStart(this);
+	}
+
+	@Override
+	public void onStop() {
+	    super.onStop();
+	    EasyTracker.getInstance(this).activityStop(this);
 	}
 
 }
