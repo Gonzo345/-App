@@ -3,6 +3,9 @@ package aplicacions.aitorgonzo.ruleta;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import android.app.Activity;
@@ -12,6 +15,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -22,6 +26,9 @@ import aplicacions.acj.ruleta.R;
 public class Inicial extends Activity {
 	private RadioGroup radioMesas;
 	private RadioButton radioMesasbt;
+	
+	private AdView adView;
+	private LinearLayout lytMain;
 
 	int contadornums = 0;
 	SeekBar seek;
@@ -59,6 +66,16 @@ public class Inicial extends Activity {
 
 		txLista = (TextView) findViewById(R.id.txLista);
 		lblnum = (TextView) findViewById(R.id.lblnum);
+		
+		
+		//*******************  BANNER  ********************************
+		
+		lytMain = (LinearLayout) findViewById(R.id.lytMain);
+		adView = new AdView(this, AdSize.BANNER,"ca-app-pub-1825821127744760/1018796934");
+		lytMain.addView(adView);
+		adView.bringToFront();
+		adView.loadAd(new AdRequest());
+		
 
 		// *******************************Declaracion de los botones que
 		// insertarán los numeros teclado***********************
