@@ -28,7 +28,7 @@ public class VerEstadisticas extends Activity {
 		
 		lytMain = (LinearLayout) findViewById(R.id.lytMain);
 		adView = new AdView(this, AdSize.BANNER,
-				"ca-app-pub-1825821127744760/1018796934");
+				"ca-app-pub-1825821127744760/3368330934");
 		lytMain.addView(adView);
 		adView.bringToFront();
 		adView.loadAd(new AdRequest());

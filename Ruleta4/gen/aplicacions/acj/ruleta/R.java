@@ -125,7 +125,9 @@ public final class R {
         public static final int ins4=0x7f050007;
         public static final int insertarnum=0x7f050011;
         public static final int mesas=0x7f050010;
+        public static final int noseleccionado=0x7f050015;
         public static final int pregunta_borrar=0x7f05000d;
+        public static final int stringEstadisticaLabel=0x7f050014;
         public static final int vermesa=0x7f050012;
     }
     public static final class style {
@@ -133,6 +135,7 @@ public final class R {
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
+     Theme.Black.NoTitleBar 
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -151,9 +154,5 @@ public final class R {
  API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f090000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static final int AppTheme=0x7f090001;
     }
 }

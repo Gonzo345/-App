@@ -31,7 +31,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		db.execSQL("DROP TABLE IF EXISTS ruleta");
+//		db.execSQL("DROP TABLE IF EXISTS ruleta");// comentada para evitar el drop por actualizazion
 		onCreate(db);
 	}
 
@@ -152,7 +152,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 		int contador = 0;
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-			result[contador] = c.getString(num)+" "+c.getString(fecha);
+			result[contador] = c.getString(num)+"                   "+c.getString(fecha).substring(0, 8);//controlamos que solo pillamos la hora 
 			contador++;
 		}
 

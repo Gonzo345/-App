@@ -241,8 +241,12 @@ public class Inicial extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(Inicial.this, VerEstadisticas.class);
-				startActivity(i);
+				int selectedId = radioMesas.getCheckedRadioButtonId();
+				
+		        radioMesasbt = (RadioButton) findViewById(selectedId);
+		        
+				MostrarEstadistica(radioMesasbt.getHint() + "");
+				
 			}
 		});
 
@@ -381,7 +385,8 @@ public class Inicial extends Activity {
 			DBH.close();
 
 		} else {
-			Toast.makeText(Inicial.this, "no se han insertado números...",
+			String cad= this.getString(R.string.noseleccionado);
+			Toast.makeText(Inicial.this, cad,
 					Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -390,6 +395,12 @@ public class Inicial extends Activity {
 		Intent i = new Intent(Inicial.this, MostrarNumerosMesa.class);
 		
 		i.putExtra("Mesa", num);
+		startActivity(i);
+	}
+	
+	public void MostrarEstadistica(String num) {
+		Intent i = new Intent(Inicial.this, Estadistica.class);
+		i.putExtra("Estadistica", num);
 		startActivity(i);
 	}
 
