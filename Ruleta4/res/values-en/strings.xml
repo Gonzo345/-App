@@ -20,8 +20,8 @@
     <string name="insertarnum">Insert number</string>
     <string name="vermesa">Check numbers of the table </string>
     <string name="borrarseleccionados">Delete all selected elements </string>
-    <string name="stringEstadisticaLabel">Table's stats </string>
-    <string name="noseleccionado">You haven't selected any number</string>
+    <string name="stringEstadisticaLabel">Table\'s stats </string>
+    <string name="noseleccionado">You haven\'t selected any number</string>
     
 
 </resources>

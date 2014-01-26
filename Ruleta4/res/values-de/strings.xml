@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Statistiken von Amerikaner Roulette</string>
+    <string name="app_name">Statistiken von Amerikanisches Roulette</string>
     <string name="action_settings">Konfiguration</string>
     <string name="hello_world">Hello world!</string>
     <string name="ins1">Tafel 1</string>
@@ -13,15 +13,15 @@
     <string name="estadistica3">Statistiken 3 </string>
     <string name="estadistica4">Statistiken 4 </string>
     <string name="borrar">Datenbank löschen </string>
-    <string name="pregunta_borrar">Wollen Sie die in der Datenbank enthaltenen Informationen unwiderruflich löschen willst?</string>
+    <string name="pregunta_borrar">Wollen Sie die informationen von die Datenbank unwiderruflich löschen?</string>
     <string name="Si">Ja</string>
     <string name="No">Nein</string>
-    <string name="mesas">Stecke in:</string>
-    <string name="insertarnum">Nummer einfügen</string>
-    <string name="vermesa">Überprüfen Sie Tischnummern</string>
-    <string name="borrarseleccionados">Ausgewählte Elemente löschen</string>
-    <string name="stringEstadisticaLabel">Statistiktabelle </string>
-    <string name="noseleccionado">Keine eingefügt Zahlen</string>
+    <string name="mesas">Einschalten in:</string>
+    <string name="insertarnum">Nummer einschalten</string>
+    <string name="vermesa">Tafelnummer überprüfen</string>
+    <string name="borrarseleccionados">Ausgewählte elemente löschen</string>
+    <string name="stringEstadisticaLabel">Tafel statistiken </string>
+    <string name="noseleccionado">Keine nummer ausgewählt</string>
     
 
 </resources>
