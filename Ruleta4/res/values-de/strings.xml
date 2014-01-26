@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Estadísticas Ruleta Americana</string>
-    <string name="action_settings">Ajustes</string>
+    <string name="app_name">Statistiken von Amerikaner Roulette</string>
+    <string name="action_settings">Konfiguration</string>
     <string name="hello_world">Hello world!</string>
-    <string name="ins1">Mesa 1</string>
-    <string name="ins2">Mesa 2</string>
-    <string name="ins3">Mesa 3</string>
-    <string name="ins4">Mesa 4</string>
-    <string name="estadistica1">Estadistica 1 </string>
-    <string name="estadistica2">Estadistica 2 </string>
-    <string name="estadistica3">Estadistica 3 </string>
-    <string name="estadistica4">Estadistica 4 </string>
-    <string name="borrar">Borrar Base de datos </string>
-    <string name="pregunta_borrar">¿Quieres eliminar de forma permanente la información que contiene la base de datos?</string>
-    <string name="Si">Sí</string>
-    <string name="No">No</string>
-    <string name="mesas">Insertar en:</string>
-    <string name="insertarnum">Insertar número</string>
-    <string name="vermesa">Comprobar números de la mesa</string>
-    <string name="borrarseleccionados">Borrar los elementos seleccionados</string>
-    <string name="stringEstadisticaLabel">Estadísticas de la mesa </string>
-    <string name="noseleccionado">No se han insertado números...</string>
+    <string name="ins1">Tafel 1</string>
+    <string name="ins2">Tafel 2</string>
+    <string name="ins3">Tafel 3</string>
+    <string name="ins4">Tafel 4</string>
+    <string name="estadistica1">Statistiken 1 </string>
+    <string name="estadistica2">Statistiken 2 </string>
+    <string name="estadistica3">Statistiken 3 </string>
+    <string name="estadistica4">Statistiken 4 </string>
+    <string name="borrar">Datenbank löschen </string>
+    <string name="pregunta_borrar">Wollen Sie die in der Datenbank enthaltenen Informationen unwiderruflich löschen willst?</string>
+    <string name="Si">Ja</string>
+    <string name="No">Nein</string>
+    <string name="mesas">Stecke in:</string>
+    <string name="insertarnum">Nummer einfügen</string>
+    <string name="vermesa">Überprüfen Sie Tischnummern</string>
+    <string name="borrarseleccionados">Ausgewählte Elemente löschen</string>
+    <string name="stringEstadisticaLabel">Statistiktabelle </string>
+    <string name="noseleccionado">Keine eingefügt Zahlen</string>
     
 
 </resources>
