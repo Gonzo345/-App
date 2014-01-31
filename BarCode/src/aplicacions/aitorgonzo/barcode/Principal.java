@@ -1,5 +1,4 @@
 package aplicacions.aitorgonzo.barcode;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
