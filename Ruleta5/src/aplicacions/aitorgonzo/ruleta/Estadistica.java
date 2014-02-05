@@ -31,7 +31,7 @@ public class Estadistica extends Activity {
 
 		int[] cad0_36 = new int[37];
 
-		for (int j = 0; j < cad0_36.length; j++) {
+		for (int j = 0; j < cad0_36.length; j++) {// Inicializamos el array a 0
 			cad0_36[j] = 0;
 		}
 		//
@@ -39,7 +39,9 @@ public class Estadistica extends Activity {
 			for (int k = 0; k < x.length; k++) {
 				if (x[k].equals(j + "")) {
 
-					cad0_36[j]++;
+					cad0_36[j]++;// incrementamos el valor de la posicion en el
+									// caso que el numero coincida con la
+									// posicion en la que estamos
 					// txlista.setText(txlista.getText()+" "+j+" "+x[k]+"\n");
 
 				}
@@ -47,11 +49,36 @@ public class Estadistica extends Activity {
 		}
 		// cad0_36[j] = Integer.getInteger(GestionarPorcentages(numtotal,x[j]));
 		String resultado;
+
+		int first = 0, second = 0;
+		for (int j = 0; j < cad0_36.length; j++) {
+
+			if (cad0_36[j] > first)
+				first = cad0_36[j];
+
+		}
+
+		for (int j = 0; j < cad0_36.length; j++) {
+
+			if (cad0_36[j] > second && cad0_36[j]!=first)
+				second = cad0_36[j];
+
+		}
+
+		// Para mostrar los numeros recorremos el array anterior para
+		// imprimirlos, para poder poner en rojo los numeros tendremos que
+		// tratarlos antes de llegar a este bucle
 		for (int j = 0; j < cad0_36.length; j++) {
 			if (cad0_36[j] != 0) {
-				txlista.setText(txlista.getText() + "\n " + j + " -> "
-				// + cad0_36[j] + " "
-						+ GestionarPorcentages(numtotal, cad0_36[j]) + "%");
+				if(cad0_36[j]==first || cad0_36[j]==second){
+
+					txlista.setText(txlista.getText() + "\n " + j + " -> vermell" + GestionarPorcentages(numtotal, cad0_36[j]) + "%");
+					
+				}else{
+					
+					txlista.setText(txlista.getText() + "\n " + j + " -> " + GestionarPorcentages(numtotal, cad0_36[j]) + "%");
+					
+				}
 			}
 		}
 
@@ -59,7 +86,9 @@ public class Estadistica extends Activity {
 
 	}
 
-	private String GestionarPorcentages(String numtotal, int cad0_36) {
+	private String GestionarPorcentages(String numtotal, int cad0_36) {// hace
+																		// los
+																		// porcentages
 
 		float total = Integer.parseInt(numtotal);
 		float cad = cad0_36;

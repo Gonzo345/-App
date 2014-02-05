@@ -19,9 +19,11 @@ public final class R {
     }
     public static final class bool {
         /** Enable automatic activity tracking
+Enable automatic activity tracking
          */
         public static final int ga_autoActivityTracking=0x7f060000;
         /** Enable automatic exception tracking
+Enable automatic exception tracking
          */
         public static final int ga_reportUncaughtExceptions=0x7f060001;
     }
@@ -31,6 +33,7 @@ public final class R {
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
+ Default screen margins, per the Android Design guidelines. 
          */
         public static final int activity_horizontal_margin=0x7f080000;
         public static final int activity_vertical_margin=0x7f080001;
@@ -116,6 +119,7 @@ public final class R {
         public static final int estadistica3=0x7f05000a;
         public static final int estadistica4=0x7f05000b;
         /** Replace placeholder ID with your tracking ID
+Replace placeholder ID with your tracking ID
          */
         public static final int ga_trackingId=0x7f050000;
         public static final int hello_world=0x7f050003;
@@ -153,6 +157,16 @@ public final class R {
         res/values-v11/styles.xml on API 14+ devices.
     
  API 14 theme customizations can go here. 
+
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    
+     Theme.Black.NoTitleBar 
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
          */
         public static final int AppBaseTheme=0x7f090000;
     }
