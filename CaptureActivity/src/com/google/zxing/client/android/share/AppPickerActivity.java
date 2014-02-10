@@ -18,44 +18,38 @@ package com.google.zxing.client.android.share;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.Browser;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class AppPickerActivity extends ListActivity {
 
-  private AsyncTask<?,?,?> backgroundTask;
+  private final List<String[]> labelsPackages = new ArrayList<String[]>();
 
   @Override
-  protected void onResume() {
-    super.onResume();
-    backgroundTask = new LoadPackagesAsyncTask(this);
-    backgroundTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-  }
-
-  @Override
-  protected void onPause() {
-    AsyncTask<?,?,?> task = backgroundTask;
-    if (task != null) {
-      task.cancel(true);
-      backgroundTask = null;
+  protected void onCreate(Bundle icicle) {
+    super.onCreate(icicle);
+    if (labelsPackages.isEmpty()) {
+      new LoadPackagesAsyncTask(this).execute(labelsPackages);
     }
-    super.onPause();
+    // Otherwise use last copy we loaded -- apps don't change much, and it takes
+    // forever to load for some reason.
   }
 
   @Override
   protected void onListItemClick(ListView l, View view, int position, long id) {
-    Adapter adapter = getListAdapter();
-    if (position >= 0 && position < adapter.getCount()) {
-      String packageName = ((AppInfo) adapter.getItem(position)).getPackageName();
+    if (position >= 0 && position < labelsPackages.size()) {
+      String url = "market://details?id=" + labelsPackages.get(position)[1];
       Intent intent = new Intent();
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-      intent.putExtra(Browser.BookmarkColumns.URL, "market://details?id=" + packageName);
+      intent.putExtra(Browser.BookmarkColumns.URL, url);
       setResult(RESULT_OK, intent);
     } else {
-      setResult(RESULT_CANCELED);      
+      setResult(RESULT_CANCELED);
     }
     finish();
   }

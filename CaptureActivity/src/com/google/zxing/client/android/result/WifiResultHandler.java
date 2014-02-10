@@ -16,13 +16,9 @@
 
 package com.google.zxing.client.android.result;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
-
 import com.google.zxing.client.android.CaptureActivity;
 import com.google.zxing.client.android.R;
 import com.google.zxing.client.android.wifi.WifiConfigManager;
@@ -32,12 +28,9 @@ import com.google.zxing.client.result.WifiParsedResult;
 /**
  * Handles address book entries.
  *
- * @author Vikram Aggarwal
- * @author Sean Owen
+ * @author viki@google.com (Vikram Aggarwal)
  */
 public final class WifiResultHandler extends ResultHandler {
-
-  private static final String TAG = WifiResultHandler.class.getSimpleName();
 
   private final CaptureActivity parent;
 
@@ -59,21 +52,15 @@ public final class WifiResultHandler extends ResultHandler {
 
   @Override
   public void handleButtonPress(int index) {
+    // Get the underlying wifi config
+    WifiParsedResult wifiResult = (WifiParsedResult) getResult();
     if (index == 0) {
-      WifiParsedResult wifiResult = (WifiParsedResult) getResult();
+      String ssid = wifiResult.getSsid();
+      String password = wifiResult.getPassword();
+      String networkType = wifiResult.getNetworkEncryption();
       WifiManager wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
-      if (wifiManager == null) {
-        Log.w(TAG, "No WifiManager available from device");
-        return;
-      }
-      final Activity activity = getActivity();
-      activity.runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-          Toast.makeText(activity.getApplicationContext(), R.string.wifi_changing_network, Toast.LENGTH_SHORT).show();
-        }
-      });
-      new WifiConfigManager(wifiManager).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wifiResult);
+      Toast.makeText(getActivity(), R.string.wifi_changing_network, Toast.LENGTH_LONG).show();
+      WifiConfigManager.configure(wifiManager, ssid, password, networkType);
       parent.restartPreviewAfterDelay(0L);
     }
   }

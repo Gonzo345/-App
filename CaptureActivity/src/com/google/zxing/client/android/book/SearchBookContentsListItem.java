@@ -56,9 +56,7 @@ public final class SearchBookContentsListItem extends LinearLayout {
   public void set(SearchBookContentsResult result) {
     pageNumberView.setText(result.getPageNumber());
     String snippet = result.getSnippet();
-    if (snippet.isEmpty()) {
-      snippetView.setText("");
-    } else {
+    if (snippet.length() > 0) {
       if (result.getValidSnippet()) {
         String lowerQuery = SearchBookContentsResult.getQuery().toLowerCase(Locale.getDefault());
         String lowerSnippet = snippet.toLowerCase(Locale.getDefault());
@@ -79,6 +77,8 @@ public final class SearchBookContentsListItem extends LinearLayout {
         // This may be an error message, so don't try to bold the query terms within it
         snippetView.setText(snippet);
       }
+    } else {
+      snippetView.setText("");
     }
   }
 }

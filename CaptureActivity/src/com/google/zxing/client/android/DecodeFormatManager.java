@@ -39,21 +39,19 @@ final class DecodeFormatManager {
                                  BarcodeFormat.UPC_E,
                                  BarcodeFormat.EAN_13,
                                  BarcodeFormat.EAN_8,
-                                 BarcodeFormat.RSS_14,
-                                 BarcodeFormat.RSS_EXPANDED);
+                                 BarcodeFormat.RSS_14);
     ONE_D_FORMATS = EnumSet.of(BarcodeFormat.CODE_39,
                                BarcodeFormat.CODE_93,
                                BarcodeFormat.CODE_128,
-                               BarcodeFormat.ITF,
-                               BarcodeFormat.CODABAR);
+                               BarcodeFormat.ITF);
     ONE_D_FORMATS.addAll(PRODUCT_FORMATS);
   }
 
   private DecodeFormatManager() {}
 
   static Collection<BarcodeFormat> parseDecodeFormats(Intent intent) {
-    Iterable<String> scanFormats = null;
-    CharSequence scanFormatsString = intent.getStringExtra(Intents.Scan.FORMATS);
+    List<String> scanFormats = null;
+    String scanFormatsString = intent.getStringExtra(Intents.Scan.FORMATS);
     if (scanFormatsString != null) {
       scanFormats = Arrays.asList(COMMA_PATTERN.split(scanFormatsString));
     }

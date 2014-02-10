@@ -62,21 +62,19 @@ final class BookmarkAdapter extends BaseAdapter {
 
   @Override
   public View getView(int index, View view, ViewGroup viewGroup) {
-    View layout;
+    LinearLayout layout;
     if (view instanceof LinearLayout) {
-      layout = view;
+      layout = (LinearLayout) view;
     } else {
       LayoutInflater factory = LayoutInflater.from(context);
-      layout = factory.inflate(R.layout.bookmark_picker_list_item, viewGroup, false);
+      layout = (LinearLayout) factory.inflate(R.layout.bookmark_picker_list_item, viewGroup, false);
     }
 
-    if (!cursor.isClosed()) {
-      cursor.moveToPosition(index);
-      CharSequence title = cursor.getString(BookmarkPickerActivity.TITLE_COLUMN);
-      ((TextView) layout.findViewById(R.id.bookmark_title)).setText(title);
-      CharSequence url = cursor.getString(BookmarkPickerActivity.URL_COLUMN);
-      ((TextView) layout.findViewById(R.id.bookmark_url)).setText(url);
-    } // Otherwise... just don't update as the object is shutting down
+    cursor.moveToPosition(index);
+    String title = cursor.getString(BookmarkPickerActivity.TITLE_COLUMN);
+    ((TextView) layout.findViewById(R.id.bookmark_title)).setText(title);
+    String url = cursor.getString(BookmarkPickerActivity.URL_COLUMN);
+    ((TextView) layout.findViewById(R.id.bookmark_url)).setText(url);
     return layout;
   }
 }

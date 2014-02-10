@@ -1,9 +1,8 @@
 package aplicacions.aitorgonzo.ruleta;
 
-import android.R.string;
 import android.app.Activity;
 import android.os.Bundle;
-import android.renderscript.Sampler.Value;
+import android.text.Html;
 import android.widget.TextView;
 import aplicacions.acj.ruleta.R;
 
@@ -60,7 +59,7 @@ public class Estadistica extends Activity {
 
 		for (int j = 0; j < cad0_36.length; j++) {
 
-			if (cad0_36[j] > second && cad0_36[j]!=first)
+			if (cad0_36[j] > second && cad0_36[j] != first)
 				second = cad0_36[j];
 
 		}
@@ -70,14 +69,17 @@ public class Estadistica extends Activity {
 		// tratarlos antes de llegar a este bucle
 		for (int j = 0; j < cad0_36.length; j++) {
 			if (cad0_36[j] != 0) {
-				if(cad0_36[j]==first || cad0_36[j]==second){
+				if (cad0_36[j] == first || cad0_36[j] == second) {
 
-					txlista.setText(txlista.getText() + "\n " + j + " -> vermell" + GestionarPorcentages(numtotal, cad0_36[j]) + "%");
-					
-				}else{
-					
-					txlista.setText(txlista.getText() + "\n " + j + " -> " + GestionarPorcentages(numtotal, cad0_36[j]) + "%");
-					
+					txlista.setText(txlista.getText() + "\n " + j
+							+ " -> vermell"
+							+ GestionarPorcentages(numtotal, cad0_36[j]) + "%");
+
+				} else {
+
+					txlista.setText(txlista.getText() + "\n " + j + " -> "
+							+ GestionarPorcentages(numtotal, cad0_36[j]) + "%");
+
 				}
 			}
 		}

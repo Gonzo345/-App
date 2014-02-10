@@ -25,7 +25,8 @@
   <TextView
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:gravity="center"
+      android:textColor="@color/share_text"
+      android:textSize="18sp"
       android:text="@string/msg_share_explanation"
       android:paddingBottom="12dip"/>
 
@@ -38,7 +39,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:scaleType="center"
         android:src="@drawable/share_via_barcode"
         android:paddingRight="24dip"/>
@@ -50,11 +50,13 @@
         android:orientation="vertical">
 
       <Button android:id="@+id/share_app_button"
-              style="@style/ShareButton"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
               android:text="@string/button_share_app"/>
 
       <Button android:id="@+id/share_contact_button"
-              style="@style/ShareButton"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
               android:text="@string/button_share_contact"/>
 
     </LinearLayout>
@@ -66,11 +68,13 @@
         android:orientation="vertical">
 
       <Button android:id="@+id/share_bookmark_button"
-              style="@style/ShareButton"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
               android:text="@string/button_share_bookmark"/>
 
       <Button android:id="@+id/share_clipboard_button"
-              style="@style/ShareButton"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
               android:text="@string/button_share_clipboard"/>
 
     </LinearLayout>
@@ -80,6 +84,7 @@
   <EditText android:id="@+id/share_text_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:hint="@string/msg_share_text"
             android:singleLine="true"
             android:selectAllOnFocus="true"/>

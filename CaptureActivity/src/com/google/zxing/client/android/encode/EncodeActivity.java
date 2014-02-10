@@ -16,17 +16,13 @@
 
 package com.google.zxing.client.android.encode;
 
-import android.graphics.Point;
 import android.view.Display;
-import android.view.MenuInflater;
 import android.view.WindowManager;
 import com.google.zxing.WriterException;
-import com.google.zxing.client.android.Contents;
 import com.google.zxing.client.android.FinishListener;
 import com.google.zxing.client.android.Intents;
 import com.google.zxing.client.android.R;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -56,6 +52,8 @@ public final class EncodeActivity extends Activity {
 
   private static final String TAG = EncodeActivity.class.getSimpleName();
 
+  private static final int SHARE_MENU = Menu.FIRST;
+  private static final int ENCODE_FORMAT_MENU = Menu.FIRST + 1;
   private static final int MAX_BARCODE_FILENAME_LENGTH = 24;
   private static final Pattern NOT_ALPHANUMERIC = Pattern.compile("[^A-Za-z0-9]");
   private static final String USE_VCARD_KEY = "USE_VCARD";
@@ -65,53 +63,43 @@ public final class EncodeActivity extends Activity {
   @Override
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
+
     Intent intent = getIntent();
-    if (intent == null) {
-      finish();
-    } else {
+    if (intent != null) {
       String action = intent.getAction();
-      if (Intents.Encode.ACTION.equals(action) || Intent.ACTION_SEND.equals(action)) {
+      if (action.equals(Intents.Encode.ACTION) || action.equals(Intent.ACTION_SEND)) {
         setContentView(R.layout.encode);
-      } else {
-        finish();
+        return;
       }
     }
+    finish();
   }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater menuInflater = getMenuInflater();
-    menuInflater.inflate(R.menu.encode, menu);
-    boolean useVcard = qrCodeEncoder != null && qrCodeEncoder.isUseVCard();
-    int encodeNameResource = useVcard ? R.string.menu_encode_mecard : R.string.menu_encode_vcard;
-    MenuItem encodeItem = menu.findItem(R.id.menu_encode);
-    encodeItem.setTitle(encodeNameResource);
-    Intent intent = getIntent();
-    if (intent != null) {
-      String type = intent.getStringExtra(Intents.Encode.TYPE);
-      encodeItem.setVisible(Contents.Type.CONTACT.equals(type));
-    }
-    return super.onCreateOptionsMenu(menu);
+    super.onCreateOptionsMenu(menu);
+    menu.add(Menu.NONE, SHARE_MENU, Menu.NONE, R.string.menu_share).setIcon(android.R.drawable.ic_menu_share);
+    int encodeNameResource = qrCodeEncoder.isUseVCard() ? R.string.menu_encode_mecard : R.string.menu_encode_vcard;
+    menu.add(Menu.NONE, ENCODE_FORMAT_MENU, Menu.NONE, encodeNameResource)
+        .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+    return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    int itemId = item.getItemId();
-	if (itemId == R.id.menu_share) {
-		share();
-		return true;
-	} else if (itemId == R.id.menu_encode) {
-		Intent intent = getIntent();
-		if (intent == null) {
-          return false;
-        }
-		intent.putExtra(USE_VCARD_KEY, !qrCodeEncoder.isUseVCard());
-		startActivity(intent);
-		finish();
-		return true;
-	} else {
-		return false;
-	}
+    switch (item.getItemId()) {
+      case SHARE_MENU:
+        share();
+        return true;
+      case ENCODE_FORMAT_MENU:
+        Intent intent = getIntent();
+        intent.putExtra(USE_VCARD_KEY, !qrCodeEncoder.isUseVCard());
+        startActivity(getIntent());
+        finish();
+        return true;
+      default:
+        return false;
+    }
   }
   
   private void share() {
@@ -182,17 +170,14 @@ public final class EncodeActivity extends Activity {
     return fileName;
   }
 
-  @SuppressLint("NewApi")
-@Override
+  @Override
   protected void onResume() {
     super.onResume();
     // This assumes the view is full screen, which is a good assumption
     WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
     Display display = manager.getDefaultDisplay();
-    Point displaySize = new Point();
-    display.getSize(displaySize);
-    int width = displaySize.x;
-    int height = displaySize.y;
+    int width = display.getWidth();
+    int height = display.getHeight();
     int smallerDimension = width < height ? width : height;
     smallerDimension = smallerDimension * 7 / 8;
 
@@ -218,10 +203,10 @@ public final class EncodeActivity extends Activity {
       TextView contents = (TextView) findViewById(R.id.contents_text_view);
       if (intent.getBooleanExtra(Intents.Encode.SHOW_CONTENTS, true)) {
         contents.setText(qrCodeEncoder.getDisplayContents());
-        setTitle(qrCodeEncoder.getTitle());
+        setTitle(getString(R.string.app_name) + " - " + qrCodeEncoder.getTitle());
       } else {
         contents.setText("");
-        setTitle("");
+        setTitle(getString(R.string.app_name));
       }
     } catch (WriterException e) {
       Log.w(TAG, "Could not encode barcode", e);

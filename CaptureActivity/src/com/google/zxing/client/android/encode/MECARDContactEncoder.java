@@ -37,7 +37,6 @@ final class MECARDContactEncoder extends ContactEncoder {
     }
   };
   private static final char TERMINATOR = ';';
-  private static final Pattern NOT_DIGITS = Pattern.compile("[^0-9]+");
 
   @Override
   public String[] encode(Iterable<String> names,
@@ -45,11 +44,11 @@ final class MECARDContactEncoder extends ContactEncoder {
                          Iterable<String> addresses,
                          Iterable<String> phones,
                          Iterable<String> emails,
-                         Iterable<String> urls,
+                         String url,
                          String note) {
     StringBuilder newContents = new StringBuilder(100);
-    newContents.append("MECARD:");
     StringBuilder newDisplayContents = new StringBuilder(100);
+    newContents.append("MECARD:");
     appendUpToUnique(newContents, newDisplayContents, "N", names, 1, new Formatter() {
       @Override
       public String format(String source) {
@@ -61,18 +60,17 @@ final class MECARDContactEncoder extends ContactEncoder {
     appendUpToUnique(newContents, newDisplayContents, "TEL", phones, Integer.MAX_VALUE, new Formatter() {
       @Override
       public String format(String source) {
-        CharSequence s = PhoneNumberUtils.formatNumber(source);
-        return s == null ? null : NOT_DIGITS.matcher(s).replaceAll("");
+        return PhoneNumberUtils.formatNumber(source);
       }
     });
     appendUpToUnique(newContents, newDisplayContents, "EMAIL", emails, Integer.MAX_VALUE, null);
-    appendUpToUnique(newContents, newDisplayContents, "URL", urls, Integer.MAX_VALUE, null);
+    append(newContents, newDisplayContents, "URL", url);
     append(newContents, newDisplayContents, "NOTE", note);
     newContents.append(';');
     return new String[] { newContents.toString(), newDisplayContents.toString() };
   }
-
-  private static void append(StringBuilder newContents,
+  
+  private static void append(StringBuilder newContents, 
                              StringBuilder newDisplayContents,
                              String prefix, 
                              String value) {

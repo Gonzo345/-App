@@ -17,6 +17,7 @@
 package com.google.zxing.client.android.result.supplement;
 
 import android.content.Context;
+import android.os.Handler;
 import android.text.Html;
 import android.widget.TextView;
 import com.google.zxing.client.android.HttpHelper;
@@ -29,49 +30,41 @@ import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * <p>Retrieves product information from Google Product search.</p>
- *
- * <p><strong>Please do not reuse this code.</strong> Using results in this way requires permission
- * from Google, and that is not granted to users via this project.</p>
- *
- * @author Sean Owen
- */
 final class ProductResultInfoRetriever extends SupplementalInfoRetriever {
 
-  private static final Pattern[] PRODUCT_NAME_PRICE_PATTERNS = {
-    Pattern.compile(",event\\)\">([^<]+)</a></h3>.+<span class=psrp>([^<]+)</span>"),
-    Pattern.compile("owb63p\">([^<]+).+zdi3pb\">([^<]+)"),
-  };
+  private static final Pattern PRODUCT_NAME_PRICE_PATTERN =
+      Pattern.compile("owb63p\">([^<]+).+zdi3pb\">([^<]+)");
+
 
   private final String productID;
   private final String source;
   private final Context context;
 
-  ProductResultInfoRetriever(TextView textView, String productID, HistoryManager historyManager, Context context) {
-    super(textView, historyManager);
+  ProductResultInfoRetriever(TextView textView,
+                             String productID,
+                             Handler handler,
+                             HistoryManager historyManager,
+                             Context context) {
+    super(textView, handler, historyManager);
     this.productID = productID;
     this.source = context.getString(R.string.msg_google_product);
     this.context = context;
   }
 
   @Override
-  void retrieveSupplementalInfo() throws IOException {
+  void retrieveSupplementalInfo() throws IOException, InterruptedException {
 
     String encodedProductID = URLEncoder.encode(productID, "UTF-8");
     String uri = "http://www.google." + LocaleManager.getProductSearchCountryTLD(context)
             + "/m/products?ie=utf8&oe=utf8&scoring=p&source=zxing&q=" + encodedProductID;
-    CharSequence content = HttpHelper.downloadViaHttp(uri, HttpHelper.ContentType.HTML);
+    String content = HttpHelper.downloadViaHttp(uri, HttpHelper.ContentType.HTML);
 
-    for (Pattern p : PRODUCT_NAME_PRICE_PATTERNS) {
-      Matcher matcher = p.matcher(content);
-      if (matcher.find()) {
-        append(productID,
-               source,
-               new String[] { unescapeHTML(matcher.group(1)), unescapeHTML(matcher.group(2)) },
-               uri);
-        break;
-      }
+    Matcher matcher = PRODUCT_NAME_PRICE_PATTERN.matcher(content);
+    if (matcher.find()) {
+      append(productID,
+             source,
+             new String[] { unescapeHTML(matcher.group(1)), unescapeHTML(matcher.group(2)) },
+             uri);
     }
   }
 

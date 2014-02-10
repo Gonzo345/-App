@@ -29,17 +29,27 @@ import com.google.zxing.client.result.ResultParser;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * A base class for the Android-specific barcode handlers. These allow the app to polymorphically
@@ -50,11 +60,27 @@ import java.util.Locale;
  * instance is needed to launch an intent.
  *
  * @author dswitkin@google.com (Daniel Switkin)
- * @author Sean Owen
  */
 public abstract class ResultHandler {
 
   private static final String TAG = ResultHandler.class.getSimpleName();
+
+  private static final DateFormat DATE_FORMAT;
+  static {
+    DATE_FORMAT = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+    // For dates without a time, for purposes of interacting with Android, the resulting timestamp
+    // needs to be midnight of that day in GMT. See:
+    // http://code.google.com/p/android/issues/detail?id=8330
+    DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
+  }
+  private static final DateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.ENGLISH);
+
+  private static final String GOOGLE_SHOPPER_PACKAGE = "com.google.android.apps.shopper";
+  private static final String GOOGLE_SHOPPER_ACTIVITY = GOOGLE_SHOPPER_PACKAGE +
+      ".results.SearchResultsActivity";
+  private static final String MARKET_URI_PREFIX = "market://details?id=";
+  private static final String MARKET_REFERRER_SUFFIX =
+      "&referrer=utm_source%3Dbarcodescanner%26utm_medium%3Dapps%26utm_campaign%3Dscan";
 
   private static final String[] EMAIL_TYPE_STRINGS = {"home", "work", "mobile"};
   private static final String[] PHONE_TYPE_STRINGS = {"home", "work", "mobile", "fax", "pager", "main"};
@@ -85,6 +111,15 @@ public abstract class ResultHandler {
   private final Result rawResult;
   private final String customProductSearch;
 
+  private final DialogInterface.OnClickListener shopperMarketListener =
+      new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int which) {
+      launchIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_URI_PREFIX +
+          GOOGLE_SHOPPER_PACKAGE + MARKET_REFERRER_SUFFIX)));
+    }
+  };
+
   ResultHandler(Activity activity, ParsedResult result) {
     this(activity, result, null);
   }
@@ -94,17 +129,22 @@ public abstract class ResultHandler {
     this.activity = activity;
     this.rawResult = rawResult;
     this.customProductSearch = parseCustomSearchURL();
+
+    // Make sure the Shopper button is hidden by default. Without this, scanning a product followed
+    // by a QR Code would leave the button on screen among the QR Code actions.
+    View shopperButton = activity.findViewById(R.id.shopper_button);
+    shopperButton.setVisibility(View.GONE);
   }
 
-  public final ParsedResult getResult() {
+  public ParsedResult getResult() {
     return result;
   }
 
-  final boolean hasCustomProductSearch() {
+  boolean hasCustomProductSearch() {
     return customProductSearch != null;
   }
 
-  final Activity getActivity() {
+  Activity getActivity() {
     return activity;
   }
 
@@ -142,6 +182,17 @@ public abstract class ResultHandler {
   }
 
   /**
+   * The Google Shopper button is special and is not handled by the abstract button methods above.
+   *
+   * @param listener The on click listener to install for this button.
+   */
+  void showGoogleShopperButton(View.OnClickListener listener) {
+    View shopperButton = activity.findViewById(R.id.shopper_button);
+    shopperButton.setVisibility(View.VISIBLE);
+    shopperButton.setOnClickListener(listener);
+  }
+
+  /**
    * Create a possibly styled string for the contents of the current barcode.
    *
    * @return The text to be displayed.
@@ -167,16 +218,81 @@ public abstract class ResultHandler {
     return result.getType();
   }
 
+  /**
+   * Sends an intent to create a new calendar event by prepopulating the Add Event UI. Older
+   * versions of the system have a bug where the event title will not be filled out.
+   *
+   * @param summary A description of the event
+   * @param start   The start time as yyyyMMdd or yyyyMMdd'T'HHmmss or yyyyMMdd'T'HHmmss'Z'
+   * @param end     The end time as yyyyMMdd or yyyyMMdd'T'HHmmss or yyyyMMdd'T'HHmmss'Z'
+   * @param location a text description of the event location
+   * @param description a text description of the event itself
+   */
+  final void addCalendarEvent(String summary,
+                              String start,
+                              String end,
+                              String location,
+                              String description) {
+    Intent intent = new Intent(Intent.ACTION_EDIT);
+    intent.setType("vnd.android.cursor.item/event");
+    long startMilliseconds = calculateMilliseconds(start);
+    intent.putExtra("beginTime", startMilliseconds);
+    boolean allDay = start.length() == 8;
+    if (allDay) {
+      intent.putExtra("allDay", true);
+    }
+    long endMilliseconds;
+    if (end == null) {
+      if (allDay) {
+        // + 1 day
+        endMilliseconds = startMilliseconds + 24 * 60 * 60 * 1000;
+      } else {
+        endMilliseconds = startMilliseconds;
+      }
+    } else {
+      endMilliseconds = calculateMilliseconds(end);
+    }
+    intent.putExtra("endTime", endMilliseconds);
+    intent.putExtra("title", summary);
+    intent.putExtra("eventLocation", location);
+    intent.putExtra("description", description);
+    launchIntent(intent);
+  }
+
+  private static long calculateMilliseconds(String when) {
+    if (when.length() == 8) {
+      // Only contains year/month/day
+      Date date;
+      synchronized (DATE_FORMAT) {
+        date = DATE_FORMAT.parse(when, new ParsePosition(0));
+      }
+      // Note this will be relative to GMT, not the local time zone
+      return date.getTime();
+    } else {
+      // The when string can be local time, or UTC if it ends with a Z
+      Date date;
+      synchronized (DATE_TIME_FORMAT) {
+       date = DATE_TIME_FORMAT.parse(when.substring(0, 15), new ParsePosition(0));
+      }
+      long milliseconds = date.getTime();
+      if (when.length() == 16 && when.charAt(15) == 'Z') {
+        Calendar calendar = new GregorianCalendar();
+        int offset = calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET);
+        milliseconds += offset;
+      }
+      return milliseconds;
+    }
+  }
+
   final void addPhoneOnlyContact(String[] phoneNumbers,String[] phoneTypes) {
-    addContact(null, null, null, phoneNumbers, phoneTypes, null, null, null, null, null, null, null, null, null, null, null);
+    addContact(null, null, phoneNumbers, phoneTypes, null, null, null, null, null, null, null, null, null, null);
   }
 
   final void addEmailOnlyContact(String[] emails, String[] emailTypes) {
-    addContact(null, null, null, null, null, emails, emailTypes, null, null, null, null, null, null, null, null, null);
+    addContact(null, null, null, null, emails, emailTypes, null, null, null, null, null, null, null, null);
   }
 
   final void addContact(String[] names,
-                        String[] nicknames,
                         String pronunciation,
                         String[] phoneNumbers,
                         String[] phoneTypes,
@@ -188,9 +304,8 @@ public abstract class ResultHandler {
                         String addressType,
                         String org,
                         String title,
-                        String[] urls,
-                        String birthday,
-                        String[] geo) {
+                        String url,
+                        String birthday) {
 
     // Only use the first name in the array, if present.
     Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT, ContactsContract.Contacts.CONTENT_URI);
@@ -223,32 +338,16 @@ public abstract class ResultHandler {
 
     // No field for URL, birthday; use notes
     StringBuilder aggregatedNotes = new StringBuilder();
-    if (urls != null) {
-      for (String url : urls) {
-        if (url != null && !url.isEmpty()) {
-          aggregatedNotes.append('\n').append(url);
-        }
-      }
-    }
-    for (String aNote : new String[] { birthday, note }) {
+    for (String aNote : new String[] { url, birthday, note }) {
       if (aNote != null) {
-        aggregatedNotes.append('\n').append(aNote);
-      }
-    }
-    if (nicknames != null) {
-      for (String nickname : nicknames) {
-        if (nickname != null && !nickname.isEmpty()) {
-          aggregatedNotes.append('\n').append(nickname);
+        if (aggregatedNotes.length() > 0) {
+          aggregatedNotes.append('\n');
         }
+        aggregatedNotes.append(aNote);
       }
     }
-    if (geo != null) {
-      aggregatedNotes.append('\n').append(geo[0]).append(',').append(geo[1]);
-    }
-
     if (aggregatedNotes.length() > 0) {
-      // Remove extra leading '\n'
-      putExtra(intent, ContactsContract.Intents.Insert.NOTES, aggregatedNotes.substring(1));
+      putExtra(intent, ContactsContract.Intents.Insert.NOTES, aggregatedNotes.toString());
     }
     
     putExtra(intent, ContactsContract.Intents.Insert.IM_HANDLE, instantMessenger);
@@ -290,7 +389,8 @@ public abstract class ResultHandler {
   }
 
   final void shareByEmail(String contents) {
-    sendEmailFromUri("mailto:", null, null, contents);
+    sendEmailFromUri("mailto:", null, activity.getString(R.string.msg_share_subject_line),
+        contents);
   }
 
   final void sendEmail(String address, String subject, String body) {
@@ -310,7 +410,8 @@ public abstract class ResultHandler {
   }
 
   final void shareBySMS(String contents) {
-    sendSMSFromUri("smsto:", contents);
+    sendSMSFromUri("smsto:", activity.getString(R.string.msg_share_subject_line) + ":\n" +
+        contents);
   }
 
   final void sendSMS(String phoneNumber, String body) {
@@ -332,7 +433,7 @@ public abstract class ResultHandler {
   final void sendMMSFromUri(String uri, String subject, String body) {
     Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(uri));
     // The Messaging app needs to see a valid subject or else it will treat this an an SMS.
-    if (subject == null || subject.isEmpty()) {
+    if (subject == null || subject.length() == 0) {
       putExtra(intent, "subject", activity.getString(R.string.msg_default_mms_subject));
     } else {
       putExtra(intent, "subject", subject);
@@ -360,9 +461,9 @@ public abstract class ResultHandler {
    * @param address The address to find
    * @param title An optional title, e.g. the name of the business at this address
    */
-  final void searchMap(String address, String title) {
+  final void searchMap(String address, CharSequence title) {
     String query = address;
-    if (title != null && !title.isEmpty()) {
+    if (title != null && title.length() > 0) {
       query += " (" + title + ')';
     }
     launchIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + Uri.encode(query))));
@@ -394,19 +495,7 @@ public abstract class ResultHandler {
   }
 
   final void openURL(String url) {
-    // Strangely, some Android browsers don't seem to register to handle HTTP:// or HTTPS://.
-    // Lower-case these as it should always be OK to lower-case these schemes.
-    if (url.startsWith("HTTP://")) {
-      url = "http" + url.substring(4);
-    } else if (url.startsWith("HTTPS://")) {
-      url = "https" + url.substring(5);
-    }
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-    try {
-      launchIntent(intent);
-    } catch (ActivityNotFoundException ignored) {
-      Log.w(TAG, "Nothing available to handle " + intent);
-    }
+    launchIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
   }
 
   final void webSearch(String query) {
@@ -415,37 +504,50 @@ public abstract class ResultHandler {
     launchIntent(intent);
   }
 
-  /**
-   * Like {@link #launchIntent(Intent)} but will tell you if it is not handle-able
-   * via {@link ActivityNotFoundException}.
-   *
-   * @throws ActivityNotFoundException
-   */
-  final void rawLaunchIntent(Intent intent) {
-    if (intent != null) {
-      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-      Log.d(TAG, "Launching intent: " + intent + " with extras: " + intent.getExtras());
-      activity.startActivity(intent);
-    }
-  }
+  final void openGoogleShopper(String query) {
 
-  /**
-   * Like {@link #rawLaunchIntent(Intent)} but will show a user dialog if nothing is available to handle.
-   */
-  final void launchIntent(Intent intent) {
-    try {
-      rawLaunchIntent(intent);
-    } catch (ActivityNotFoundException ignored) {
+    // Construct Intent to launch Shopper
+    Intent intent = new Intent(Intent.ACTION_SEARCH);
+    intent.setClassName(GOOGLE_SHOPPER_PACKAGE, GOOGLE_SHOPPER_ACTIVITY);
+    intent.putExtra(SearchManager.QUERY, query);
+
+    // Is it available?
+    PackageManager pm = activity.getPackageManager();
+    Collection<?> availableApps = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+    if (availableApps != null && !availableApps.isEmpty()) {
+      // If something can handle it, start it
+      activity.startActivity(intent);
+    } else {
+      // Otherwise offer to install it from Market.
       AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-      builder.setTitle(R.string.app_name);
-      builder.setMessage(R.string.msg_intent_failed);
-      builder.setPositiveButton(R.string.button_ok, null);
+      builder.setTitle(R.string.msg_google_shopper_missing);
+      builder.setMessage(R.string.msg_install_google_shopper);
+      builder.setIcon(R.drawable.shopper_icon);
+      builder.setPositiveButton(R.string.button_ok, shopperMarketListener);
+      builder.setNegativeButton(R.string.button_cancel, null);
       builder.show();
     }
   }
 
+  void launchIntent(Intent intent) {
+    if (intent != null) {
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+      Log.d(TAG, "Launching intent: " + intent + " with extras: " + intent.getExtras());
+      try {
+        activity.startActivity(intent);
+      } catch (ActivityNotFoundException e) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.app_name);
+        builder.setMessage(R.string.msg_intent_failed);
+        builder.setPositiveButton(R.string.button_ok, null);
+        builder.show();
+      }
+    }
+  }
+
   private static void putExtra(Intent intent, String key, String value) {
-    if (value != null && !value.isEmpty()) {
+    if (value != null && value.length() > 0) {
       intent.putExtra(key, value);
     }
   }
@@ -454,20 +556,15 @@ public abstract class ResultHandler {
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
     String customProductSearch = prefs.getString(PreferencesActivity.KEY_CUSTOM_PRODUCT_SEARCH,
         null);
-    if (customProductSearch != null && customProductSearch.trim().isEmpty()) {
+    if (customProductSearch != null && customProductSearch.trim().length() == 0) {
       return null;
     }
     return customProductSearch;
   }
 
-  final String fillInCustomSearchURL(String text) {
+  String fillInCustomSearchURL(String text) {
     if (customProductSearch == null) {
       return text; // ?
-    }
-    try {
-      text = URLEncoder.encode(text, "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      // can't happen; UTF-8 is always supported. Continue, I guess, without encoding      
     }
     String url = customProductSearch.replace("%s", text);
     if (rawResult != null) {

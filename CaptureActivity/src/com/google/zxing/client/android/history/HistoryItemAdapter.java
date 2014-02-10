@@ -16,7 +16,7 @@
 
 package com.google.zxing.client.android.history;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,28 +31,28 @@ import java.util.ArrayList;
 
 final class HistoryItemAdapter extends ArrayAdapter<HistoryItem> {
 
-  private final Context activity;
+  private final Activity activity;
 
-  HistoryItemAdapter(Context activity) {
+  HistoryItemAdapter(Activity activity) {
     super(activity, R.layout.history_list_item, new ArrayList<HistoryItem>());
     this.activity = activity;
   }
 
   @Override
   public View getView(int position, View view, ViewGroup viewGroup) {
-    View layout;
+    LinearLayout layout;
     if (view instanceof LinearLayout) {
-      layout = view;
+      layout = (LinearLayout) view;
     } else {
       LayoutInflater factory = LayoutInflater.from(activity);
-      layout = factory.inflate(R.layout.history_list_item, viewGroup, false);
+      layout = (LinearLayout) factory.inflate(R.layout.history_list_item, viewGroup, false);
     }
 
     HistoryItem item = getItem(position);
     Result result = item.getResult();
 
-    CharSequence title;
-    CharSequence detail;
+    String title;
+    String detail;
     if (result != null) {
       title = result.getText();
       detail = item.getDisplayAndDetails();      

@@ -16,7 +16,6 @@
 
 package com.google.zxing.client.android.history;
 
-import android.database.sqlite.SQLiteException;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.client.android.Intents;
@@ -53,7 +52,7 @@ public final class HistoryManager {
 
   private static final String TAG = HistoryManager.class.getSimpleName();
 
-  private static final int MAX_ITEMS = 2000;
+  private static final int MAX_ITEMS = 500;
 
   private static final String[] COLUMNS = {
       DBHelper.TEXT_COL,
@@ -67,8 +66,7 @@ public final class HistoryManager {
 
   private static final String[] ID_COL_PROJECTION = { DBHelper.ID_COL };
   private static final String[] ID_DETAIL_COL_PROJECTION = { DBHelper.ID_COL, DBHelper.DETAILS_COL };
-  private static final DateFormat EXPORT_DATE_TIME_FORMAT =
-      DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+  private static final DateFormat EXPORT_DATE_TIME_FORMAT = DateFormat.getDateTimeInstance();
 
   private final Activity activity;
 
@@ -203,21 +201,11 @@ public final class HistoryManager {
         oldDetails = cursor.getString(1);
       }
 
-      if (oldID != null) {
-        String newDetails;
-        if (oldDetails == null) {
-          newDetails = itemDetails;
-        } else if (oldDetails.contains(itemDetails)) {
-          newDetails = null;
-        } else {
-          newDetails = oldDetails + " : " + itemDetails;
-        } 
-        if (newDetails != null) {
-          ContentValues values = new ContentValues();
-          values.put(DBHelper.DETAILS_COL, newDetails);
-          db.update(DBHelper.TABLE_NAME, values, DBHelper.ID_COL + "=?", new String[] { oldID });
-        }
-      }
+      String newDetails = oldDetails == null ? itemDetails : oldDetails + " : " + itemDetails;
+      ContentValues values = new ContentValues();
+      values.put(DBHelper.DETAILS_COL, newDetails);
+
+      db.update(DBHelper.TABLE_NAME, values, DBHelper.ID_COL + "=?", new String[] { oldID });
 
     } finally {
       close(cursor, db);
@@ -247,15 +235,8 @@ public final class HistoryManager {
                         DBHelper.TIMESTAMP_COL + " DESC");
       cursor.move(MAX_ITEMS);
       while (cursor.moveToNext()) {
-        String id = cursor.getString(0);
-        Log.i(TAG, "Deleting scan history ID " + id);
-        db.delete(DBHelper.TABLE_NAME, DBHelper.ID_COL + '=' + id, null);
+        db.delete(DBHelper.TABLE_NAME, DBHelper.ID_COL + '=' + cursor.getString(0), null);
       }
-    } catch (SQLiteException sqle) {
-      // We're seeing an error here when called in CaptureActivity.onCreate() in rare cases
-      // and don't understand it. First theory is that it's transient so can be safely ignored.
-      Log.w(TAG, sqle);
-      // continue
     } finally {
       close(cursor, db);
     }
@@ -276,6 +257,7 @@ public final class HistoryManager {
    * </ul>
    */
   CharSequence buildHistory() {
+    StringBuilder historyText = new StringBuilder(1000);
     SQLiteOpenHelper helper = new DBHelper(activity);
     SQLiteDatabase db = null;
     Cursor cursor = null;
@@ -286,7 +268,6 @@ public final class HistoryManager {
                         null, null, null, null,
                         DBHelper.TIMESTAMP_COL + " DESC");
 
-      StringBuilder historyText = new StringBuilder(1000);
       while (cursor.moveToNext()) {
 
         historyText.append('"').append(massageHistoryField(cursor.getString(0))).append("\",");

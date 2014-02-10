@@ -17,14 +17,16 @@
 package com.google.zxing.client.android.camera;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.SurfaceHolder;
-import com.google.zxing.PlanarYUVLuminanceSource;
-import com.google.zxing.client.android.camera.open.OpenCameraInterface;
+import com.google.zxing.client.android.PlanarYUVLuminanceSource;
+import com.google.zxing.client.android.PreferencesActivity;
 
 import java.io.IOException;
 
@@ -41,17 +43,17 @@ public final class CameraManager {
 
   private static final int MIN_FRAME_WIDTH = 240;
   private static final int MIN_FRAME_HEIGHT = 240;
-  private static final int MAX_FRAME_WIDTH = 1200; // = 5/8 * 1920
-  private static final int MAX_FRAME_HEIGHT = 675; // = 5/8 * 1080
+  private static final int MAX_FRAME_WIDTH = 600;
+  private static final int MAX_FRAME_HEIGHT = 400;
 
   private final Context context;
   private final CameraConfigurationManager configManager;
   private Camera camera;
-  private AutoFocusManager autoFocusManager;
   private Rect framingRect;
   private Rect framingRectInPreview;
   private boolean initialized;
   private boolean previewing;
+  private boolean reverseImage;
   private int requestedFramingRectWidth;
   private int requestedFramingRectHeight;
   /**
@@ -59,11 +61,14 @@ public final class CameraManager {
    * clear the handler so it will only receive one message.
    */
   private final PreviewCallback previewCallback;
+  /** Autofocus callbacks arrive here, and are dispatched to the Handler which requested them. */
+  private final AutoFocusCallback autoFocusCallback;
 
   public CameraManager(Context context) {
     this.context = context;
     this.configManager = new CameraConfigurationManager(context);
     previewCallback = new PreviewCallback(configManager);
+    autoFocusCallback = new AutoFocusCallback();
   }
 
   /**
@@ -72,10 +77,10 @@ public final class CameraManager {
    * @param holder The surface object which the camera will draw preview frames into.
    * @throws IOException Indicates the camera driver failed to open.
    */
-  public synchronized void openDriver(SurfaceHolder holder) throws IOException {
+  public void openDriver(SurfaceHolder holder) throws IOException {
     Camera theCamera = camera;
     if (theCamera == null) {
-      theCamera = OpenCameraInterface.open();
+      theCamera = Camera.open();
       if (theCamera == null) {
         throw new IOException();
       }
@@ -92,39 +97,16 @@ public final class CameraManager {
         requestedFramingRectHeight = 0;
       }
     }
+    configManager.setDesiredCameraParameters(theCamera);
 
-    Camera.Parameters parameters = theCamera.getParameters();
-    String parametersFlattened = parameters == null ? null : parameters.flatten(); // Save these, temporarily
-    try {
-      configManager.setDesiredCameraParameters(theCamera, false);
-    } catch (RuntimeException re) {
-      // Driver failed
-      Log.w(TAG, "Camera rejected parameters. Setting only minimal safe-mode parameters");
-      Log.i(TAG, "Resetting to saved camera params: " + parametersFlattened);
-      // Reset:
-      if (parametersFlattened != null) {
-        parameters = theCamera.getParameters();
-        parameters.unflatten(parametersFlattened);
-        try {
-          theCamera.setParameters(parameters);
-          configManager.setDesiredCameraParameters(theCamera, true);
-        } catch (RuntimeException re2) {
-          // Well, darn. Give up
-          Log.w(TAG, "Camera rejected even safe-mode parameters! No configuration");
-        }
-      }
-    }
-
-  }
-
-  public synchronized boolean isOpen() {
-    return camera != null;
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    reverseImage = prefs.getBoolean(PreferencesActivity.KEY_REVERSE_IMAGE, false);
   }
 
   /**
    * Closes the camera driver if still in use.
    */
-  public synchronized void closeDriver() {
+  public void closeDriver() {
     if (camera != null) {
       camera.release();
       camera = null;
@@ -138,44 +120,23 @@ public final class CameraManager {
   /**
    * Asks the camera hardware to begin drawing preview frames to the screen.
    */
-  public synchronized void startPreview() {
+  public void startPreview() {
     Camera theCamera = camera;
     if (theCamera != null && !previewing) {
       theCamera.startPreview();
       previewing = true;
-      autoFocusManager = new AutoFocusManager(context, camera);
     }
   }
 
   /**
    * Tells the camera to stop drawing preview frames.
    */
-  public synchronized void stopPreview() {
-    if (autoFocusManager != null) {
-      autoFocusManager.stop();
-      autoFocusManager = null;
-    }
+  public void stopPreview() {
     if (camera != null && previewing) {
       camera.stopPreview();
       previewCallback.setHandler(null, 0);
+      autoFocusCallback.setHandler(null, 0);
       previewing = false;
-    }
-  }
-
-  /**
-   * Convenience method for {@link com.google.zxing.client.android.CaptureActivity}
-   */
-  public synchronized void setTorch(boolean newSetting) {
-    if (newSetting != configManager.getTorchState(camera)) {
-      if (camera != null) {
-        if (autoFocusManager != null) {
-          autoFocusManager.stop();
-        }
-        configManager.setTorch(camera, newSetting);
-        if (autoFocusManager != null) {
-          autoFocusManager.start();
-        }
-      }
     }
   }
 
@@ -187,11 +148,29 @@ public final class CameraManager {
    * @param handler The handler to send the message to.
    * @param message The what field of the message to be sent.
    */
-  public synchronized void requestPreviewFrame(Handler handler, int message) {
+  public void requestPreviewFrame(Handler handler, int message) {
     Camera theCamera = camera;
     if (theCamera != null && previewing) {
       previewCallback.setHandler(handler, message);
       theCamera.setOneShotPreviewCallback(previewCallback);
+    }
+  }
+
+  /**
+   * Asks the camera hardware to perform an autofocus.
+   *
+   * @param handler The Handler to notify when the autofocus completes.
+   * @param message The message to deliver.
+   */
+  public void requestAutoFocus(Handler handler, int message) {
+    if (camera != null && previewing) {
+      autoFocusCallback.setHandler(handler, message);
+      try {
+        camera.autoFocus(autoFocusCallback);
+      } catch (RuntimeException re) {
+        // Have heard RuntimeException reported in Android 4.0.x+; continue?
+        Log.w(TAG, "Unexpected exception while focusing", re);
+      }
     }
   }
 
@@ -202,20 +181,24 @@ public final class CameraManager {
    *
    * @return The rectangle to draw on screen in window coordinates.
    */
-  public synchronized Rect getFramingRect() {
+  public Rect getFramingRect() {
     if (framingRect == null) {
       if (camera == null) {
         return null;
       }
       Point screenResolution = configManager.getScreenResolution();
-      if (screenResolution == null) {
-        // Called early, before init even finished
-        return null;
+      int width = screenResolution.x * 3 / 4;
+      if (width < MIN_FRAME_WIDTH) {
+        width = MIN_FRAME_WIDTH;
+      } else if (width > MAX_FRAME_WIDTH) {
+        width = MAX_FRAME_WIDTH;
       }
-
-      int width = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
-      int height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
-
+      int height = screenResolution.y * 3 / 4;
+      if (height < MIN_FRAME_HEIGHT) {
+        height = MIN_FRAME_HEIGHT;
+      } else if (height > MAX_FRAME_HEIGHT) {
+        height = MAX_FRAME_HEIGHT;
+      }
       int leftOffset = (screenResolution.x - width) / 2;
       int topOffset = (screenResolution.y - height) / 2;
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
@@ -223,23 +206,12 @@ public final class CameraManager {
     }
     return framingRect;
   }
-  
-  private static int findDesiredDimensionInRange(int resolution, int hardMin, int hardMax) {
-    int dim = 5 * resolution / 8; // Target 5/8 of each dimension
-    if (dim < hardMin) {
-      return hardMin;
-    }
-    if (dim > hardMax) {
-      return hardMax;
-    }
-    return dim;
-  }
 
   /**
    * Like {@link #getFramingRect} but coordinates are in terms of the preview frame,
    * not UI / screen.
    */
-  public synchronized Rect getFramingRectInPreview() {
+  public Rect getFramingRectInPreview() {
     if (framingRectInPreview == null) {
       Rect framingRect = getFramingRect();
       if (framingRect == null) {
@@ -248,10 +220,6 @@ public final class CameraManager {
       Rect rect = new Rect(framingRect);
       Point cameraResolution = configManager.getCameraResolution();
       Point screenResolution = configManager.getScreenResolution();
-      if (cameraResolution == null || screenResolution == null) {
-        // Called early, before init even finished
-        return null;
-      }
       rect.left = rect.left * cameraResolution.x / screenResolution.x;
       rect.right = rect.right * cameraResolution.x / screenResolution.x;
       rect.top = rect.top * cameraResolution.y / screenResolution.y;
@@ -268,7 +236,7 @@ public final class CameraManager {
    * @param width The width in pixels to scan.
    * @param height The height in pixels to scan.
    */
-  public synchronized void setManualFramingRect(int width, int height) {
+  public void setManualFramingRect(int width, int height) {
     if (initialized) {
       Point screenResolution = configManager.getScreenResolution();
       if (width > screenResolution.x) {
@@ -304,7 +272,7 @@ public final class CameraManager {
     }
     // Go ahead and assume it's YUV rather than die.
     return new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
-                                        rect.width(), rect.height(), false);
+                                        rect.width(), rect.height(), reverseImage);
   }
 
 }
