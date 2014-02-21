@@ -9,8 +9,10 @@ import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,15 +26,17 @@ import android.widget.Toast;
 import aplicacions.acj.ruleta.R;
 
 public class Inicial extends Activity {
+
+	protected PowerManager.WakeLock wakelock;
 	private RadioGroup radioMesas;
 	private RadioButton radioMesasbt;
-	
+
 	private AdView adView;
 	private LinearLayout lytMain;
 
 	int contadornums = 0;
 	SeekBar seek;
-	
+
 	Button btinsertar, btinsertar2, btinsertar3, btinsertar4, btestadistica,
 			btborrar, btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8,
 			btn9, btnborrar, btvermesa;
@@ -66,16 +70,22 @@ public class Inicial extends Activity {
 
 		txLista = (TextView) findViewById(R.id.txLista);
 		lblnum = (TextView) findViewById(R.id.lblnum);
-		
-		
-		//*******************  BANNER  ********************************
-		
+
+		// ******************* BANNER ********************************
+
 		lytMain = (LinearLayout) findViewById(R.id.lytMain);
-		adView = new AdView(this, AdSize.BANNER,"ca-app-pub-1825821127744760/1018796934");
+		adView = new AdView(this, AdSize.BANNER,
+				"ca-app-pub-1825821127744760/1018796934");
 		lytMain.addView(adView);
 		adView.bringToFront();
 		adView.loadAd(new AdRequest());
-		
+
+		// *************************Impedir apagar la pantalla ***********************
+
+		final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		this.wakelock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK,
+				"etiqueta");
+		wakelock.acquire();
 
 		// *******************************Declaracion de los botones que
 		// insertarán los numeros teclado***********************
@@ -85,7 +95,7 @@ public class Inicial extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-	BorrarNumTeclado();
+				BorrarNumTeclado();
 
 			}
 		});
@@ -200,20 +210,18 @@ public class Inicial extends Activity {
 		// ****************************************************************************************
 		// ****************************************************************************************
 		btvermesa.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				int selectedId = radioMesas.getCheckedRadioButtonId();
 				// find the radiobutton by returned id
-		        radioMesasbt = (RadioButton) findViewById(selectedId);
-		        
-		        MostarMesa(radioMesasbt.getHint().toString());
-				
+				radioMesasbt = (RadioButton) findViewById(selectedId);
+
+				MostarMesa(radioMesasbt.getHint().toString());
+
 			}
 		});
-		
-		
-		
+
 		// ****************************************************************************************
 
 		// Boton insertar en la ruleta
@@ -224,17 +232,12 @@ public class Inicial extends Activity {
 				// TODO Auto-generated method stub
 				int selectedId = radioMesas.getCheckedRadioButtonId();
 				// find the radiobutton by returned id
-		        radioMesasbt = (RadioButton) findViewById(selectedId);
-				
-				
+				radioMesasbt = (RadioButton) findViewById(selectedId);
+
 				LlamadaInsert(radioMesasbt.getHint() + "");
-				
-				
-				
 
 			}
 		});
-		
 
 		btestadistica.setOnClickListener(new OnClickListener() {
 
@@ -242,11 +245,11 @@ public class Inicial extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				int selectedId = radioMesas.getCheckedRadioButtonId();
-				
-		        radioMesasbt = (RadioButton) findViewById(selectedId);
-		        
+
+				radioMesasbt = (RadioButton) findViewById(selectedId);
+
 				MostrarEstadistica(radioMesasbt.getHint() + "");
-				
+
 			}
 		});
 
@@ -270,61 +273,64 @@ public class Inicial extends Activity {
 		btn7.setEnabled(true);
 		btn8.setEnabled(true);
 		btn9.setEnabled(true);
-		
+
 	}
 
 	// Metodo que controla los numeros que se van a passar al label del teclado
 	public void ControlHint(String numhint) {
 		if (contadornums <= 1) {
-			if (numhint.equals("1") || numhint.equals("2")){
+			if (numhint.equals("1") || numhint.equals("2")) {
 				AnadirNormal(numhint);
 			}
-			
-			if (numhint.equals("3")){
+
+			if (numhint.equals("3")) {
 				AnadirEspecial(numhint);
 			}
-			
-			if (numhint.equals("4") || numhint.equals("5") || numhint.equals("6") || numhint.equals("7") || numhint.equals("8") || numhint.equals("9") || numhint.equals("0")){
+
+			if (numhint.equals("4") || numhint.equals("5")
+					|| numhint.equals("6") || numhint.equals("7")
+					|| numhint.equals("8") || numhint.equals("9")
+					|| numhint.equals("0")) {
 				AnadirSoloUno(numhint);
 			}
-			
+
 			// switch (numhint) {
 			// case "1" :
 			// AnadirNormal(numhint);
 			// break;
-			
+
 			// case "2":
 			// AnadirNormal(numhint);
 			// break;
-			
+
 			// case "3":
 			// AnadirEspecial(numhint);
 			// break;
-			
+
 			// case "4":
 			// AnadirSoloUno(numhint);
 			// break;
-			
+
 			// case "5":
 			// AnadirSoloUno(numhint);
 			// break;
-			
+
 			// case "6":
 			// AnadirSoloUno(numhint);
 			// break;
-			
+
 			// case "7":
 			// AnadirSoloUno(numhint);
 			// break;
-			
+
 			// case "8":
 			// AnadirSoloUno(numhint);
 			// break;
-			
+
 			// case "9":
 			// AnadirSoloUno(numhint);
 			// break;
-			
+
 			// case "0":
 			// AnadirSoloUno(numhint);
 			// break;
@@ -368,36 +374,35 @@ public class Inicial extends Activity {
 			numsel = lblnum.getText().toString();
 			BorrarNumTeclado();
 
-//			Toast.makeText(Inicial.this, numsel + " en la mesa " + idruleta,
-//					Toast.LENGTH_SHORT).show();
-			
+			// Toast.makeText(Inicial.this, numsel + " en la mesa " + idruleta,
+			// Toast.LENGTH_SHORT).show();
+
 			SimpleDateFormat s = new SimpleDateFormat("hh:mm:ss - dd/MM/yyyy");
 			String format = s.format(new Date());
-			
-//			Toast.makeText(Inicial.this, format, Toast.LENGTH_SHORT).show();
+
+			// Toast.makeText(Inicial.this, format, Toast.LENGTH_SHORT).show();
 
 			DBH.Insertar(idruleta, numsel, format);
 
 			txLista.setText("");
 
 			DBH.BuscarSiExiste("hola");
-			
+
 			DBH.close();
 
 		} else {
-			String cad= this.getString(R.string.noseleccionado);
-			Toast.makeText(Inicial.this, cad,
-					Toast.LENGTH_SHORT).show();
+			String cad = this.getString(R.string.noseleccionado);
+			Toast.makeText(Inicial.this, cad, Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
 	public void MostarMesa(String num) {
 		Intent i = new Intent(Inicial.this, MostrarNumerosMesa.class);
-		
+
 		i.putExtra("Mesa", num);
 		startActivity(i);
 	}
-	
+
 	public void MostrarEstadistica(String num) {
 		Intent i = new Intent(Inicial.this, Estadistica.class);
 		i.putExtra("Estadistica", num);
@@ -410,18 +415,27 @@ public class Inicial extends Activity {
 		getMenuInflater().inflate(R.menu.inicial, menu);
 		return true;
 	}
-	
+
 	@Override
 	public void onStart() {
-	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
 	}
 
 	@Override
 	public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this);
 	}
+	
+	
+	
+	/*Esto, junto con el onDestroy, hacen que la pantalla siga encendida hasta que la actividad termine*/
+	protected void onDestroy(){
+	        super.onDestroy();
+	       
+	        this.wakelock.release();
+	    }
 
 }
 

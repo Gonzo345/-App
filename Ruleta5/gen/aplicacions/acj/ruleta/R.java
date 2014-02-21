@@ -27,6 +27,9 @@ Enable automatic exception tracking
          */
         public static final int ga_reportUncaughtExceptions=0x7f060001;
     }
+    public static final class color {
+        public static final int rojo=0x7f080000;
+    }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
@@ -35,8 +38,8 @@ Enable automatic exception tracking
     
  Default screen margins, per the Android Design guidelines. 
          */
-        public static final int activity_horizontal_margin=0x7f080000;
-        public static final int activity_vertical_margin=0x7f080001;
+        public static final int activity_horizontal_margin=0x7f090000;
+        public static final int activity_vertical_margin=0x7f090001;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
@@ -44,55 +47,55 @@ Enable automatic exception tracking
         public static final int ruleta=0x7f020002;
     }
     public static final class id {
-        public static final int AbsoluteLayout1=0x7f0b002f;
-        public static final int LinearLayout1=0x7f0b000c;
-        public static final int TableRow01=0x7f0b0016;
-        public static final int TableRow02=0x7f0b0011;
-        public static final int action_settings=0x7f0b0030;
-        public static final int bt1=0x7f0b0006;
-        public static final int bt2=0x7f0b0007;
-        public static final int bt3=0x7f0b0008;
-        public static final int bt4=0x7f0b0009;
-        public static final int btborrar=0x7f0b0024;
-        public static final int btborrarseleccionados=0x7f0b002d;
-        public static final int btestadistica=0x7f0b0022;
-        public static final int btinsertar=0x7f0b002b;
-        public static final int btinsertar2=0x7f0b001e;
-        public static final int btinsertar3=0x7f0b0020;
-        public static final int btinsertar4=0x7f0b0021;
-        public static final int btinsetar=0x7f0b001d;
-        public static final int btn0=0x7f0b001c;
-        public static final int btn1=0x7f0b0012;
-        public static final int btn2=0x7f0b0013;
-        public static final int btn3=0x7f0b0014;
-        public static final int btn4=0x7f0b0015;
-        public static final int btn5=0x7f0b0017;
-        public static final int btn6=0x7f0b0018;
-        public static final int btn7=0x7f0b0019;
-        public static final int btn8=0x7f0b001a;
-        public static final int btn9=0x7f0b001b;
-        public static final int btnborrar=0x7f0b0010;
-        public static final int btno=0x7f0b0004;
-        public static final int btsi=0x7f0b0003;
-        public static final int btvermesa=0x7f0b002c;
-        public static final int ima1=0x7f0b000d;
-        public static final int lblnum=0x7f0b000f;
-        public static final int listView1=0x7f0b002e;
-        public static final int lytMain=0x7f0b0005;
-        public static final int radio_mesas=0x7f0b0026;
-        public static final int radiomesa1=0x7f0b0027;
-        public static final int radiomesa2=0x7f0b0028;
-        public static final int radiomesa3=0x7f0b0029;
-        public static final int radiomesa4=0x7f0b002a;
-        public static final int scrollView1=0x7f0b000a;
-        public static final int tableRow1=0x7f0b0000;
-        public static final int tableRow2=0x7f0b0002;
-        public static final int tableRow3=0x7f0b001f;
-        public static final int tableRow4=0x7f0b000e;
-        public static final int textView1=0x7f0b0025;
-        public static final int txLista=0x7f0b0023;
-        public static final int txlista=0x7f0b000b;
-        public static final int txpreg=0x7f0b0001;
+        public static final int AbsoluteLayout1=0x7f0c002f;
+        public static final int LinearLayout1=0x7f0c000c;
+        public static final int TableRow01=0x7f0c0016;
+        public static final int TableRow02=0x7f0c0011;
+        public static final int action_settings=0x7f0c0030;
+        public static final int bt1=0x7f0c0006;
+        public static final int bt2=0x7f0c0007;
+        public static final int bt3=0x7f0c0008;
+        public static final int bt4=0x7f0c0009;
+        public static final int btborrar=0x7f0c0024;
+        public static final int btborrarseleccionados=0x7f0c002d;
+        public static final int btestadistica=0x7f0c0022;
+        public static final int btinsertar=0x7f0c002b;
+        public static final int btinsertar2=0x7f0c001e;
+        public static final int btinsertar3=0x7f0c0020;
+        public static final int btinsertar4=0x7f0c0021;
+        public static final int btinsetar=0x7f0c001d;
+        public static final int btn0=0x7f0c001c;
+        public static final int btn1=0x7f0c0012;
+        public static final int btn2=0x7f0c0013;
+        public static final int btn3=0x7f0c0014;
+        public static final int btn4=0x7f0c0015;
+        public static final int btn5=0x7f0c0017;
+        public static final int btn6=0x7f0c0018;
+        public static final int btn7=0x7f0c0019;
+        public static final int btn8=0x7f0c001a;
+        public static final int btn9=0x7f0c001b;
+        public static final int btnborrar=0x7f0c0010;
+        public static final int btno=0x7f0c0004;
+        public static final int btsi=0x7f0c0003;
+        public static final int btvermesa=0x7f0c002c;
+        public static final int ima1=0x7f0c000d;
+        public static final int lblnum=0x7f0c000f;
+        public static final int listView1=0x7f0c002e;
+        public static final int lytMain=0x7f0c0005;
+        public static final int radio_mesas=0x7f0c0026;
+        public static final int radiomesa1=0x7f0c0027;
+        public static final int radiomesa2=0x7f0c0028;
+        public static final int radiomesa3=0x7f0c0029;
+        public static final int radiomesa4=0x7f0c002a;
+        public static final int scrollView1=0x7f0c000a;
+        public static final int tableRow1=0x7f0c0000;
+        public static final int tableRow2=0x7f0c0002;
+        public static final int tableRow3=0x7f0c001f;
+        public static final int tableRow4=0x7f0c000e;
+        public static final int textView1=0x7f0c0025;
+        public static final int txLista=0x7f0c0023;
+        public static final int txlista=0x7f0c000b;
+        public static final int txpreg=0x7f0c0001;
     }
     public static final class layout {
         public static final int borrar=0x7f030000;
@@ -105,7 +108,7 @@ Enable automatic exception tracking
         public static final int slash=0x7f030007;
     }
     public static final class menu {
-        public static final int inicial=0x7f0a0000;
+        public static final int inicial=0x7f0b0000;
     }
     public static final class string {
         public static final int No=0x7f05000f;
@@ -168,6 +171,6 @@ Replace placeholder ID with your tracking ID
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f0a0000;
     }
 }
