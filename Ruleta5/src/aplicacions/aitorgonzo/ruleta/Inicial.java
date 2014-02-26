@@ -39,7 +39,7 @@ public class Inicial extends Activity {
 
 	Button btinsertar, btinsertar2, btinsertar3, btinsertar4, btestadistica,
 			btborrar, btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8,
-			btn9, btnborrar, btvermesa;
+			btn9, btnborrar, btvermesa, bthelp;
 	String numsel;
 	TextView num1, txLista, lblnum;
 	// Llamamos a la clase de base de datos
@@ -67,6 +67,7 @@ public class Inicial extends Activity {
 		btn9 = (Button) findViewById(R.id.btn9);
 		btnborrar = (Button) findViewById(R.id.btnborrar);
 		btvermesa = (Button) findViewById(R.id.btvermesa);
+		bthelp= (Button)findViewById(R.id.help);
 
 		txLista = (TextView) findViewById(R.id.txLista);
 		lblnum = (TextView) findViewById(R.id.lblnum);
@@ -260,6 +261,17 @@ public class Inicial extends Activity {
 				// TODO Auto-generated method stub
 
 				Intent i = new Intent(Inicial.this, Borrar.class);
+				startActivity(i);
+			}
+		});
+		
+		
+		bthelp.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i= new Intent(Inicial.this, Help.class);
 				startActivity(i);
 			}
 		});

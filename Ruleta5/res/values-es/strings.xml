@@ -23,6 +23,11 @@
     <string name="stringEstadisticaLabel">Estadísticas de la mesa </string>
     <string name="noseleccionado">No se han insertado números...</string>
     <string name="verestadisticas">Ver estadísticas</string>
+    <string name="cad_help_1"></string>
+    <string name="cad_help_2"></string>
+    <string name="cad_help_3"></string>
+    
+    
     
 
 </resources>

@@ -264,12 +264,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btborrar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ff0000"
-                android:text="@string/borrar" />
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btborrar"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.70"
+                    android:background="#ff0000"
+                    android:text="@string/borrar" />
+
+                <Button
+                    android:id="@+id/help"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/help"/>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

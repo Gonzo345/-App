@@ -23,6 +23,8 @@
     <string name="stringEstadisticaLabel">Tafel statistiken </string>
     <string name="noseleccionado">Keine nummer ausgewählt</string>
     <string name="verestadisticas">Statistiken anzeigen</string>
-    
+    <string name="cad_help_1"></string>
+    <string name="cad_help_2"></string>
+    <string name="cad_help_3"></string>
 
 </resources>

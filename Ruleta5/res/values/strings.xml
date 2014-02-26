@@ -23,6 +23,9 @@
     <string name="stringEstadisticaLabel">Table\'s stats </string>
     <string name="noseleccionado">You haven\'t selected any number</string>
     <string name="verestadisticas">Show Statistics</string>
+    <string name="cad_help_1"></string>
+    <string name="cad_help_2"></string>
+    <string name="cad_help_3"></string>
     
 
 </resources>

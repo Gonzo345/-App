@@ -23,6 +23,8 @@
     <string name="stringEstadisticaLabel">Estadístiques de la taula </string>
     <string name="noseleccionado">No s´han insertat nombres</string>
     <string name="verestadisticas">Veure estadístiques</string>
-    
+    <string name="cad_help_1"></string>
+    <string name="cad_help_2"></string>
+    <string name="cad_help_3"></string>
 
 </resources>
