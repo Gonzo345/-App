@@ -1,24 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context="sine.apps.sinedolore.Inicial"
     tools:ignore="MergeRootFrame" >
 
-<!--     	Pertenece a visor google drive -->
-<!--     	<WebView -->
-<!--         android:id="@+id/page" -->
-<!--         android:layout_width="match_parent" -->
-<!--         android:layout_height="match_parent" /> -->
-<!--     	Fin de GDrive -->
+    <!-- Pertenece a visor google drive -->
+    <!-- <WebView -->
+    <!-- android:id="@+id/page" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="match_parent" /> -->
+    <!-- Fin de GDrive -->
 
-    <Button
-        android:id="@+id/OpenPdfButton"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Abrir PDF" />
+        android:layout_gravity="center_horizontal"
+        android:text="@string/error_pdf" />
 
 </LinearLayout>
-

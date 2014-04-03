@@ -44,36 +44,33 @@ public class PDF extends Activity {
 		
 		//Versión nativa funcional
 		setContentView(R.layout.pdf);
-		Button button = (Button) findViewById(R.id.OpenPdfButton);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-	                File file = new File("/sdcard/example.pdf");
-	                
-	                Toast.makeText(PDF.this, 
-                            "Estoy dentro", 
-                            Toast.LENGTH_SHORT).show();
+		
+		File file = new File("/storage/sdcard1/programa2014.pdf");
+        
+        Toast.makeText(PDF.this, 
+                "Estoy dentro", 
+                Toast.LENGTH_SHORT).show();
 
-	                if(file.exists()) {
-	                    Uri path = Uri.fromFile(file);
-	                    Intent intent = new Intent(Intent.ACTION_VIEW);
-	                    intent.setDataAndType(path, "application/pdf");
-	                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if(file.exists()) {
+            Uri path = Uri.fromFile(file);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(path, "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-	                    try {
-	                        startActivity(intent);
-	                    } 
-	                    catch (ActivityNotFoundException e) {
-	                        Toast.makeText(PDF.this, 
-	                            "No Application Available to View PDF", 
-	                            Toast.LENGTH_SHORT).show();
-	                    }
-	                }
-	                else
-	                	Toast.makeText(PDF.this, 
-	                            "No existe el archivo", 
-	                            Toast.LENGTH_SHORT).show();
-			}
-			});
+            try {
+                startActivity(intent);
+            } 
+            catch (ActivityNotFoundException e) {
+                Toast.makeText(PDF.this, 
+                    "No hay aplicación lectora de PDFs", 
+                    Toast.LENGTH_LONG).show();
+                
+            }
+        }
+        else
+        	Toast.makeText(PDF.this, 
+                    "No existe el archivo", 
+                    Toast.LENGTH_SHORT).show();
+		
 	}	
 }
