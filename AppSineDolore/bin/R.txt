@@ -235,11 +235,12 @@ int drawable abc_textfield_searchview_holo_light 0x7f020054
 int drawable abc_textfield_searchview_right_holo_dark 0x7f020055
 int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable ic_launcher 0x7f020057
+int drawable logo 0x7f020058
 int id EditText01 0x7f060051
 int id EditText02 0x7f06004d
 int id EditText04 0x7f060045
 int id EditText05 0x7f060041
-int id OpenPdfButton 0x7f06005c
+int id OpenPdfButton 0x7f06005d
 int id TableLayout1 0x7f06003c
 int id TableRow01 0x7f060050
 int id TableRow02 0x7f06004e
@@ -267,7 +268,7 @@ int id action_context_bar 0x7f06001d
 int id action_menu_divider 0x7f060016
 int id action_menu_presenter 0x7f060017
 int id action_mode_close_button 0x7f060024
-int id action_settings 0x7f06005e
+int id action_settings 0x7f060060
 int id activity_chooser_view_content 0x7f060025
 int id always 0x7f06000b
 int id beginning 0x7f060011
@@ -275,7 +276,7 @@ int id btform 0x7f060057
 int id btpage 0x7f060058
 int id btpdf 0x7f06005a
 int id btwine 0x7f060059
-int id btyt 0x7f06005b
+int id btyt 0x7f06005c
 int id checkbox 0x7f06002d
 int id collapseActionView 0x7f06000d
 int id container 0x7f060056
@@ -293,6 +294,7 @@ int id home 0x7f060014
 int id homeAsUp 0x7f060005
 int id icon 0x7f06002a
 int id ifRoom 0x7f06000a
+int id ima1 0x7f06005e
 int id image 0x7f060027
 int id listMode 0x7f060001
 int id list_item 0x7f060029
@@ -300,7 +302,7 @@ int id middle 0x7f060012
 int id never 0x7f060009
 int id none 0x7f060010
 int id normal 0x7f060000
-int id page 0x7f06005d
+int id page 0x7f06005f
 int id progress_circular 0x7f060018
 int id progress_horizontal 0x7f060019
 int id radio 0x7f06002f
@@ -324,6 +326,7 @@ int id submit_area 0x7f060039
 int id tabMode 0x7f060002
 int id tableRow1 0x7f060052
 int id tableRow2 0x7f060054
+int id tableRow3 0x7f06005b
 int id textView1 0x7f060053
 int id title 0x7f06002b
 int id top_action_bar 0x7f060020
@@ -361,9 +364,10 @@ int layout fragment_main 0x7f03001a
 int layout inicial 0x7f03001b
 int layout page 0x7f03001c
 int layout pdf 0x7f03001d
-int layout support_simple_spinner_dropdown_item 0x7f03001e
-int layout wine 0x7f03001f
-int layout youtube 0x7f030020
+int layout splash 0x7f03001e
+int layout support_simple_spinner_dropdown_item 0x7f03001f
+int layout wine 0x7f030020
+int layout youtube 0x7f030021
 int menu inicial 0x7f0d0000
 int raw programa2014 0x7f050000
 int string abc_action_bar_home_description 0x7f0b0001

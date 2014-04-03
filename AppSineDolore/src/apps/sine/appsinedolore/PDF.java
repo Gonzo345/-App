@@ -1,10 +1,10 @@
 package apps.sine.appsinedolore;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -48,48 +48,24 @@ public class PDF extends Activity {
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				Context context = getApplicationContext();
-				Resources res = context.getResources();
-				
-				String pdf="programa2014";
-				int soundId = res.getIdentifier(pdf, "raw", context.getPackageName());
-				
-				Toast.makeText(PDF.this, 
-                        soundId,
-                        Toast.LENGTH_SHORT).show();
-				
-				Uri path = Uri.parse("android.resource://apps.sine.appsinedolore/raw/" + soundId);
-                
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(path, "application/pdf");
-              	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                
-                try {
-                    startActivity(intent);
-                } 
-                catch (ActivityNotFoundException e) {
-                    Toast.makeText(PDF.this, 
-                        "No Application Available to View PDF", 
-                        Toast.LENGTH_SHORT).show();
-                }
-//                
-//                if (file.exists()) {
-//                    Uri path = Uri.fromFile(file);
-//                    Intent intent = new Intent(Intent.ACTION_VIEW);
-//                    intent.setDataAndType(path, "application/pdf");
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//                    try {
-//                        startActivity(intent);
-//                    } 
-//                    catch (ActivityNotFoundException e) {
-//                        Toast.makeText(PDF.this, 
-//                            "No Application Available to View PDF", 
-//                            Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-            }
-		});
+	                File file = new File("/sdcard/example.pdf");
+
+	                if (file.exists()) {
+	                    Uri path = Uri.fromFile(file);
+	                    Intent intent = new Intent(Intent.ACTION_VIEW);
+	                    intent.setDataAndType(path, "application/pdf");
+	                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+	                    try {
+	                        startActivity(intent);
+	                    } 
+	                    catch (ActivityNotFoundException e) {
+	                        Toast.makeText(PDF.this, 
+	                            "No Application Available to View PDF", 
+	                            Toast.LENGTH_SHORT).show();
+	                    }
+	                }
+			}
+			});
 	}	
 }
