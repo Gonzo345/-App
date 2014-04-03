@@ -49,8 +49,12 @@ public class PDF extends Activity {
 			@Override
 			public void onClick(View v) {
 	                File file = new File("/sdcard/example.pdf");
+	                
+	                Toast.makeText(PDF.this, 
+                            "Estoy dentro", 
+                            Toast.LENGTH_SHORT).show();
 
-	                if (file.exists()) {
+	                if(file.exists()) {
 	                    Uri path = Uri.fromFile(file);
 	                    Intent intent = new Intent(Intent.ACTION_VIEW);
 	                    intent.setDataAndType(path, "application/pdf");
@@ -65,6 +69,10 @@ public class PDF extends Activity {
 	                            Toast.LENGTH_SHORT).show();
 	                    }
 	                }
+	                else
+	                	Toast.makeText(PDF.this, 
+	                            "No existe el archivo", 
+	                            Toast.LENGTH_SHORT).show();
 			}
 			});
 	}	
