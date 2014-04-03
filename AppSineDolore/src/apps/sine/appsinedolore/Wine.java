@@ -6,7 +6,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class Wine  extends Activity {
+public class Wine extends Activity {
 
 	private WebView mWebView;
 	@Override

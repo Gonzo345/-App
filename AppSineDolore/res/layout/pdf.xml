@@ -7,10 +7,18 @@
     tools:context="sine.apps.sinedolore.Inicial"
     tools:ignore="MergeRootFrame" >
 
-    	<WebView
-        android:id="@+id/page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+<!--     	Pertenece a visor google drive -->
+<!--     	<WebView -->
+<!--         android:id="@+id/page" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="match_parent" /> -->
+<!--     	Fin de GDrive -->
+
+    <Button
+        android:id="@+id/OpenPdfButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abrir PDF" />
 
 </LinearLayout>
 
