@@ -71,6 +71,7 @@ public class PDF extends Activity {
         	Toast.makeText(PDF.this, 
                     "No existe el archivo", 
                     Toast.LENGTH_SHORT).show();
+        finish();
 		
 	}	
 }
