@@ -8,13 +8,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PDF extends Activity {
 	
 	private WebView mWebView;
+	private TextView tv_link;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,17 @@ public class PDF extends Activity {
 		//Versión nativa funcional
 		setContentView(R.layout.pdf);
 		
+		tv_link= (TextView)findViewById(R.id.textView1);
+		
+		tv_link.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.adobe.reader")));
+			}
+		});
+		
+		
 		File file = new File("/storage/sdcard1/programa2014.pdf");
-        
+		
         Toast.makeText(PDF.this, 
                 "Estoy dentro", 
                 Toast.LENGTH_SHORT).show();
