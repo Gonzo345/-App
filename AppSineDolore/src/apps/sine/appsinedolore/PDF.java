@@ -75,13 +75,11 @@ public class PDF extends Activity {
                 Toast.makeText(PDF.this, 
                     "No hay aplicación lectora de PDFs", 
                     Toast.LENGTH_LONG).show();
-                
             }
         }
         else
         	Toast.makeText(PDF.this, 
                     "No existe el archivo", 
-                    Toast.LENGTH_SHORT).show();
-		
+                    Toast.LENGTH_SHORT).show();		
 	}	
 }

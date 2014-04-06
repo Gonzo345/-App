@@ -1085,7 +1085,7 @@ containing a value of this type.
         public static final int EditText02=0x7f06004d;
         public static final int EditText04=0x7f060045;
         public static final int EditText05=0x7f060041;
-        public static final int LinearLayout1=0x7f06005d;
+        public static final int LinearLayout1=0x7f06005e;
         public static final int TableLayout1=0x7f06003c;
         public static final int TableRow01=0x7f060050;
         public static final int TableRow02=0x7f06004e;
@@ -1117,6 +1117,7 @@ containing a value of this type.
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
         public static final int btform=0x7f060057;
+        public static final int btgmaps=0x7f06005d;
         public static final int btpage=0x7f060058;
         public static final int btpdf=0x7f06005a;
         public static final int btwine=0x7f060059;
@@ -1138,7 +1139,7 @@ containing a value of this type.
         public static final int homeAsUp=0x7f060005;
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
-        public static final int ima1=0x7f06005e;
+        public static final int ima1=0x7f06005f;
         public static final int image=0x7f060027;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
@@ -1146,7 +1147,7 @@ containing a value of this type.
         public static final int never=0x7f060009;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
-        public static final int page=0x7f06005f;
+        public static final int page=0x7f060060;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
         public static final int radio=0x7f06002f;
