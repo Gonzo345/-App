@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Inicial extends Activity {
 
-	private Button btform, btyt, btpage, btpdf, btwine;
+	private Button btform, btyt, btpage, btpdf, btwine, btgmaps;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ public class Inicial extends Activity {
 		btpage = (Button) findViewById(R.id.btpage);
 		btpdf = (Button) findViewById(R.id.btpdf);
 		btyt = (Button) findViewById(R.id.btyt);
+		btgmaps = (Button) findViewById(R.id.btgmaps);
 
 		//Formulario
 		btform.setOnClickListener(new OnClickListener() {
@@ -28,11 +29,9 @@ public class Inicial extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(Inicial.this, Formulario.class);
 				startActivity(i);
-				// Toast.makeText(Inicial.this, "hola",
-				// Toast.LENGTH_SHORT).show();
 			}
 		});
-		//Youtube
+		//YouTube
 		btyt.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -48,7 +47,7 @@ public class Inicial extends Activity {
 				startActivity(i);
 			}
 		});
-		//page
+		//WebPage
 		btpage.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -56,11 +55,19 @@ public class Inicial extends Activity {
 				startActivity(i);
 			}
 		});
-		//pdf
+		//PDF
 		btpdf.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Inicial.this, PDF.class);
+				startActivity(i);
+			}
+		});
+		//Google Maps
+		btgmaps.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Inicial.this, Maps.class);
 				startActivity(i);
 			}
 		});

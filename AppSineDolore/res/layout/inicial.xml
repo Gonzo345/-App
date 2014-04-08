@@ -78,7 +78,14 @@
                         android:gravity="center_vertical|center_horizontal|center"
                         android:text="YouTube" />
 
+                    <Button
+                        android:id="@+id/btgmaps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Google Maps" />
+
                 </TableRow>
+
             </TableLayout>
 
         </LinearLayout>
