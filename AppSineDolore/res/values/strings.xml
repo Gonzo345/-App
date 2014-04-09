@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Sine Dolore</string>
+    <string name="redasistencial">Red Asistencial</string>
     <string name="error_pdf">No hay aplicación lectora de PDFs. Toca aquí para ir a la Play Store para descargar un lector gratuito </string>
 
 </resources>
