@@ -3,11 +3,8 @@ package apps.sine.appsinedolore;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -23,22 +20,6 @@ public class Maps extends Activity {
 		
 		//Creamos marcador
 		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-		
-		
-		 LatLng menorca = new LatLng(40.00, 4.06); 
-		  
-	        CameraPosition campos = new CameraPosition.Builder().target(menorca) // Centramos 
-	                                                                                // el 
-	                                                                                // mapa 
-	                                                                                // en 
-	                                                                                // menorca 
-	                .zoom(10) // zoom de 1-18 
-	                .bearing(0) // Orientacion N 
-	                .tilt(20) // Vista camara a 70 grados 
-	                .build(); 
-	  
-	        CameraUpdate camupd3 = CameraUpdateFactory.newCameraPosition(campos); 
-	        mMap.animateCamera(camupd3); 
 		
 		//Marcador de Mahón 1
 		mMap.addMarker(new MarkerOptions()
