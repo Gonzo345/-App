@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Inicial extends Activity {
 
-	private Button btform, btyt, btpage, btpdf, btwine, btgmaps;
+	private Button btform, btyt, btpage, btpdf, btwine, btgmaps, btabout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class Inicial extends Activity {
 		btpdf = (Button) findViewById(R.id.btpdf);
 		btyt = (Button) findViewById(R.id.btyt);
 		btgmaps = (Button) findViewById(R.id.btgmaps);
+		btabout = (Button) findViewById(R.id.btabout);
 
 		//Formulario
 		btform.setOnClickListener(new OnClickListener() {
@@ -70,6 +71,16 @@ public class Inicial extends Activity {
 				Intent i = new Intent(Inicial.this, Maps.class);
 				startActivity(i);
 			}
+		});
+		
+		btabout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Inicial.this, About.class);
+				startActivity(i);
+			}
+			
 		});
 		//#################### FIN DE BOTONES  ########################
 

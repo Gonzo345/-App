@@ -4,5 +4,9 @@
     <string name="app_name">Sine Dolore</string>
     <string name="redasistencial">Red Asistencial</string>
     <string name="error_pdf">No hay aplicación lectora de PDFs. Toca aquí para ir a la Play Store para descargar un lector gratuito </string>
+    <string name="bt_about">Acerca de</string>
+    <string name="about1">Texto uno</string>
+    <string name="about2">Texto dos</string>
+    <string name="about3">Texto tres</string>
 
 </resources>
