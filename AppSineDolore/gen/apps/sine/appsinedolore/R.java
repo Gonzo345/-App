@@ -1009,6 +1009,12 @@ containing a value of this type.
         public static final int abc_config_allowActionMenuItemTextWithIcon=0x7f060004;
         public static final int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f060003;
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
+        /** Enable automatic activity tracking
+         */
+        public static final int ga_autoActivityTracking=0x7f060006;
+        /** Enable automatic exception tracking
+         */
+        public static final int ga_reportUncaughtExceptions=0x7f060007;
     }
     public static final class color {
         public static final int abc_search_url_text_holo=0x7f07000d;
@@ -1488,10 +1494,10 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int about1=0x7f0a002c;
-        public static final int about2=0x7f0a002d;
-        public static final int about3=0x7f0a002e;
-        public static final int app_name=0x7f0a0028;
+        public static final int about1=0x7f0a002d;
+        public static final int about2=0x7f0a002e;
+        public static final int about3=0x7f0a002f;
+        public static final int app_name=0x7f0a0029;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -1515,7 +1521,7 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f0a0021;
-        public static final int bt_about=0x7f0a002b;
+        public static final int bt_about=0x7f0a002c;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1587,11 +1593,14 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f0a0020;
-        public static final int error_pdf=0x7f0a002a;
+        public static final int error_pdf=0x7f0a002b;
+        /** Replace placeholder ID with your tracking ID
+         */
+        public static final int ga_trackingId=0x7f0a0028;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f0a0027;
-        public static final int redasistencial=0x7f0a0029;
+        public static final int redasistencial=0x7f0a002a;
     }
     public static final class style {
         /** 
