@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class Inicial extends Activity {
+public class Inicial extends Analytics {
 
 	private Button btform, btyt, btpage, btpdf, btwine, btgmaps, btabout;
 
@@ -91,13 +91,13 @@ public class Inicial extends Activity {
 	@Override
 	protected void onStart() {
 	    super.onStart();
-//	    EasyTracker.getInstance(this).activityStart(this);
+	    EasyTracker.getInstance(this).activityStart(this);
 	}
 
 	@Override
 	protected void onStop() {
 	    super.onStop();
-//	    EasyTracker.getInstance(this).activityStop(this);
+	    EasyTracker.getInstance(this).activityStop(this);
 	}
 
 }

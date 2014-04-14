@@ -3,7 +3,7 @@ package apps.sine.appsinedolore;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class Page  extends Activity {
+public class Page  extends Analytics {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

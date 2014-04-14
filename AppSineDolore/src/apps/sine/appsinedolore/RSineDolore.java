@@ -6,7 +6,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class RSineDolore extends Activity {
+public class RSineDolore extends Analytics {
 
 	private WebView mWebView;
 	@Override

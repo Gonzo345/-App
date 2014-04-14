@@ -21,7 +21,7 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PDF extends Activity {
+public class PDF extends Analytics {
 
 	private WebView mWebView;
 	private TextView tv_link;

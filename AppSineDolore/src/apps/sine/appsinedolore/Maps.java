@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Maps extends Activity {
+public class Maps extends Analytics {
 
 	private GoogleMap mMap;
 	private Button bt_map;
