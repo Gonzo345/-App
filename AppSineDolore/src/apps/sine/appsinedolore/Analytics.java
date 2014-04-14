@@ -1,5 +1,7 @@
 package apps.sine.appsinedolore;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.app.Activity;
 
 public class Analytics extends Activity {
