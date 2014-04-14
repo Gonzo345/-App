@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 public class Formulario extends Analytics {
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.formulario);

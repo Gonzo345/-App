@@ -19,7 +19,8 @@ public class Wine extends Analytics {
 		final Activity activity = this;
 		
 		mWebView.setWebViewClient(new WebViewClient() {
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            @Override
+			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 Toast.makeText(activity, description, Toast.LENGTH_SHORT).show();
             }
         });

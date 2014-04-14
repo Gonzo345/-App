@@ -1,7 +1,6 @@
 package apps.sine.appsinedolore;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,7 +12,6 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -60,6 +58,7 @@ public class PDF extends Analytics {
 		tv_link = (TextView) findViewById(R.id.textView1);
 
 		tv_link.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(
 						Intent.ACTION_VIEW,

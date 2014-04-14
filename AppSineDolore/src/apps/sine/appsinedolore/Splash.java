@@ -17,6 +17,7 @@ public class Splash extends Activity {
 	private long splashDelay = 2000;// tiempo en lanzar la siguiente actividad
 	private long CambioImagen = 1000;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
