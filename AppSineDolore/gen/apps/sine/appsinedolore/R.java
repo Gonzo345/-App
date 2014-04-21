@@ -1454,6 +1454,8 @@ containing a value of this type.
         public static final int youtube=0x7f030021;
     }
     public static final class string {
+        public static final int Aitor=0x7f070031;
+        public static final int Gonzalo=0x7f070030;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f07001c;
