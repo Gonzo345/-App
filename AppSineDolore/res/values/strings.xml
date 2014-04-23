@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Sine Dolore</string>
     <string name="redasistencial">Red Asistencial</string>
     <string name="error_pdf">No hay aplicación lectora de PDFs. Toca aquí para ir a la Play Store para descargar un lector gratuito </string>
@@ -10,5 +9,6 @@
     <string name="about3">Texto tres</string>
     <string name="Gonzalo">AIzaSyDIN2MUMzYWaIro_qyx7Rm48XL194Illzk</string>
     <string name="Aitor">AIzaSyA9hBA72SEJqTIULdKn1CZXK8hMxcvnt0Y</string>
-
+    <string name="Publica">AIzaSyDQBwMFk4MfCxvHV3Gw9iLxF14SrfBvCDo</string>
+    <string name="Dimension">100dp</string>
 </resources>

@@ -2,8 +2,8 @@ package apps.sine.appsinedolore;
 
 //import com.google.analytics.tracking.android.EasyTracker;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,7 +16,10 @@ public class Inicial extends Analytics {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.inicial);
+		setContentView(R.layout.inicial3);
+		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
 		btform = (Button) findViewById(R.id.btform);
 		btwine = (Button) findViewById(R.id.btwine);

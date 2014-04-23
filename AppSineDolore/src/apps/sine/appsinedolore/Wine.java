@@ -25,7 +25,8 @@ public class Wine extends Analytics {
             }
         });
 
-        mWebView.loadUrl("shop.sinedolore.org");
+//        mWebView.loadUrl("https://www.shop.sinedolore.org");
+        mWebView.loadUrl("https://www.shop.sinedolore.org");
         setContentView(mWebView );
 
 	}

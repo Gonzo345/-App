@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="sine.apps.sinedolore.Inicial"
+    tools:ignore="MergeRootFrame" >
+
+    <Button
+        android:id="@+id/btpdf"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBaseline="@+id/btwine"
+        android:layout_alignBottom="@+id/btwine"
+        android:layout_alignLeft="@+id/btpage"
+        android:background="@drawable/pdfs" />
+
+    <Button
+        android:id="@+id/btgmaps"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBaseline="@+id/btyt"
+        android:layout_alignBottom="@+id/btyt"
+        android:layout_alignLeft="@+id/btpdf"
+        android:background="@drawable/maps" />
+
+    <Button
+        android:id="@+id/btpage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/btwine"
+        android:layout_toRightOf="@+id/btabout"
+        android:background="@drawable/pagi" />
+
+    <Button
+        android:id="@+id/btabout"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/btyt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/sobre" />
+
+    <Button
+        android:id="@+id/btyt"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/btwine"
+        android:layout_marginTop="26dp"
+        android:layout_toLeftOf="@+id/btabout"
+        android:background="@drawable/yout" />
+
+    <Button
+        android:id="@+id/btwine"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/btyt"
+        android:layout_below="@+id/btform"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/wine" />
+
+    <Button
+        android:id="@+id/btform"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/btwine"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/form" />
+
+</RelativeLayout>
