@@ -11,4 +11,13 @@
     <string name="Aitor">AIzaSyA9hBA72SEJqTIULdKn1CZXK8hMxcvnt0Y</string>
     <string name="Publica">AIzaSyDQBwMFk4MfCxvHV3Gw9iLxF14SrfBvCDo</string>
     <string name="Dimension">100dp</string>
+    <string name="Tamano">10dp</string>
+    <string name="Form">Registro</string>
+    <string name="Maps">Mapa Sine Dolore</string>
+    <string name="Pdf">Pain Meeting</string>
+    <string name="Vino">Tienda Vino</string>
+    <string name="Web">Sine Dolore</string>
+    <string name="Video">Canal Vídeos</string>
+    <string name="Acercade">Acerca de</string>
+    <string name="Enviar">Enviar datos</string>
 </resources>

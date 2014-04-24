@@ -14,16 +14,10 @@
         android:layout_alignBaseline="@+id/btwine"
         android:layout_alignBottom="@+id/btwine"
         android:layout_alignLeft="@+id/btpage"
-        android:background="@drawable/pdfs" />
-
-    <Button
-        android:id="@+id/btgmaps"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignBaseline="@+id/btyt"
-        android:layout_alignBottom="@+id/btyt"
-        android:layout_alignLeft="@+id/btpdf"
-        android:background="@drawable/maps" />
+        android:background="@drawable/pdfs"
+        android:gravity="bottom|center"
+        android:text="@string/Pdf"
+        android:textSize="10dp" />
 
     <Button
         android:id="@+id/btpage"
@@ -31,7 +25,10 @@
         android:layout_height="100dp"
         android:layout_above="@+id/btwine"
         android:layout_toRightOf="@+id/btabout"
-        android:background="@drawable/pagi" />
+        android:background="@drawable/pagi"
+        android:gravity="bottom|center"
+        android:text="@string/Web"
+        android:textSize="10dp" />
 
     <Button
         android:id="@+id/btabout"
@@ -40,7 +37,10 @@
         android:layout_below="@+id/btyt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:background="@drawable/sobre" />
+        android:background="@drawable/sobre"
+        android:gravity="bottom|center"
+        android:text="@string/Acercade"
+        android:textSize="10dp" />
 
     <Button
         android:id="@+id/btyt"
@@ -49,7 +49,10 @@
         android:layout_below="@+id/btwine"
         android:layout_marginTop="26dp"
         android:layout_toLeftOf="@+id/btabout"
-        android:background="@drawable/yout" />
+        android:background="@drawable/yout"
+        android:gravity="bottom|center"
+        android:text="@string/Video"
+        android:textSize="10dp" />
 
     <Button
         android:id="@+id/btwine"
@@ -58,7 +61,10 @@
         android:layout_alignLeft="@+id/btyt"
         android:layout_below="@+id/btform"
         android:layout_marginTop="30dp"
-        android:background="@drawable/wine" />
+        android:background="@drawable/wine"
+        android:gravity="bottom|center"
+        android:text="@string/Vino"
+        android:textSize="10dp" />
 
     <Button
         android:id="@+id/btform"
@@ -67,6 +73,20 @@
         android:layout_alignLeft="@+id/btwine"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
-        android:background="@drawable/form" />
+        android:background="@drawable/form"
+        android:gravity="bottom|center"
+        android:text="@string/Form"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/btgmaps"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/btabout"
+        android:layout_alignLeft="@+id/btpdf"
+        android:background="@drawable/maps"
+        android:gravity="bottom|center"
+        android:text="@string/Maps"
+        android:textSize="10dp" />
 
 </RelativeLayout>
