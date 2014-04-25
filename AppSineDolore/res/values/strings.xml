@@ -20,4 +20,13 @@
     <string name="Video">Canal Vídeos</string>
     <string name="Acercade">Acerca de</string>
     <string name="Enviar">Enviar datos</string>
+    <string name="formtoast">Gracias por registrarte</string>
+    <string name="comprobarnombre">El nombre no ha sido introducido</string>
+    <string name="comprobarapellido">El apellido no ha sido introducido</string>
+    <string name="comprobaremail">El email no ha sido introducido</string>
+    <string name="comprobartelefono">El teléfono no ha sido introducido</string>
+    <string name="nombre">Nombre:</string>
+    <string name="apellidos">Apellidos:</string>
+    <string name="email">Email:</string>
+    <string name="telefono">Teléfono:</string>
 </resources>

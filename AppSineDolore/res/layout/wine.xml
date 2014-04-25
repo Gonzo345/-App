@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="sine.apps.sinedolore.Inicial"
-    tools:ignore="MergeRootFrame" >
-
+    tools:ignore="MergeRootFrame" 
+    android:background="#FFFFFF">
 
 </LinearLayout>
 

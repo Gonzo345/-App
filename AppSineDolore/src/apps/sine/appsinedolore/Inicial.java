@@ -16,7 +16,7 @@ public class Inicial extends Analytics {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.inicial3);
+		setContentView(R.layout.inicial4);
 		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

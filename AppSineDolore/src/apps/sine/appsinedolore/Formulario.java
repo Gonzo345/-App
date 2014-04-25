@@ -19,13 +19,20 @@ import org.apache.http.message.BasicNameValuePair;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class Formulario extends Analytics {
 	private static ArrayList<String> arrPersonas = new ArrayList<String>();
 	private static ArrayAdapter<String> adaptadorVista;
+
+	private Button btEnviar;
+	// campos interesantes clinica, procedencia...
+	private String nombre, apellido, telefono, email, cadena;
 
 	private ListView lstListaPersonas;
 
@@ -33,11 +40,36 @@ public class Formulario extends Analytics {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.formulario);
+
+		btEnviar = (Button) findViewById(R.id.btEnviar);
+
+		cadena = this.getString(R.string.formtoast);
+
+		btEnviar.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				
+				ConexionServidor task = new ConexionServidor();
+				task.execute(new String[] { "" });
+
+				Toast.makeText(Formulario.this, cadena, Toast.LENGTH_LONG)
+						.show();
+				finish();
+
+			}
+		});
 	}
 
 	public void btnEnviar(View v) {
+
 		ConexionServidor task = new ConexionServidor();
 		task.execute(new String[] { "" });
+
+		Toast.makeText(Formulario.this, this.getString(R.string.formtoast),
+				Toast.LENGTH_LONG).show();
+		finish();
 
 	}
 
@@ -52,22 +84,24 @@ public class Formulario extends Analytics {
 					"http://menorcapp.net/pasarela.php");
 
 			try {
-				final String nombre = ((EditText) findViewById(R.id.tvNombre))
-						.getText().toString();
-				final String apellido = ((EditText) findViewById(R.id.tvApellido))
-						.getText().toString();
-				final String email = ((EditText) findViewById(R.id.tvEmail))
-						.getText().toString();
-				final String telefono = ((EditText) findViewById(R.id.tvTelefono))
-						.getText().toString();
+				nombre = ((EditText) findViewById(R.id.tvNombre)).getText()
+						.toString();
+				apellido = ((EditText) findViewById(R.id.tvApellido)).getText()
+						.toString();
+				email = ((EditText) findViewById(R.id.tvEmail)).getText()
+						.toString();
+				telefono = ((EditText) findViewById(R.id.tvTelefono)).getText()
+						.toString();
 
 				// Agregar parámetros
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 						2);
 				nameValuePairs.add(new BasicNameValuePair("nombre", nombre));
-				nameValuePairs.add(new BasicNameValuePair("apellido", apellido));
+				nameValuePairs
+						.add(new BasicNameValuePair("apellido", apellido));
 				nameValuePairs.add(new BasicNameValuePair("email", email));
-				nameValuePairs.add(new BasicNameValuePair("telefono", telefono));
+				nameValuePairs
+						.add(new BasicNameValuePair("telefono", telefono));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 				// Ejecutar la petición HTTP Post
@@ -79,8 +113,6 @@ public class Formulario extends Analytics {
 
 				datos = datos.substring(0, datos.indexOf("]") + 1);
 				respuesta = datos;
-				
-				
 
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
