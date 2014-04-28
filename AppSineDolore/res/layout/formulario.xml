@@ -38,7 +38,7 @@
                     android:layout_weight="1"
                     android:text="@string/nombre"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#000000" />
+                    android:textColor="#990000" />
 
             </TableRow>
 
@@ -68,7 +68,7 @@
                     android:layout_weight="1"
                     android:text="@string/apellidos"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#000000" />
+                    android:textColor="#990000" />
 
             </TableRow>
 
@@ -98,7 +98,7 @@
                     android:layout_weight="1"
                     android:text="@string/email"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#000000" />
+                    android:textColor="#990000" />
 
             </TableRow>
 
@@ -117,40 +117,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/TableRow04"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/TextView02"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/telefono"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#000000" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/TableRow03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" > 
-
-                <EditText
-                    android:id="@+id/tvTelefono"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="phone" >
-
-                    <requestFocus />
-                </EditText>
-
-            </TableRow>
-
-            <TableRow
                 android:id="@+id/TableRow02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,7 +128,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:text="@string/Enviar" />
+                    android:text="@string/Enviar"
+                    android:enabled="false" />
            
             </TableRow>
         </LinearLayout>

@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -32,9 +34,10 @@ public class Formulario extends Analytics {
 
 	private Button btEnviar;
 	// campos interesantes clinica, procedencia...
-	private String nombre, apellido, telefono, email, cadena;
+	private String nombre, apellido, email;
 
 	private ListView lstListaPersonas;
+	private EditText etnombre, etapellidos, etemail;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,35 +45,66 @@ public class Formulario extends Analytics {
 		setContentView(R.layout.formulario);
 
 		btEnviar = (Button) findViewById(R.id.btEnviar);
+		btEnviar.setEnabled(true);
 
-		cadena = this.getString(R.string.formtoast);
+		etnombre = (EditText) findViewById(R.id.tvNombre);
+		etapellidos = (EditText) findViewById(R.id.tvApellido);
+		etemail = (EditText) findViewById(R.id.tvEmail);
+
+		etnombre.setText("");
+		etapellidos.setText("");
+		etemail.setText("");
 
 		btEnviar.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
-				
-				ConexionServidor task = new ConexionServidor();
-				task.execute(new String[] { "" });
-
-				Toast.makeText(Formulario.this, cadena, Toast.LENGTH_LONG)
-						.show();
-				finish();
+				btnEnviar();
 
 			}
 		});
 	}
 
-	public void btnEnviar(View v) {
+	public void btnEnviar() {
 
-		ConexionServidor task = new ConexionServidor();
-		task.execute(new String[] { "" });
+		if (etnombre.getText().toString().equals("")
+				|| etapellidos.getText().toString().equals("")
+				|| etemail.getText().toString().equals("")) {
 
-		Toast.makeText(Formulario.this, this.getString(R.string.formtoast),
-				Toast.LENGTH_LONG).show();
-		finish();
+			Toast.makeText(Formulario.this,
+					this.getString(R.string.formtoastError), Toast.LENGTH_LONG)
+					.show();
+		} else {
 
+			if (ComprobarEmail()) {
+				ConexionServidor task = new ConexionServidor();
+				task.execute(new String[] { "" });
+
+				Toast.makeText(Formulario.this,
+						this.getString(R.string.formtoastOk), Toast.LENGTH_LONG)
+						.show();
+				finish();
+			}else{
+				Toast.makeText(Formulario.this,
+						this.getString(R.string.formtoastEmail), Toast.LENGTH_LONG)
+						.show();
+			}
+		}
+	}
+
+	private boolean ComprobarEmail() {
+
+		
+		String cadena= etemail.getText().toString();
+		String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	        
+	        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+	 
+	        Matcher matcher = pattern.matcher(cadena);
+	        return matcher.matches();
+		
 	}
 
 	private class ConexionServidor extends AsyncTask<String, Void, String> {
@@ -90,8 +124,6 @@ public class Formulario extends Analytics {
 						.toString();
 				email = ((EditText) findViewById(R.id.tvEmail)).getText()
 						.toString();
-				telefono = ((EditText) findViewById(R.id.tvTelefono)).getText()
-						.toString();
 
 				// Agregar parámetros
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
@@ -100,8 +132,6 @@ public class Formulario extends Analytics {
 				nameValuePairs
 						.add(new BasicNameValuePair("apellido", apellido));
 				nameValuePairs.add(new BasicNameValuePair("email", email));
-				nameValuePairs
-						.add(new BasicNameValuePair("telefono", telefono));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 				// Ejecutar la petición HTTP Post

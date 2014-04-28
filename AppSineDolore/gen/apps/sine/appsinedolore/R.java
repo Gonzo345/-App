@@ -1509,22 +1509,19 @@ containing a value of this type.
         public static final int yout=0x7f02008c;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f050074;
-        public static final int LinearLayout2=0x7f050075;
-        public static final int LinearLayout3=0x7f050076;
-        public static final int LinearLayout4=0x7f050077;
-        public static final int RelativeLayout1=0x7f050078;
+        public static final int LinearLayout1=0x7f050070;
+        public static final int LinearLayout2=0x7f050071;
+        public static final int LinearLayout3=0x7f050072;
+        public static final int LinearLayout4=0x7f050073;
+        public static final int RelativeLayout1=0x7f050074;
         public static final int TableLayout1=0x7f050054;
-        public static final int TableRow02=0x7f050066;
-        public static final int TableRow03=0x7f050064;
-        public static final int TableRow04=0x7f050062;
+        public static final int TableRow02=0x7f050062;
         public static final int TableRow05=0x7f050060;
         public static final int TableRow06=0x7f05005e;
         public static final int TableRow07=0x7f05005c;
         public static final int TableRow08=0x7f05005a;
         public static final int TableRow09=0x7f050058;
         public static final int TableRow10=0x7f050056;
-        public static final int TextView02=0x7f050063;
         public static final int TextView03=0x7f05005f;
         public static final int TextView04=0x7f05005b;
         public static final int action_bar=0x7f050030;
@@ -1544,15 +1541,15 @@ containing a value of this type.
         public static final int always=0x7f050021;
         public static final int beginning=0x7f050026;
         public static final int bottom=0x7f050005;
-        public static final int btEnviar=0x7f050067;
-        public static final int bt_mapa=0x7f05007a;
-        public static final int btabout=0x7f050073;
-        public static final int btform=0x7f05006a;
-        public static final int btgmaps=0x7f050071;
-        public static final int btpage=0x7f05006b;
-        public static final int btpdf=0x7f05006e;
-        public static final int btwine=0x7f05006d;
-        public static final int btyt=0x7f050070;
+        public static final int btEnviar=0x7f050063;
+        public static final int bt_mapa=0x7f050076;
+        public static final int btabout=0x7f05006f;
+        public static final int btform=0x7f050066;
+        public static final int btgmaps=0x7f05006d;
+        public static final int btpage=0x7f050067;
+        public static final int btpdf=0x7f05006a;
+        public static final int btwine=0x7f050069;
+        public static final int btyt=0x7f05006c;
         public static final int center=0x7f05000c;
         public static final int center_horizontal=0x7f05000a;
         public static final int center_vertical=0x7f050008;
@@ -1560,7 +1557,7 @@ containing a value of this type.
         public static final int clip_horizontal=0x7f05000f;
         public static final int clip_vertical=0x7f05000e;
         public static final int collapseActionView=0x7f050023;
-        public static final int container=0x7f050068;
+        public static final int container=0x7f050064;
         public static final int default_activity_button=0x7f05003c;
         public static final int dialog=0x7f050024;
         public static final int disableHome=0x7f05001e;
@@ -1578,18 +1575,18 @@ containing a value of this type.
         public static final int hybrid=0x7f050016;
         public static final int icon=0x7f05003e;
         public static final int ifRoom=0x7f050020;
-        public static final int ima1=0x7f05007c;
+        public static final int ima1=0x7f050078;
         public static final int image=0x7f05003b;
         public static final int imageView1=0x7f050055;
         public static final int left=0x7f050006;
         public static final int listMode=0x7f050017;
         public static final int list_item=0x7f05003d;
-        public static final int map=0x7f050079;
+        public static final int map=0x7f050075;
         public static final int middle=0x7f050027;
         public static final int never=0x7f05001f;
         public static final int none=0x7f050012;
         public static final int normal=0x7f050013;
-        public static final int page=0x7f05007d;
+        public static final int page=0x7f050079;
         public static final int progress_circular=0x7f05002c;
         public static final int progress_horizontal=0x7f05002d;
         public static final int radio=0x7f050043;
@@ -1614,12 +1611,12 @@ containing a value of this type.
         public static final int start=0x7f050010;
         public static final int submit_area=0x7f05004d;
         public static final int tabMode=0x7f050018;
-        public static final int tableRow1=0x7f050069;
-        public static final int tableRow2=0x7f05006c;
-        public static final int tableRow3=0x7f05006f;
-        public static final int tableRow4=0x7f050072;
+        public static final int tableRow1=0x7f050065;
+        public static final int tableRow2=0x7f050068;
+        public static final int tableRow3=0x7f05006b;
+        public static final int tableRow4=0x7f05006e;
         public static final int terrain=0x7f050015;
-        public static final int textView1=0x7f05007b;
+        public static final int textView1=0x7f050077;
         public static final int title=0x7f05003f;
         public static final int top=0x7f050004;
         public static final int top_action_bar=0x7f050034;
@@ -1627,7 +1624,6 @@ containing a value of this type.
         public static final int tvApellido=0x7f05005d;
         public static final int tvEmail=0x7f050061;
         public static final int tvNombre=0x7f050059;
-        public static final int tvTelefono=0x7f050065;
         public static final int tv_1=0x7f050051;
         public static final int tv_2=0x7f050052;
         public static final int tv_3=0x7f050053;
@@ -1758,7 +1754,7 @@ containing a value of this type.
         public static final int about1=0x7f08002d;
         public static final int about2=0x7f08002e;
         public static final int about3=0x7f08002f;
-        public static final int apellidos=0x7f080043;
+        public static final int apellidos=0x7f080045;
         public static final int app_name=0x7f080029;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -1855,22 +1851,24 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f080013;
-        public static final int comprobarapellido=0x7f08003f;
-        public static final int comprobaremail=0x7f080040;
-        public static final int comprobarnombre=0x7f08003e;
-        public static final int comprobartelefono=0x7f080041;
-        public static final int email=0x7f080044;
+        public static final int comprobarapellido=0x7f080041;
+        public static final int comprobaremail=0x7f080042;
+        public static final int comprobarnombre=0x7f080040;
+        public static final int comprobartelefono=0x7f080043;
+        public static final int email=0x7f080046;
         public static final int error_pdf=0x7f08002b;
-        public static final int formtoast=0x7f08003d;
+        public static final int formtoastEmail=0x7f08003f;
+        public static final int formtoastError=0x7f08003d;
+        public static final int formtoastOk=0x7f08003e;
         /** Replace placeholder ID with your tracking ID
          */
         public static final int ga_trackingId=0x7f080028;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f08001a;
-        public static final int nombre=0x7f080042;
+        public static final int nombre=0x7f080044;
         public static final int redasistencial=0x7f08002a;
-        public static final int telefono=0x7f080045;
+        public static final int telefono=0x7f080047;
     }
     public static final class style {
         /** 

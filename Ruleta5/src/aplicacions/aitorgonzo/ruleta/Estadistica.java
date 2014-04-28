@@ -11,7 +11,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import aplicacions.acj.ruleta.R;
 
-public class Estadistica extends Activity {
+public class Estadistica extends Analytics {
 
 	TextView txlista;
 	Handler_sqlite DBH = new Handler_sqlite(Estadistica.this);

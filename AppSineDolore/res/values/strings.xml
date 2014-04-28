@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Sine Dolore</string>
+
+    <!-- MAps -->
     <string name="redasistencial">Red Asistencial</string>
+
+    <!-- PDF -->
     <string name="error_pdf">No hay aplicación lectora de PDFs. Toca aquí para ir a la Play Store para descargar un lector gratuito </string>
-    <string name="bt_about">Acerca de</string>
-    <string name="about1">Texto uno</string>
-    <string name="about2">Texto dos</string>
-    <string name="about3">Texto tres</string>
+
+    <!-- about -->
+    <string name="about1">Aplicación desarrollada por Global Umbrella</string>
+    <string name="about2"></string>
+    <string name="about3"></string>
+
+    <!-- KEYS -->
     <string name="Gonzalo">AIzaSyDIN2MUMzYWaIro_qyx7Rm48XL194Illzk</string>
     <string name="Aitor">AIzaSyA9hBA72SEJqTIULdKn1CZXK8hMxcvnt0Y</string>
     <string name="Publica">AIzaSyDQBwMFk4MfCxvHV3Gw9iLxF14SrfBvCDo</string>
+
+    <!-- Inicial -->
     <string name="Dimension">100dp</string>
     <string name="Tamano">10dp</string>
     <string name="Form">Registro</string>
@@ -19,8 +29,13 @@
     <string name="Web">Sine Dolore</string>
     <string name="Video">Canal Vídeos</string>
     <string name="Acercade">Acerca de</string>
+    <string name="bt_about">Acerca de</string>
+
+    <!-- Forms -->
     <string name="Enviar">Enviar datos</string>
-    <string name="formtoast">Gracias por registrarte</string>
+    <string name="formtoastError">Faltan campos por rellenar</string>
+    <string name="formtoastOk">Gracias por enviar sus datos</string>
+    <string name="formtoastEmail">El formato del email no es correcto</string>
     <string name="comprobarnombre">El nombre no ha sido introducido</string>
     <string name="comprobarapellido">El apellido no ha sido introducido</string>
     <string name="comprobaremail">El email no ha sido introducido</string>
@@ -29,4 +44,5 @@
     <string name="apellidos">Apellidos:</string>
     <string name="email">Email:</string>
     <string name="telefono">Teléfono:</string>
+
 </resources>

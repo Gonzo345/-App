@@ -14,7 +14,7 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
-public class VerEstadisticas extends Activity {
+public class VerEstadisticas extends Analytics {
 	
 	private AdView adView;
 	private LinearLayout lytMain;

@@ -440,8 +440,6 @@ public class Inicial extends Activity {
 		EasyTracker.getInstance(this).activityStop(this);
 	}
 	
-	
-	
 	/*Esto, junto con el onDestroy, hacen que la pantalla siga encendida hasta que la actividad termine*/
 	protected void onDestroy(){
 	        super.onDestroy();

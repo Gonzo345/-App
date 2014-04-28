@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="#FFFFFF">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -20,7 +21,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/about1"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/tv_2"
@@ -28,14 +30,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/about2"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#000000" />
+
             <TextView
                 android:id="@+id/tv_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/about3"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#000000" />
 
         </LinearLayout>
     </ScrollView>

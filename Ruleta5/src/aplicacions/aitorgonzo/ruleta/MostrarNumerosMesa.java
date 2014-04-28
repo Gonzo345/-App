@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import aplicacions.acj.ruleta.R;
 
-public class MostrarNumerosMesa extends Activity{
+public class MostrarNumerosMesa extends Analytics{
 	
 	Button btBorrarSeleccionados;
 	ListView listnumeros;

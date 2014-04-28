@@ -123,11 +123,11 @@
 
                 <Button
                     android:id="@+id/btabout"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_margin="20dp"
                     android:background="@drawable/sobre"
-                    android:gravity="bottom|center"
+                    android:gravity="bottom|right"
                     android:text="@string/Acercade"
                     android:textSize="10dp" />
             </LinearLayout>
