@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -16,31 +16,115 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/tv_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/about1"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
-
-            <TextView
                 android:id="@+id/tv_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:text="@string/about2"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#990000"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/form" />
 
             <TextView
-                android:id="@+id/tv_3"
+                android:id="@+id/TextView04"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:text="@string/about3"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#990000"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/maps" />
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/about4"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/pdfs" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/about5"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/pagi" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/about6"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/yout" />
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/about7"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/wine" />
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/about1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000" />
 
         </LinearLayout>
     </ScrollView>

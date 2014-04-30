@@ -43,7 +43,8 @@ public class Formulario extends Analytics {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.formulario);
-
+		
+		//Declaraci—n de los botones
 		btEnviar = (Button) findViewById(R.id.btEnviar);
 		btEnviar.setEnabled(true);
 
@@ -55,6 +56,7 @@ public class Formulario extends Analytics {
 		etapellidos.setText("");
 		etemail.setText("");
 
+		//Evento OnClick del bot—n enviar
 		btEnviar.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -66,6 +68,7 @@ public class Formulario extends Analytics {
 		});
 	}
 
+	//MŽtodo encargado para el envio de datos
 	public void btnEnviar() {
 
 		if (etnombre.getText().toString().equals("")
@@ -78,6 +81,7 @@ public class Formulario extends Analytics {
 		} else {
 
 			if (ComprobarEmail()) {
+				//Enviamos los datos
 				ConexionServidor task = new ConexionServidor();
 				task.execute(new String[] { "" });
 
@@ -95,7 +99,7 @@ public class Formulario extends Analytics {
 
 	private boolean ComprobarEmail() {
 
-		
+		//Comprovamos que el email tiene el formato correcto
 		String cadena= etemail.getText().toString();
 		String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 	            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -107,6 +111,7 @@ public class Formulario extends Analytics {
 		
 	}
 
+	//Hilo que se encarga del envio de datos al servidor
 	private class ConexionServidor extends AsyncTask<String, Void, String> {
 		@Override
 		protected String doInBackground(String... urls) {
