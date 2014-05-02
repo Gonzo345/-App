@@ -2,18 +2,13 @@ package apps.sine.appsinedolore;
 
 //import com.google.analytics.tracking.android.EasyTracker;
 
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,21 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class Inicial extends Analytics {
 
-	private static final String SENDER_ID = "973082549612";
-
-	public static final String EXTRA_MESSAGE = "message";
-	public static final String PROPERTY_REG_ID = "registration_id";
-	private static final String PROPERTY_APP_VERSION = "appVersion";
-	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
 	private Button btform, btyt, btpage, btpdf, btwine, btgmaps, btabout;
 	private String TAG = "GCM";
+	private String SENDER_ID="";
 	
 	private GcmIntentService GIS= new GcmIntentService();
 
@@ -50,8 +37,7 @@ public class Inicial extends Analytics {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.inicial4);
-
-		// Linea que impide el cambio de la orientaci—n del dispositivo
+		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
@@ -98,7 +84,7 @@ public class Inicial extends Analytics {
 		btgmaps = (Button) findViewById(R.id.btgmaps);
 		btabout = (Button) findViewById(R.id.btabout);
 
-		// Formulario
+		//Formulario
 		btform.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -106,7 +92,7 @@ public class Inicial extends Analytics {
 				startActivity(i);
 			}
 		});
-		// YouTube
+		//YouTube
 		btyt.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -114,7 +100,7 @@ public class Inicial extends Analytics {
 				startActivity(i);
 			}
 		});
-		// Wine
+		//Wine
 		btwine.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -122,7 +108,7 @@ public class Inicial extends Analytics {
 				startActivity(i);
 			}
 		});
-		// WebPage
+		//WebPage
 		btpage.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -130,7 +116,7 @@ public class Inicial extends Analytics {
 				startActivity(i);
 			}
 		});
-		// PDF
+		//PDF
 		btpdf.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -138,7 +124,7 @@ public class Inicial extends Analytics {
 				startActivity(i);
 			}
 		});
-		// Google Maps
+		//Google Maps
 		btgmaps.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -146,17 +132,18 @@ public class Inicial extends Analytics {
 				startActivity(i);
 			}
 		});
-
+		
 		btabout.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Inicial.this, About.class);
 				startActivity(i);
 			}
-
+			
 		});
 		// #################### FIN DE BOTONES ########################
-
 	}
-}
+		//#################### FIN DE BOTONES  ########################
+		
+	}
