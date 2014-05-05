@@ -18,5 +18,6 @@ public class GCMBroadcastReceiver extends WakefulBroadcastReceiver
         startWakefulService(context, (intent.setComponent(comp)));
         
         setResultCode(Activity.RESULT_OK);
+        
     }
 }

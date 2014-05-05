@@ -45,7 +45,7 @@ public class GCMIntentService extends IntentService
 		NotificationCompat.Builder mBuilder = 
 			new NotificationCompat.Builder(this)  
 				.setSmallIcon(android.R.drawable.stat_sys_warning)  
-				.setContentTitle("Notificaci√≥n GCM")  
+				.setContentTitle("Notificación GCM")  
 				.setContentText(msg);
 		
 		Intent notIntent =  new Intent(this, Inicial.class);    

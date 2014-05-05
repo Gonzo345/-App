@@ -57,7 +57,7 @@ public class Inicial extends Analytics {
 
 	public static final long EXPIRATION_TIME_MS = 1000 * 3600 * 24 * 7;
 
-	String SENDER_ID = "973082549612";
+	String SENDER_ID = "784409889338";
 
 
 	@Override
@@ -146,7 +146,7 @@ public class Inicial extends Analytics {
 			    String actype = ac.type;
 
 			    System.out.println("Accounts : " + acname + ", " + actype);
-			    if(actype.equals("com.whatsapp")){
+			    if(actype.equals("com.google")){
 			        number = ac.name;
 			    }
 			}

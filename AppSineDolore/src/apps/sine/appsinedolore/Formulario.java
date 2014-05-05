@@ -18,6 +18,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -51,9 +53,28 @@ public class Formulario extends Analytics {
 		etapellidos = (EditText) findViewById(R.id.tvApellido);
 		etemail = (EditText) findViewById(R.id.tvEmail);
 
+		//Accedemos a las cuentas del dispositivo
+		try{
+			AccountManager am = AccountManager.get(this);
+			Account[] accounts = am.getAccounts();
+
+			ArrayList googleAccounts = new ArrayList();
+			for (Account ac : accounts) {
+			    String acname = ac.name;
+			    String actype = ac.type;
+
+			    System.out.println("Accounts : " + acname + ", " + actype);
+			    if(actype.equals("com.google")){
+			        email = ac.name;
+			    }
+			}
+		}catch(Exception e){
+			
+		}
+		//****************************
 		etnombre.setText("");
 		etapellidos.setText("");
-		etemail.setText("");
+		etemail.setText(email);
 
 		btEnviar.setOnClickListener(new OnClickListener() {
 

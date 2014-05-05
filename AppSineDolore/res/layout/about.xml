@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -22,7 +22,7 @@
                 android:layout_margin="10dp"
                 android:text="@string/about1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#990000" />
 
             <TextView
                 android:id="@+id/tv_2"
@@ -31,7 +31,14 @@
                 android:layout_margin="10dp"
                 android:text="@string/about2"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#990000" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/form" />
 
             <TextView
                 android:id="@+id/tv_3"
@@ -40,8 +47,78 @@
                 android:layout_margin="10dp"
                 android:text="@string/about3"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#990000" />
 
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/maps" />
+
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/about4"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000" />
+
+            <ImageView
+                android:id="@+id/ImageView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/pdfs" />
+
+            <TextView
+                android:id="@+id/tv_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/about5"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000" />
+
+            <ImageView
+                android:id="@+id/ImageView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/pagi" />
+
+            <TextView
+                android:id="@+id/tv_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/about6"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000" />
+
+            <ImageView
+                android:id="@+id/ImageView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/yout" />
+
+            <TextView
+                android:id="@+id/tv_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/about7"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#990000" />
+
+            <ImageView
+                android:id="@+id/ImageView05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/wine" />
         </LinearLayout>
     </ScrollView>
 

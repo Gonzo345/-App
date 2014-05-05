@@ -11,8 +11,12 @@
 
     <!-- about -->
     <string name="about1">Aplicación desarrollada por Global Umbrella</string>
-    <string name="about2"></string>
-    <string name="about3"></string>
+    <string name="about2">El icono del sobre nos permite registrarnos en el boletín de noticias de Sine Dolore</string>
+    <string name="about3">El mapa nos permite ver la Red Asistencial Sine Dolore</string>
+    <string name="about4">Pain Meeteing nos da acceso al itinerario de la gala Sine Dolore</string>
+    <string name="about5">Con el icono del mundo accedemos a la página Sine Dolore</string>
+    <string name="about6">Tenemos acceso al canal de YouTube</string>
+    <string name="about7">Accedemos a la tienda para comprar vino Sine Dolore</string>
 
     <!-- KEYS -->
     <string name="Gonzalo">AIzaSyDIN2MUMzYWaIro_qyx7Rm48XL194Illzk</string>
