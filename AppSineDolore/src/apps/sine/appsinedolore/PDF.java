@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class PDF extends Analytics {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
 		// ANTERIOR VERSIÓN
 		// setContentView(R.layout.pdf);

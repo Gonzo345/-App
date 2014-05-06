@@ -1,6 +1,7 @@
 package apps.sine.appsinedolore;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +17,7 @@ public class Wine extends Analytics {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.wine);
-		
+
 		mWebView = new WebView(this);
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		final Activity activity = this;

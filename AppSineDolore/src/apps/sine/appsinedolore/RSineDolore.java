@@ -1,6 +1,7 @@
 package apps.sine.appsinedolore;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,6 +14,8 @@ public class RSineDolore extends Analytics {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.wine);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 		
 		mWebView = new WebView(this);
 		mWebView.getSettings().setJavaScriptEnabled(true);

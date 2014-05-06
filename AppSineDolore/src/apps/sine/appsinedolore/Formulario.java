@@ -20,6 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -45,6 +46,9 @@ public class Formulario extends Analytics {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.formulario);
+		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
 		btEnviar = (Button) findViewById(R.id.btEnviar);
 		btEnviar.setEnabled(true);

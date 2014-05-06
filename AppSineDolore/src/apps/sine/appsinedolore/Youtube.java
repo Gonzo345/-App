@@ -2,6 +2,7 @@ package apps.sine.appsinedolore;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,6 +15,9 @@ public class Youtube extends Analytics {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.youtube);
+		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 		
 		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=SeXSNxObX2g&list=PLuqOO6gUWfdQph0KUc4jVcuDzJ6oL0VXz")));
 		finish();
