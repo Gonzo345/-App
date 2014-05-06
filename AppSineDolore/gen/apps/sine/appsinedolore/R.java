@@ -1494,13 +1494,16 @@ containing a value of this type.
         public static final int Acercade=0x7f07003e;
         public static final int Aitor=0x7f070034;
         /**  Inicial 
+ Inicial 
          */
         public static final int Dimension=0x7f070036;
         /**  Forms 
+ Forms 
          */
         public static final int Enviar=0x7f070040;
         public static final int Form=0x7f070038;
         /**  KEYS 
+ KEYS 
          */
         public static final int Gonzalo=0x7f070033;
         public static final int Maps=0x7f070039;
@@ -1551,6 +1554,7 @@ containing a value of this type.
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f070026;
         /**  about 
+ about 
          */
         public static final int about1=0x7f07002c;
         public static final int about2=0x7f07002d;
@@ -1662,6 +1666,7 @@ containing a value of this type.
         public static final int comprobartelefono=0x7f070047;
         public static final int email=0x7f07004a;
         /**  PDF 
+ PDF 
          */
         public static final int error_pdf=0x7f07002b;
         public static final int formtoastEmail=0x7f070043;
@@ -1675,6 +1680,7 @@ containing a value of this type.
         public static final int location_client_powered_by_google=0x7f07001a;
         public static final int nombre=0x7f070048;
         /**  MAps 
+ MAps 
          */
         public static final int redasistencial=0x7f07002a;
         public static final int telefono=0x7f07004b;

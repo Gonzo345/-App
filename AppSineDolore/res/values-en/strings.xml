@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sine Dolore</string>
+
+    <!-- MAps -->
+    <string name="redasistencial">Care network</string>
+
+    <!-- PDF -->
+    <string name="error_pdf">There is no PDF application reader. Touch here to go to the Play Store and download a free one </string>
+
+    <!-- about -->
+    <string name="about1">Application developed by Global Umbrella</string>
+    <string name="about2">The envelop icon allows us join you in our Sine Dolore newsletter</string>
+    <string name="about3">The map allows us checking the Sine Dolore Care network</string>
+    <string name="about4">Pain Meeting allows you to view the congress and the Sine Dolore show programs</string>
+    <string name="about5">With the world's icon we will access to the Sine Dolore webpage</string>
+    <string name="about6">With the YouTube icon we will be able to access the Sine Dolore channel on YouTube</string>
+    <string name="about7">We can access to the store in order to buy the Sine Dolore wine</string>
+
+    <!-- KEYS -->
+    <string name="Gonzalo">AIzaSyDIN2MUMzYWaIro_qyx7Rm48XL194Illzk</string>
+    <string name="Aitor">AIzaSyA9hBA72SEJqTIULdKn1CZXK8hMxcvnt0Y</string>
+    <string name="Publica">AIzaSyDQBwMFk4MfCxvHV3Gw9iLxF14SrfBvCDo</string>
+
+    <!-- Inicial -->
+    <string name="Dimension">100dp</string>
+    <string name="Tamano">10dp</string>
+    <string name="Form">Register</string>
+    <string name="Maps">Sine Dolore map</string>
+    <string name="Pdf">Pain Meeting</string>
+    <string name="Vino">Wine shop</string>
+    <string name="Web">Sine Dolore</string>
+    <string name="Video">YouTube channel</string>
+    <string name="Acercade">About</string>
+    <string name="bt_about">About</string>
+
+    <!-- Forms -->
+    <string name="Enviar">Send data</string>
+    <string name="formtoastError">There are camps in blank</string>
+    <string name="formtoastOk">Thank you for registering!</string>
+    <string name="formtoastEmail">The e-mail format is incorrect</string>
+    <string name="comprobarnombre">The name is missing</string>
+    <string name="comprobarapellido">The surname is missing</string>
+    <string name="comprobaremail">The e-mail is missing</string>
+    <string name="comprobartelefono">The phone is missing</string>
+    <string name="nombre">Name:</string>
+    <string name="apellidos">Surname:</string>
+    <string name="email">E-mail:</string>
+    <string name="telefono">Phone:</string>
+
+</resources>
