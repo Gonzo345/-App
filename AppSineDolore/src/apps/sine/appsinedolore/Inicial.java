@@ -1,7 +1,5 @@
 package apps.sine.appsinedolore;
 
-//import com.google.analytics.tracking.android.EasyTracker;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

@@ -15,6 +15,6 @@
     
 }
 
-@property (strong, nonatomic) IBOutlet MKMapView *MV;
+@property (strong, nonatomic) IBOutlet MKMapView * MV;
 
 @end
