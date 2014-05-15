@@ -40,6 +40,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
+                <action android:name="android.intent.action.CREARPRODUCTO" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.GUARDARPRODUCTO" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="com.example.barcodeprueba.SCAN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
