@@ -46,6 +46,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.barcodeprueba.mysql"></activity>
+         <activity android:name="GuardarProducto" ></activity>
+         <activity android:name="CrearProducto" ></activity>
     </application>
 
 </manifest>

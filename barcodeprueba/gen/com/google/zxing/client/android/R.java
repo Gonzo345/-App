@@ -90,7 +90,11 @@ public final class R {
 	public static final class layout {
 		public static final int bookmark_picker_list_item = 0x7f030001;
 		public static final int capture = 0x7f030002;
+<<<<<<< HEAD
 		public static final int encode = 0x7f030004;
+=======
+		public static final int encode = 0x7f030003;
+>>>>>>> Aitor
 		public static final int help = 0x7f030005;
 		public static final int history_list_item = 0x7f030006;
 		public static final int search_book_contents = 0x7f030008;

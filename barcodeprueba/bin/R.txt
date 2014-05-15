@@ -96,8 +96,13 @@ int id viewfinder_view 0x7f080012
 int layout activity_main 0x7f030000
 int layout bookmark_picker_list_item 0x7f030001
 int layout capture 0x7f030002
+<<<<<<< HEAD
 int layout crearproducto 0x7f030003
 int layout encode 0x7f030004
+=======
+int layout encode 0x7f030003
+int layout guardar 0x7f030004
+>>>>>>> Aitor
 int layout help 0x7f030005
 int layout history_list_item 0x7f030006
 int layout mysql 0x7f030007
