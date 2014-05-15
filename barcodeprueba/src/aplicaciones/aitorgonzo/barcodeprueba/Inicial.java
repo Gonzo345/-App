@@ -281,11 +281,11 @@ public class Inicial extends Activity {
 					} else {
 						toast("No existe");
 						// llamada a la actividad encargada de registrarla
-						Intent i = new Intent(Inicial.this, CrearProducto.class);
-						i.putExtra("id", str_id);
-						startActivity(i);
+//						Intent i = new Intent(Inicial.this, CrearProducto.class);
+//						i.putExtra("id", str_id);
+//						startActivity(i);
 						
-//						EnviarDatosInsert(URL);
+						EnviarDatosInsert(URL);
 					}
 				}
 			});
