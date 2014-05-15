@@ -45,7 +45,7 @@ public class BD extends Activity {
 				// en tu misma PC no utilizar 127.0.0.1 o localhost como IP,
 				// utilizar 10.0.2.2
 				Connection conn = DriverManager.getConnection(
-						"jdbc:mysql://db518907232.db.1and1.com", "dbo518907232", "costafernandez");
+						"URL", "DB", "PASS");
 				// En el stsql se puede agregar cualquier consulta SQL deseada.
 				String stsql = "Select version()";
 				Statement st = conn.createStatement();

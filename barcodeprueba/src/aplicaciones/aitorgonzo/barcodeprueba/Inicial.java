@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,22 +25,30 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.barcodeprueba.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
-public class MainActivity extends Activity{
+public class Inicial extends Activity {
 
-	
 	private String[] arg;
-	public String URL = "http://www.menorcapp.net/pasarelaInsertScann.php",
-			str_id="no especificado", 
-			str_nombre = "no especificado",
+	public String URL = "http://www.menorcapp.net/pasarelaInsertarScann.php",
+	URLExiste = "http://www.menorcapp.net/existe.php?id=",
+			str_id = "no especificado", str_nombre = "no especificado",
 			str_precio = "no especificado",
 			str_descripcion = "no especificado",
 			str_supermercado = "no especificado",
 			str_marca = "no especificado";
 
+	private Connection conexionMySQL;
+	private TextView textResultadoSQL, text;
+
+	// ############### Declaraci—n de los getters y setters para poder acceder a
+	// los parametros que tenemos que ir rellenando de los productos
+	
 	public String getStr_id() {
 		return str_id;
 	}
@@ -88,11 +97,17 @@ public class MainActivity extends Activity{
 		this.str_marca = str_marca;
 	}
 
+	//############### FIN getters setters#####################
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button button1 = (Button) findViewById(R.id.button1);
+		
+		text = (TextView) findViewById(R.id.text);//label grande
+		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);//label para el id
+		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);
 
 		// ################ Llamada al scaner de la app ##################
 		button1.setOnClickListener(new OnClickListener() {
@@ -105,21 +120,45 @@ public class MainActivity extends Activity{
 		});
 		// ************ FIN DE LA LLAMADA AL SCANER ********************
 
+
 	}
 
+	//metodo que nos devuelve el resultado del scanner
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
 				str_id = intent.getStringExtra("resultat");
 
-				Toast.makeText(this, str_id, Toast.LENGTH_SHORT).show();
+				toast(str_id);
 
-				EnviarDatosInsert(URL);
+				toast("En este toast se tiene que llamar al metodo que comprueba que el id exista");
+
+				textResultadoSQL.setText(str_id);
+
+				try {
+					//llamamos a la url concatenando el resultado del scaner
+					executeHttpGet(URLExiste + str_id);
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+
+					Log.e("falllalalalalalallal", "error");
+
+					toast("Hola desde catch del try encargado de sacar el codigo fuente");
+				}
+
+//				EnviarDatosInsert(URL);
 
 			} else if (resultCode == RESULT_CANCELED) {
 				// Si se cancelo la captura.
 			}
 		}
+	}
+
+	private void toast(String string) {
+		// TODO Auto-generated method stub
+		Toast.makeText(Inicial.this, string, Toast.LENGTH_LONG).show();
 	}
 
 	public void ejecutascan() {
@@ -134,8 +173,7 @@ public class MainActivity extends Activity{
 		task.execute(new String[] { "" });
 
 	}
-	
-	
+
 	private class ConexionServidor extends AsyncTask<String, Void, String> {
 		@Override
 		protected String doInBackground(String... urls) {
@@ -147,34 +185,21 @@ public class MainActivity extends Activity{
 			HttpPost httppost = new HttpPost(URL);
 
 			try {
-				
-				 		
-				
+
 				// Agregar parámetros
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 						2);
 				nameValuePairs.add(new BasicNameValuePair("id", getStr_id()));
-				nameValuePairs
-						.add(new BasicNameValuePair("nombre", getStr_nombre()));
-				nameValuePairs
-						.add(new BasicNameValuePair("precio", getStr_precio()));
+				nameValuePairs.add(new BasicNameValuePair("nombre",
+						getStr_nombre()));
+				nameValuePairs.add(new BasicNameValuePair("precio",
+						getStr_precio()));
 				nameValuePairs.add(new BasicNameValuePair("descripcion",
 						getStr_descripcion()));
 				nameValuePairs.add(new BasicNameValuePair("supermercado",
 						getStr_supermercado()));
-				nameValuePairs.add(new BasicNameValuePair("marca", getStr_marca()));
-
-				// nameValuePairs.add(new BasicNameValuePair("id", valores[0]));
-				// nameValuePairs.add(new BasicNameValuePair("nombre",
-				// valores[1]));
-				// nameValuePairs.add(new BasicNameValuePair("precio",
-				// valores[2]));
-				// nameValuePairs.add(new BasicNameValuePair("descripcion",
-				// valores[3]));
-				// nameValuePairs.add(new BasicNameValuePair("supermercado",
-				// valores[4]));
-				// nameValuePairs.add(new BasicNameValuePair("marca",
-				// valores[5]));
+				nameValuePairs.add(new BasicNameValuePair("marca",
+						getStr_marca()));
 
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -222,6 +247,37 @@ public class MainActivity extends Activity{
 			}
 		}
 		return sb.toString();
+	}
+
+	public void executeHttpGet(String url) throws Exception {
+		BufferedReader in = null;
+
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(url, new AsyncHttpResponseHandler() {
+				@Override
+				public void onSuccess(String response) {
+					System.out.println(response);
+					text.setText(response);
+
+					if (response.equals("1")) {
+						toast("Existe");
+						//llamada a la actividad de vista producto
+						
+					} else {
+						toast("No existe");
+						//llamada a la actividad encargada de registrarla
+						EnviarDatosInsert(URL);
+					}
+				}
+			});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+			text.append(" ERROR ");
+		}
+		// return "ERROR";
 	}
 
 }
