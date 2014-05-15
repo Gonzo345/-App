@@ -35,8 +35,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 public class Inicial extends Activity {
 
 	private String[] arg;
-	public String URL = "http://www.menorcapp.net/pasarelaInsertarScann.php",
-	URLExiste = "http://www.menorcapp.net/existe.php?id=",
+	public String URL = "http://www.menorcapp.net/pasarelaInsertScann.php",
+			URLExiste = "http://www.menorcapp.net/existe.php?id=",
 			str_id = "no especificado", str_nombre = "no especificado",
 			str_precio = "no especificado",
 			str_descripcion = "no especificado",
@@ -48,7 +48,7 @@ public class Inicial extends Activity {
 
 	// ############### Declaraci—n de los getters y setters para poder acceder a
 	// los parametros que tenemos que ir rellenando de los productos
-	
+
 	public String getStr_id() {
 		return str_id;
 	}
@@ -97,16 +97,19 @@ public class Inicial extends Activity {
 		this.str_marca = str_marca;
 	}
 
-	//############### FIN getters setters#####################
-	
+	// ############### FIN getters setters#####################
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button button1 = (Button) findViewById(R.id.button1);
-		
-		text = (TextView) findViewById(R.id.text);//label grande
-		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);//label para el id
+
+		text = (TextView) findViewById(R.id.text);// label grande
+		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);// label
+																			// para
+																			// el
+																			// id
 		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);
 
 		// ################ Llamada al scaner de la app ##################
@@ -120,25 +123,20 @@ public class Inicial extends Activity {
 		});
 		// ************ FIN DE LA LLAMADA AL SCANER ********************
 
-
 	}
 
-	//metodo que nos devuelve el resultado del scanner
+	// metodo que nos devuelve el resultado del scanner
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
 				str_id = intent.getStringExtra("resultat");
 
-				toast(str_id);
-
-				toast("En este toast se tiene que llamar al metodo que comprueba que el id exista");
-
 				textResultadoSQL.setText(str_id);
 
 				try {
-					//llamamos a la url concatenando el resultado del scaner
+					// llamamos a la url concatenando el resultado del scaner
 					executeHttpGet(URLExiste + str_id);
-					
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -148,7 +146,7 @@ public class Inicial extends Activity {
 					toast("Hola desde catch del try encargado de sacar el codigo fuente");
 				}
 
-//				EnviarDatosInsert(URL);
+				// EnviarDatosInsert(URL);
 
 			} else if (resultCode == RESULT_CANCELED) {
 				// Si se cancelo la captura.
@@ -261,13 +259,25 @@ public class Inicial extends Activity {
 					System.out.println(response);
 					text.setText(response);
 
+					toast(response);
+
+					try {
+
+						int ini = response.indexOf("1");
+						response = response.substring(ini, ini + 1);
+
+					} catch (Exception e) {
+
+					}
+
 					if (response.equals("1")) {
+
 						toast("Existe");
-						//llamada a la actividad de vista producto
-						
+						// llamada a la actividad de vista producto
+
 					} else {
 						toast("No existe");
-						//llamada a la actividad encargada de registrarla
+						// llamada a la actividad encargada de registrarla
 						EnviarDatosInsert(URL);
 					}
 				}

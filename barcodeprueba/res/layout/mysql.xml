@@ -5,7 +5,7 @@
     tools:context=".Inicial" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/lbtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,38 +15,38 @@
         android:text="Cedula:" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/lbid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/lbcost"
+        android:layout_below="@+id/lbcost"
         android:layout_marginTop="25dp"
         android:text="Direccion:" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lbname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignRight="@+id/lbtitle"
+        android:layout_below="@+id/lbtitle"
         android:layout_marginTop="26dp"
         android:text="Nombre:" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/lbcost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/lbname"
+        android:layout_below="@+id/lbname"
         android:layout_marginTop="29dp"
         android:text="Apellidos:" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView4"
-        android:layout_below="@+id/textView4"
+        android:layout_alignRight="@+id/lbid"
+        android:layout_below="@+id/lbid"
         android:layout_marginTop="31dp"
         android:text="Telefono:" />
 
@@ -54,7 +54,7 @@
         android:id="@+id/editTextCedula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignBottom="@+id/lbtitle"
         android:layout_alignParentRight="true"
         android:ems="10"
         android:inputType="textPersonName" />
@@ -63,7 +63,7 @@
         android:id="@+id/editTextNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBottom="@+id/lbname"
         android:layout_alignParentRight="true"
         android:ems="10"
         android:inputType="textPersonName" />
@@ -73,7 +73,7 @@
         android:id="@+id/editTextApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView4"
+        android:layout_above="@+id/lbid"
         android:layout_alignParentRight="true"
         android:ems="10"
         android:inputType="textPersonName" >
@@ -85,7 +85,7 @@
         android:id="@+id/editTextDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView5"
+        android:layout_above="@+id/txid"
         android:layout_alignParentRight="true"
         android:ems="10" />
 
@@ -93,7 +93,7 @@
         android:id="@+id/editTextTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignBottom="@+id/txid"
         android:layout_alignParentRight="true"
         android:ems="10"
         android:inputType="phone" />
