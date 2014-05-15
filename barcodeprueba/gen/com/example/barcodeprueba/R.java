@@ -55,7 +55,11 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f08000a;
+<<<<<<< HEAD
+        public static final int action_settings=0x7f080041;
+=======
         public static final int action_settings=0x7f080046;
+>>>>>>> Aitor
         /**  Messages IDs 
          */
         public static final int auto_focus=0x7f080000;
@@ -71,11 +75,19 @@ public final class R {
         public static final int decode_succeeded=0x7f080003;
         public static final int done_button=0x7f08002f;
         public static final int editText1=0x7f08002a;
+<<<<<<< HEAD
+        public static final int editTextApellido=0x7f080034;
+        public static final int editTextCedula=0x7f080032;
+        public static final int editTextDireccion=0x7f080035;
+        public static final int editTextNombre=0x7f080033;
+        public static final int editTextTelefono=0x7f080036;
+=======
         public static final int editTextApellido=0x7f080039;
         public static final int editTextCedula=0x7f080037;
         public static final int editTextDireccion=0x7f08003a;
         public static final int editTextNombre=0x7f080038;
         public static final int editTextTelefono=0x7f08003b;
+>>>>>>> Aitor
         public static final int encode_view=0x7f08002b;
         public static final int format_text_view=0x7f080016;
         public static final int format_text_view_label=0x7f080015;
@@ -91,6 +103,16 @@ public final class R {
         public static final int lbtitle=0x7f080022;
         public static final int meta_text_view=0x7f08001c;
         public static final int meta_text_view_label=0x7f08001b;
+<<<<<<< HEAD
+        public static final int page_number_view=0x7f08003a;
+        public static final int preview_view=0x7f080011;
+        public static final int query_button=0x7f080038;
+        public static final int query_text_view=0x7f080037;
+        public static final int quit=0x7f080005;
+        public static final int restart_preview=0x7f080006;
+        public static final int result_button_view=0x7f08001f;
+        public static final int result_list_view=0x7f080039;
+=======
         public static final int page_number_view=0x7f08003f;
         public static final int preview_view=0x7f080011;
         public static final int query_button=0x7f08003d;
@@ -99,11 +121,24 @@ public final class R {
         public static final int restart_preview=0x7f080006;
         public static final int result_button_view=0x7f08001f;
         public static final int result_list_view=0x7f08003e;
+>>>>>>> Aitor
         public static final int result_view=0x7f080013;
         public static final int return_scan_result=0x7f080007;
         public static final int scrollView1=0x7f08000d;
         public static final int search_book_contents_failed=0x7f080008;
         public static final int search_book_contents_succeeded=0x7f080009;
+<<<<<<< HEAD
+        public static final int share_app_button=0x7f08003c;
+        public static final int share_bookmark_button=0x7f08003d;
+        public static final int share_clipboard_button=0x7f08003f;
+        public static final int share_contact_button=0x7f08003e;
+        public static final int share_text_view=0x7f080040;
+        public static final int shopper_button=0x7f080020;
+        public static final int snippet_view=0x7f08003b;
+        public static final int status_view=0x7f080021;
+        public static final int text=0x7f08000e;
+        public static final int textResultadoSQL=0x7f08000c;
+=======
         public static final int share_app_button=0x7f080041;
         public static final int share_bookmark_button=0x7f080042;
         public static final int share_clipboard_button=0x7f080044;
@@ -119,6 +154,7 @@ public final class R {
         public static final int textView3=0x7f080034;
         public static final int textView4=0x7f080033;
         public static final int textView5=0x7f080036;
+>>>>>>> Aitor
         public static final int time_text_view=0x7f08001a;
         public static final int time_text_view_label=0x7f080019;
         public static final int txcost=0x7f080026;
@@ -132,6 +168,22 @@ public final class R {
         public static final int activity_main=0x7f030000;
         public static final int bookmark_picker_list_item=0x7f030001;
         public static final int capture=0x7f030002;
+<<<<<<< HEAD
+<<<<<<< HEAD
+        public static final int crearproducto=0x7f030003;
+        public static final int encode=0x7f030004;
+=======
+        public static final int encode=0x7f030003;
+        public static final int guardar=0x7f030004;
+>>>>>>> Aitor
+        public static final int help=0x7f030005;
+        public static final int history_list_item=0x7f030006;
+        public static final int mysql=0x7f030007;
+        public static final int search_book_contents=0x7f030008;
+        public static final int search_book_contents_header=0x7f030009;
+        public static final int search_book_contents_list_item=0x7f03000a;
+        public static final int share=0x7f03000b;
+=======
         public static final int crearproducto=0x7f030003;
         public static final int encode=0x7f030004;
         public static final int guardar=0x7f030005;
@@ -142,6 +194,7 @@ public final class R {
         public static final int search_book_contents_header=0x7f03000a;
         public static final int search_book_contents_list_item=0x7f03000b;
         public static final int share=0x7f03000c;
+>>>>>>> Aitor
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
