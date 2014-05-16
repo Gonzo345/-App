@@ -274,7 +274,7 @@ public class Inicial extends Activity {
 
 						toast("Existe");
 						// llamada a la actividad de vista producto
-						Intent i = new Intent(Inicial.this, GuardarProducto.class);
+						Intent i = new Intent(Inicial.this, MostrarProducto.class);
 						i.putExtra("id", str_id);
 						startActivity(i);
 
@@ -284,8 +284,7 @@ public class Inicial extends Activity {
 						Intent i = new Intent(Inicial.this, CrearProducto.class);
 						i.putExtra("id", str_id);
 						startActivity(i);
-						
-						EnviarDatosInsert(URL);
+
 					}
 				}
 			});
