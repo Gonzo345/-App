@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="aplicaciones.aitorgonzo.barcodeprueba.Inicial"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,9 +47,16 @@
         </activity>
         <activity android:name="com.example.barcodeprueba.mysql" >
         </activity>
+<<<<<<< HEAD
         <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.MostrarProducto" >
+=======
+        <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.MostrarProducto" 
+            android:screenOrientation="portrait">
+>>>>>>> master
         </activity>
-        <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.CrearProducto" >
+        <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.CrearProducto"
+            android:screenOrientation="portrait">
+            
         </activity>
     </application>
 

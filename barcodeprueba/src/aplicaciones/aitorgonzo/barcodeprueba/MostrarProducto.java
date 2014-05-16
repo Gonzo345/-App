@@ -1,7 +1,10 @@
 package aplicaciones.aitorgonzo.barcodeprueba;
 
 import android.app.Activity;
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+>>>>>>> master
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,9 +14,15 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class MostrarProducto extends Activity {
+<<<<<<< HEAD
 
 	private String URL= "http://www.menorcapp.com/mostrarproductoid.php?id=", id="";
 	
+=======
+	
+	private String URL= "http://www.menorcapp.com/mostrarproductoid.php?id=", id="";
+
+>>>>>>> master
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mostrarproducto);
