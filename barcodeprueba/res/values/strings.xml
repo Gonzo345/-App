@@ -5,9 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 	<string name="crear"> Crear producto</string>
+	<string name="mostrar"> Datos de producto</string>
 	<string name="Nombre"> Nombre del producto</string>
 	<string name="Precio"> Precio del producto</string>
 	<string name="Descripcion"> Descripción del producto</string>
 	<string name="Marca"> Marca del producto</string>
 	<string name="Enviar"> Enviar información</string>
+	<string name="cancelar"> No añadir</string>
+	<string name="ok"> Añadir al carrito</string>
 </resources>
