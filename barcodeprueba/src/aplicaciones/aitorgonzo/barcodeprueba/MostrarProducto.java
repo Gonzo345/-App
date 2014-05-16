@@ -13,7 +13,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class MostrarProducto extends Activity {
 
-	private String URL = "http://www.menorcapp.com/mostrarproductoid.php?id=",
+	private String URL = "http://www.menorcapp.net/mostrarproductoid.php?id=",
 			id = "";
 	private Button btno, btok;
 	private TextView txname, txcost, txid, txmarca;
@@ -45,19 +45,26 @@ public class MostrarProducto extends Activity {
 		toast(id);
 
 		try {
+			
 
+			toast("dins de la connexi— amnb " + URL+id);
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(URL + id, new AsyncHttpResponseHandler() {
+				
 				@Override
 				public void onSuccess(String response) {
+					int ini=0, fin=0;
 					System.out.println(response);
 
 					toast(response);
+					
+					txname.setText(response.substring(ini, response.indexOf("&")));
+					txcost.setText(response.substring(response.indexOf("&")+1, response.lastIndexOf("&")));
+					txmarca.setText(response.substring(response.lastIndexOf("&")+1,response.length()));
 
 					try {
 
-						int ini = response.indexOf("1");
-						response = response.substring(ini, ini + 1);
+					
 
 					} catch (Exception e) {
 
@@ -68,6 +75,7 @@ public class MostrarProducto extends Activity {
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
+			toast("Error al intentar connectar");
 		}
 
 	}

@@ -143,7 +143,7 @@ public class Inicial extends Activity {
 
 					Log.e("falllalalalalalallal", "error");
 
-					toast("Hola desde catch del try encargado de sacar el codigo fuente");
+//					toast("Hola desde catch del try encargado de sacar el codigo fuente");
 				}
 
 				// EnviarDatosInsert(URL);
@@ -259,7 +259,7 @@ public class Inicial extends Activity {
 					System.out.println(response);
 					text.setText(response);
 
-					toast(response);
+//					toast(response);
 
 					try {
 
@@ -272,14 +272,14 @@ public class Inicial extends Activity {
 
 					if (response.equals("1")) {
 
-						toast("Existe");
+//						toast("Existe");
 						// llamada a la actividad de vista producto
 						Intent i = new Intent(Inicial.this, MostrarProducto.class);
 						i.putExtra("id", str_id);
 						startActivity(i);
 
 					} else {
-						toast("No existe");
+//						toast("No existe");
 						// llamada a la actividad encargada de registrarla
 						Intent i = new Intent(Inicial.this, CrearProducto.class);
 						i.putExtra("id", str_id);
