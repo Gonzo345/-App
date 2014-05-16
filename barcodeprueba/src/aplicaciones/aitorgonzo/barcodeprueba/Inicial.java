@@ -24,7 +24,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +46,13 @@ public class Inicial extends Activity {
 			str_marca = "no especificado";
 
 	private Connection conexionMySQL;
-	private TextView textResultadoSQL, text;
+	private TextView textResultadoSQL, text, txtotal;
+
+	Button btBorrarSeleccionados;
+	ListView listacesta;
+	Handler_sqlite DBH = new Handler_sqlite(Inicial.this);
+	String[] NombresProductos = {};
+	String[] PrecioProductos = {};
 
 	// ############### Declaraci—n de los getters y setters para poder acceder a
 	// los parametros que tenemos que ir rellenando de los productos
@@ -106,11 +114,16 @@ public class Inicial extends Activity {
 		Button button1 = (Button) findViewById(R.id.button1);
 
 		text = (TextView) findViewById(R.id.text);// label grande
+		txtotal = (TextView) findViewById(R.id.txtotal);
+
 		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);// label
 																			// para
 																			// el
 																			// id
 		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);
+
+		// llamada a la recuperaci—n de la cesta
+		RecuperarCesta();
 
 		// ################ Llamada al scaner de la app ##################
 		button1.setOnClickListener(new OnClickListener() {
@@ -143,7 +156,7 @@ public class Inicial extends Activity {
 
 					Log.e("falllalalalalalallal", "error");
 
-//					toast("Hola desde catch del try encargado de sacar el codigo fuente");
+					// toast("Hola desde catch del try encargado de sacar el codigo fuente");
 				}
 
 				// EnviarDatosInsert(URL);
@@ -169,6 +182,45 @@ public class Inicial extends Activity {
 
 		ConexionServidor task = new ConexionServidor();
 		task.execute(new String[] { "" });
+
+	}
+
+	// acceso a BBDD SQLITE para llenar el listview
+	public void RecuperarCesta() {
+
+		String numtotal = DBH.BuscarExistentes();// buscar
+		toast(numtotal);
+		// numeros
+		// que
+		// pertenecen
+		// a una
+		// mesa en
+		// concreto
+		try {
+
+			NombresProductos = DBH.leerArray(numtotal);// recupera los valores
+														// de la cesta
+			PrecioProductos = DBH.leerArrayPrecio(numtotal);// recupera los
+															// valores de la
+															// cesta
+
+			listacesta = (ListView) findViewById(R.id.listacompra);
+			ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
+					android.R.layout.simple_list_item_checked, NombresProductos);
+
+			listacesta.setAdapter(adaptador);
+			listacesta.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+			int total = 0;
+			for (int j = 0; j <= PrecioProductos.length; j++) {
+				total = Integer.parseInt(PrecioProductos[j]);
+				toast(Integer.parseInt(PrecioProductos[j])+"");
+			}
+
+			txtotal.setText(total + "");
+		} catch (Exception e) {
+
+		}
 
 	}
 
@@ -259,7 +311,7 @@ public class Inicial extends Activity {
 					System.out.println(response);
 					text.setText(response);
 
-//					toast(response);
+					// toast(response);
 
 					try {
 
@@ -272,14 +324,15 @@ public class Inicial extends Activity {
 
 					if (response.equals("1")) {
 
-//						toast("Existe");
+						// toast("Existe");
 						// llamada a la actividad de vista producto
-						Intent i = new Intent(Inicial.this, MostrarProducto.class);
+						Intent i = new Intent(Inicial.this,
+								MostrarProducto.class);
 						i.putExtra("id", str_id);
 						startActivity(i);
 
 					} else {
-//						toast("No existe");
+						// toast("No existe");
 						// llamada a la actividad encargada de registrarla
 						Intent i = new Intent(Inicial.this, CrearProducto.class);
 						i.putExtra("id", str_id);

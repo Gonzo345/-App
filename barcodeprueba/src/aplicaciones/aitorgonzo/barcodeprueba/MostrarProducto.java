@@ -1,8 +1,11 @@
 package aplicaciones.aitorgonzo.barcodeprueba;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ public class MostrarProducto extends Activity {
 			id = "";
 	private Button btno, btok;
 	private TextView txname, txcost, txid, txmarca;
+	Handler_sqlite DBH = new Handler_sqlite(MostrarProducto.this);
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,26 +49,27 @@ public class MostrarProducto extends Activity {
 		toast(id);
 
 		try {
-			
 
-			toast("dins de la connexi— amnb " + URL+id);
+			toast("dins de la connexi— amnb " + URL + id);
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(URL + id, new AsyncHttpResponseHandler() {
-				
+
 				@Override
 				public void onSuccess(String response) {
-					int ini=0, fin=0;
+					int ini = 0, fin = 0;
 					System.out.println(response);
 
 					toast(response);
-					
-					txname.setText(response.substring(ini, response.indexOf("&")));
-					txcost.setText(response.substring(response.indexOf("&")+1, response.lastIndexOf("&")));
-					txmarca.setText(response.substring(response.lastIndexOf("&")+1,response.length()));
+
+					txname.setText(response.substring(ini,
+							response.indexOf("&")));
+					txcost.setText(response.substring(
+							response.indexOf("&") + 1,
+							response.lastIndexOf("&")));
+					txmarca.setText(response.substring(
+							response.lastIndexOf("&") + 1, response.length()));
 
 					try {
-
-					
 
 					} catch (Exception e) {
 
@@ -77,7 +82,29 @@ public class MostrarProducto extends Activity {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 			toast("Error al intentar connectar");
 		}
+//Boton cancelar
+		btno.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MostrarProducto.this, Inicial.class);
+				startActivity(i);
+//				finish();
+			}
+		});
+//Boton ok
+		btok.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				DBH.Insertar(txid.getText().toString(), txname.getText().toString(), txcost.getText().toString(), txmarca.getText().toString());
+				Intent i = new Intent(MostrarProducto.this, Inicial.class);
+				startActivity(i);
+				finish();
+			}
+		});
 	}
 
 	private void toast(String string) {
