@@ -284,7 +284,6 @@ public class Inicial extends Activity {
 						Intent i = new Intent(Inicial.this, CrearProducto.class);
 						i.putExtra("id", str_id);
 						startActivity(i);
-
 					}
 				}
 			});
