@@ -47,12 +47,8 @@
         </activity>
         <activity android:name="com.example.barcodeprueba.mysql" >
         </activity>
-<<<<<<< HEAD
-        <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.MostrarProducto" >
-=======
         <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.MostrarProducto" 
             android:screenOrientation="portrait">
->>>>>>> master
         </activity>
         <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.CrearProducto"
             android:screenOrientation="portrait">
