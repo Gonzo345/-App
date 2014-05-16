@@ -28,16 +28,14 @@ int drawable launcher_icon 0x7f020001
 int drawable share_via_barcode 0x7f020002
 int drawable shopper_icon 0x7f020003
 int id LinearLayout1 0x7f08000a
-<<<<<<< HEAD
-int id action_settings 0x7f080041
-=======
-int id action_settings 0x7f080046
->>>>>>> Aitor
+int id action_settings 0x7f080043
 int id auto_focus 0x7f080000
 int id back_button 0x7f08002e
 int id barcode_image_view 0x7f080014
 int id bookmark_title 0x7f08000f
 int id bookmark_url 0x7f080010
+int id btcancel 0x7f080032
+int id btok 0x7f080033
 int id button1 0x7f08000b
 int id contents_supplement_text_view 0x7f08001e
 int id contents_text_view 0x7f08001d
@@ -46,19 +44,11 @@ int id decode_failed 0x7f080002
 int id decode_succeeded 0x7f080003
 int id done_button 0x7f08002f
 int id editText1 0x7f08002a
-<<<<<<< HEAD
-int id editTextApellido 0x7f080034
-int id editTextCedula 0x7f080032
-int id editTextDireccion 0x7f080035
-int id editTextNombre 0x7f080033
-int id editTextTelefono 0x7f080036
-=======
-int id editTextApellido 0x7f080039
-int id editTextCedula 0x7f080037
-int id editTextDireccion 0x7f08003a
-int id editTextNombre 0x7f080038
-int id editTextTelefono 0x7f08003b
->>>>>>> Aitor
+int id editTextApellido 0x7f080036
+int id editTextCedula 0x7f080034
+int id editTextDireccion 0x7f080037
+int id editTextNombre 0x7f080035
+int id editTextTelefono 0x7f080038
 int id encode_view 0x7f08002b
 int id format_text_view 0x7f080016
 int id format_text_view_label 0x7f080015
@@ -74,58 +64,29 @@ int id lbname 0x7f080023
 int id lbtitle 0x7f080022
 int id meta_text_view 0x7f08001c
 int id meta_text_view_label 0x7f08001b
-<<<<<<< HEAD
-int id page_number_view 0x7f08003a
+int id page_number_view 0x7f08003c
 int id preview_view 0x7f080011
-int id query_button 0x7f080038
-int id query_text_view 0x7f080037
+int id query_button 0x7f08003a
+int id query_text_view 0x7f080039
 int id quit 0x7f080005
 int id restart_preview 0x7f080006
 int id result_button_view 0x7f08001f
-int id result_list_view 0x7f080039
-=======
-int id page_number_view 0x7f08003f
-int id preview_view 0x7f080011
-int id query_button 0x7f08003d
-int id query_text_view 0x7f08003c
-int id quit 0x7f080005
-int id restart_preview 0x7f080006
-int id result_button_view 0x7f08001f
-int id result_list_view 0x7f08003e
->>>>>>> Aitor
+int id result_list_view 0x7f08003b
 int id result_view 0x7f080013
 int id return_scan_result 0x7f080007
 int id scrollView1 0x7f08000d
 int id search_book_contents_failed 0x7f080008
 int id search_book_contents_succeeded 0x7f080009
-<<<<<<< HEAD
-int id share_app_button 0x7f08003c
-int id share_bookmark_button 0x7f08003d
-int id share_clipboard_button 0x7f08003f
-int id share_contact_button 0x7f08003e
-int id share_text_view 0x7f080040
+int id share_app_button 0x7f08003e
+int id share_bookmark_button 0x7f08003f
+int id share_clipboard_button 0x7f080041
+int id share_contact_button 0x7f080040
+int id share_text_view 0x7f080042
 int id shopper_button 0x7f080020
-int id snippet_view 0x7f08003b
+int id snippet_view 0x7f08003d
 int id status_view 0x7f080021
 int id text 0x7f08000e
 int id textResultadoSQL 0x7f08000c
-=======
-int id share_app_button 0x7f080041
-int id share_bookmark_button 0x7f080042
-int id share_clipboard_button 0x7f080044
-int id share_contact_button 0x7f080043
-int id share_text_view 0x7f080045
-int id shopper_button 0x7f080020
-int id snippet_view 0x7f080040
-int id status_view 0x7f080021
-int id text 0x7f08000e
-int id textResultadoSQL 0x7f08000c
-int id textView1 0x7f080032
-int id textView2 0x7f080035
-int id textView3 0x7f080034
-int id textView4 0x7f080033
-int id textView5 0x7f080036
->>>>>>> Aitor
 int id time_text_view 0x7f08001a
 int id time_text_view_label 0x7f080019
 int id txcost 0x7f080026
@@ -137,40 +98,24 @@ int id viewfinder_view 0x7f080012
 int layout activity_main 0x7f030000
 int layout bookmark_picker_list_item 0x7f030001
 int layout capture 0x7f030002
-<<<<<<< HEAD
-<<<<<<< HEAD
-int layout crearproducto 0x7f030003
-int layout encode 0x7f030004
-=======
-int layout encode 0x7f030003
-int layout guardar 0x7f030004
->>>>>>> Aitor
-int layout help 0x7f030005
-int layout history_list_item 0x7f030006
-int layout mysql 0x7f030007
-int layout search_book_contents 0x7f030008
-int layout search_book_contents_header 0x7f030009
-int layout search_book_contents_list_item 0x7f03000a
-int layout share 0x7f03000b
-=======
 int layout crearproducto 0x7f030003
 int layout encode 0x7f030004
 int layout guardar 0x7f030005
 int layout help 0x7f030006
 int layout history_list_item 0x7f030007
-int layout mysql 0x7f030008
-int layout search_book_contents 0x7f030009
-int layout search_book_contents_header 0x7f03000a
-int layout search_book_contents_list_item 0x7f03000b
-int layout share 0x7f03000c
->>>>>>> Aitor
+int layout mostrarproducto 0x7f030008
+int layout mysql 0x7f030009
+int layout search_book_contents 0x7f03000a
+int layout search_book_contents_header 0x7f03000b
+int layout search_book_contents_list_item 0x7f03000c
+int layout share 0x7f03000d
 int menu main 0x7f0c0000
 int raw beep 0x7f050000
-int string Descripcion 0x7f09007d
-int string Enviar 0x7f09007f
-int string Marca 0x7f09007e
-int string Nombre 0x7f09007b
-int string Precio 0x7f09007c
+int string Descripcion 0x7f09007e
+int string Enviar 0x7f090080
+int string Marca 0x7f09007f
+int string Nombre 0x7f09007c
+int string Precio 0x7f09007d
 int string action_settings 0x7f090078
 int string app_name 0x7f090000
 int string app_picker_name 0x7f090001
@@ -202,6 +147,7 @@ int string button_show_map 0x7f09001a
 int string button_sms 0x7f09001b
 int string button_web_search 0x7f09001c
 int string button_wifi 0x7f09001d
+int string cancelar 0x7f090081
 int string contents_contact 0x7f09001e
 int string contents_email 0x7f09001f
 int string contents_location 0x7f090020
@@ -224,6 +170,7 @@ int string menu_help 0x7f09002e
 int string menu_history 0x7f09002f
 int string menu_settings 0x7f090030
 int string menu_share 0x7f090031
+int string mostrar 0x7f09007b
 int string msg_about 0x7f090032
 int string msg_bulk_mode_scanned 0x7f090033
 int string msg_camera_framework_bug 0x7f090034
@@ -252,6 +199,7 @@ int string msg_share_subject_line 0x7f09004a
 int string msg_share_text 0x7f09004b
 int string msg_sure 0x7f09004c
 int string msg_unmount_usb 0x7f09004d
+int string ok 0x7f090082
 int string preferences_actions_title 0x7f09004e
 int string preferences_bulk_mode_summary 0x7f09004f
 int string preferences_bulk_mode_title 0x7f090050
