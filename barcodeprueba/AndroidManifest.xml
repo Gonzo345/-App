@@ -9,8 +9,7 @@
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -45,9 +44,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.barcodeprueba.mysql"></activity>
-         <activity android:name="GuardarProducto" ></activity>
-         <activity android:name="CrearProducto" ></activity>
+        <activity android:name="com.example.barcodeprueba.mysql" >
+        </activity>
+        <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.GuardarProducto" >
+        </activity>
+        <activity android:name="aplicaciones.aitorgonzo.barcodeprueba.CrearProducto" >
+        </activity>
     </application>
 
 </manifest>

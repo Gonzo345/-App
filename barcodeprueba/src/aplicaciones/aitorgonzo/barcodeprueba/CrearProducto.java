@@ -1,5 +1,7 @@
 package aplicaciones.aitorgonzo.barcodeprueba;
 
-public class CrearProducto {
+import android.app.Activity;
+
+public class CrearProducto extends Activity{
 
 }
