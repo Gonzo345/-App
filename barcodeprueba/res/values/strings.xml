@@ -13,4 +13,5 @@
 	<string name="Enviar"> Enviar información</string>
 	<string name="cancelar"> No añadir</string>
 	<string name="ok"> Añadir al carrito</string>
+	<string name="Carrito"> Carrito </string>
 </resources>

@@ -53,60 +53,6 @@ public class Inicial extends Activity {
 	Handler_sqlite DBH = new Handler_sqlite(Inicial.this);
 	String[] NombresProductos = {};
 	String[] PrecioProductos = {};
-
-	// ############### Declaraci—n de los getters y setters para poder acceder a
-	// los parametros que tenemos que ir rellenando de los productos
-
-	public String getStr_id() {
-		return str_id;
-	}
-
-	public void setStr_id(String str_id) {
-		this.str_id = str_id;
-	}
-
-	public String getStr_nombre() {
-		return str_nombre;
-	}
-
-	public void setStr_nombre(String str_nombre) {
-		this.str_nombre = str_nombre;
-	}
-
-	public String getStr_precio() {
-		return str_precio;
-	}
-
-	public void setStr_precio(String str_precio) {
-		this.str_precio = str_precio;
-	}
-
-	public String getStr_descripcion() {
-		return str_descripcion;
-	}
-
-	public void setStr_descripcion(String str_descripcion) {
-		this.str_descripcion = str_descripcion;
-	}
-
-	public String getStr_supermercado() {
-		return str_supermercado;
-	}
-
-	public void setStr_supermercado(String str_supermercado) {
-		this.str_supermercado = str_supermercado;
-	}
-
-	public String getStr_marca() {
-		return str_marca;
-	}
-
-	public void setStr_marca(String str_marca) {
-		this.str_marca = str_marca;
-	}
-
-	// ############### FIN getters setters#####################
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -196,26 +142,22 @@ public class Inicial extends Activity {
 		// a una
 		// mesa en
 		// concreto
+		NombresProductos = DBH.leerArray(numtotal);	// recupera los valores de la cesta
+		PrecioProductos = DBH.leerArrayPrecio(numtotal);	// recupera los valores de la cesta
+		listacesta = (ListView) findViewById(R.id.listacompra);
+		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_checked, NombresProductos);
+		
+		listacesta.setAdapter(adaptador);
+		listacesta.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		try {
-
-			NombresProductos = DBH.leerArray(numtotal);// recupera los valores
-														// de la cesta
-			PrecioProductos = DBH.leerArrayPrecio(numtotal);// recupera los
-															// valores de la
-															// cesta
-
-			listacesta = (ListView) findViewById(R.id.listacompra);
-			ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
-					android.R.layout.simple_list_item_checked, NombresProductos);
-
-			listacesta.setAdapter(adaptador);
-			listacesta.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
+			
 			int total = 0;
 			for (int j = 0; j < PrecioProductos.length; j++) {
 				total += Integer.parseInt(PrecioProductos[j]);
 				toast("precio del producto: " + j + "->"
 						+ Integer.parseInt(PrecioProductos[j]) + "");
+				
 			}
 
 			Toast.makeText(Inicial.this, "Total cesta: " + total,
@@ -240,7 +182,7 @@ public class Inicial extends Activity {
 
 			try {
 
-				// Agregar parámetros
+				// Agregar par‡metros
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 						2);
 				nameValuePairs.add(new BasicNameValuePair("id", getStr_id()));
@@ -352,4 +294,56 @@ public class Inicial extends Activity {
 		// return "ERROR";
 	}
 
+	// ############### Declaraci—n de los getters y setters para poder acceder a
+		// los parametros que tenemos que ir rellenando de los productos
+
+		public String getStr_id() {
+			return str_id;
+		}
+
+		public void setStr_id(String str_id) {
+			this.str_id = str_id;
+		}
+
+		public String getStr_nombre() {
+			return str_nombre;
+		}
+
+		public void setStr_nombre(String str_nombre) {
+			this.str_nombre = str_nombre;
+		}
+
+		public String getStr_precio() {
+			return str_precio;
+		}
+
+		public void setStr_precio(String str_precio) {
+			this.str_precio = str_precio;
+		}
+
+		public String getStr_descripcion() {
+			return str_descripcion;
+		}
+
+		public void setStr_descripcion(String str_descripcion) {
+			this.str_descripcion = str_descripcion;
+		}
+
+		public String getStr_supermercado() {
+			return str_supermercado;
+		}
+
+		public void setStr_supermercado(String str_supermercado) {
+			this.str_supermercado = str_supermercado;
+		}
+
+		public String getStr_marca() {
+			return str_marca;
+		}
+
+		public void setStr_marca(String str_marca) {
+			this.str_marca = str_marca;
+		}
+
+		// ############### FIN getters setters#####################
 }

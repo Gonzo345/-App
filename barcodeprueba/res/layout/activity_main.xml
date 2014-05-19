@@ -10,6 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Inicial" >
 
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/Carrito"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -23,32 +31,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <ListView
+        android:id="@+id/listacompra"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.85" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.68"
-                android:ems="10" />
-
-            <ListView
-                android:id="@+id/listacompra"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.68" >
-            </ListView>
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="300dp" >
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
