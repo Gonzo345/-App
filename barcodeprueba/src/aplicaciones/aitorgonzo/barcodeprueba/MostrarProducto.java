@@ -50,7 +50,7 @@ public class MostrarProducto extends Activity {
 
 		try {
 
-			toast("dins de la connexi— amnb " + URL + id);
+			// toast("dins de la connexi— amnb " + URL + id);
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(URL + id, new AsyncHttpResponseHandler() {
 
@@ -59,15 +59,13 @@ public class MostrarProducto extends Activity {
 					int ini = 0, fin = 0;
 					System.out.println(response);
 
-					toast(response);
-
-					txname.setText(response.substring(ini,
-							response.indexOf("&")));
-					txcost.setText(response.substring(
-							response.indexOf("&") + 1,
-							response.lastIndexOf("&")));
-					txmarca.setText(response.substring(
-							response.lastIndexOf("&") + 1, response.length()));
+					// toast(response);
+//					toast(response.substring(ini, response.indexOf("&")));
+					String texto=response.substring(0, response.indexOf("&"));
+					
+					txname.setText(texto);
+					txcost.setText(response.substring(response.indexOf("&") + 1,response.lastIndexOf("&")));
+					txmarca.setText(response.substring(response.lastIndexOf("&") + 1, response.length()));
 
 					try {
 
@@ -82,7 +80,7 @@ public class MostrarProducto extends Activity {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 			toast("Error al intentar connectar");
 		}
-//Boton cancelar
+		// Boton cancelar
 		btno.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -90,16 +88,18 @@ public class MostrarProducto extends Activity {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(MostrarProducto.this, Inicial.class);
 				startActivity(i);
-//				finish();
+				// finish();
 			}
 		});
-//Boton ok
+		// Boton ok
 		btok.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				DBH.Insertar(txid.getText().toString(), txname.getText().toString(), txcost.getText().toString(), txmarca.getText().toString());
+				DBH.Insertar(txid.getText().toString(), txname.getText()
+						.toString(), txcost.getText().toString(), txmarca
+						.getText().toString());
 				Intent i = new Intent(MostrarProducto.this, Inicial.class);
 				startActivity(i);
 				finish();
