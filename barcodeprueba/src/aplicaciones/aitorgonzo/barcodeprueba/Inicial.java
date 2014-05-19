@@ -212,14 +212,18 @@ public class Inicial extends Activity {
 			listacesta.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 			int total = 0;
-			for (int j = 0; j <= PrecioProductos.length; j++) {
-				total = Integer.parseInt(PrecioProductos[j]);
-				toast(Integer.parseInt(PrecioProductos[j])+"");
+			for (int j = 0; j < PrecioProductos.length; j++) {
+				total += Integer.parseInt(PrecioProductos[j]);
+				toast("precio del producto: " + j + "->"
+						+ Integer.parseInt(PrecioProductos[j]) + "");
 			}
 
+			Toast.makeText(Inicial.this, "Total cesta: " + total,
+					Toast.LENGTH_LONG).show();
 			txtotal.setText(total + "");
 		} catch (Exception e) {
-
+			toast("peta");
+			toast(e+"");
 		}
 
 	}
