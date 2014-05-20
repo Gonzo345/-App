@@ -32,7 +32,7 @@ public class MostrarProducto extends Activity {
 		txcost = (TextView) findViewById(R.id.txcost);
 		txid = (TextView) findViewById(R.id.txid);
 		txmarca = (TextView) findViewById(R.id.txmarca);
-		txname= (TextView)findViewById(R.id.txname);
+		txname = (TextView) findViewById(R.id.txname);
 
 		if (savedInstanceState == null) {
 			savedInstanceState = getIntent().getExtras();
@@ -60,14 +60,16 @@ public class MostrarProducto extends Activity {
 					System.out.println(response);
 
 					// toast(response);
-					
-//					toast(txname.getText().toString());
-					txname.setText(response.substring(1,response.indexOf("&")));
-					txcost.setText(response.substring(response.indexOf("&") + 1,response.lastIndexOf("&")));
-					txmarca.setText(response.substring(response.lastIndexOf("&") + 1, response.length()));
+
+					// toast(txname.getText().toString());
+					txname.setText(response.substring(1, response.indexOf("&")));
+					txcost.setText(response.substring(
+							response.indexOf("&") + 1,
+							response.lastIndexOf("&")));
+					txmarca.setText(response.substring(
+							response.lastIndexOf("&") + 1, response.length()));
 
 					try {
-
 					} catch (Exception e) {
 
 					}
@@ -96,7 +98,7 @@ public class MostrarProducto extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				DBH.Insertar(txid.getText().toString(), txname.getText()
+				DBH.Insertar("Hola", txid.getText().toString(), txname.getText()
 						.toString(), txcost.getText().toString(), txmarca
 						.getText().toString());
 				Intent i = new Intent(MostrarProducto.this, Inicial.class);

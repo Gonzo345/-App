@@ -19,7 +19,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		String query = "CREATE TABLE cesta (id TEXT, nombre TEXT, precio TEXT, marca TEXT);";
+		String query = "CREATE TABLE cesta (idproducto INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT, nombre TEXT, precio TEXT, marca TEXT);";
 		db.execSQL(query);
 
 	}
@@ -32,8 +32,10 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public void Insertar(String id, String nombre, String precio, String marca) {
+	public void Insertar(String idproducto, String id, String nombre,
+			String precio, String marca) {
 		ContentValues valores = new ContentValues();
+//		valores.put("idproducto", idproducto);
 		valores.put("id", id);
 		valores.put("nombre", nombre);
 		valores.put("precio", precio);
@@ -48,15 +50,17 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 	public String leer() {
 		String result = "";
-		String columnas[] = { "id", "nombre", "precio", "marca" };// declaramos
-																	// las
-																	// columnas
+		String columnas[] = { "idproducto", "id", "nombre", "precio", "marca" };// declaramos
+		// las
+		// columnas
 		Cursor c = this.getReadableDatabase().query("cesta", columnas, null,
 				null, null, null, null);
 
-		int id, idr, precio, marca; // aqui ponemos los indices de las columnas
-									// en
-									// cada integer que hemos creado
+		int idproducto, id, idr, precio, marca; // aqui ponemos los indices de
+												// las columnas
+		// en
+		// cada integer que hemos creado
+		idproducto = c.getColumnIndex("idproducto");
 		id = c.getColumnIndex("id");
 		idr = c.getColumnIndex("nombre");
 		precio = c.getColumnIndex("precio");
@@ -64,8 +68,9 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 		c.moveToLast(); // lo movemos al ultimo registro insertado
 
-		result = c.getString(id) + " " + c.getString(idr) + " "
-				+ c.getString(precio) + " " + c.getString(marca);
+		result = c.getString(idproducto) + " " + c.getString(id) + " "
+				+ c.getString(idr) + " " + c.getString(precio) + " "
+				+ c.getString(marca);
 
 		return result;
 	}
@@ -74,17 +79,19 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 		int a = Integer.parseInt(numtotal);
 		String result[] = new String[a];
-		String columnas[] = { "id", "nombre", "precio", "marca" };// declaramos
-																	// las
-																	// columnas
+		String columnas[] = { "idproducto", "id", "nombre", "precio", "marca" };// declaramos
+		// las
+		// columnas
 		// Cursor c = this.getReadableDatabase().query("ruleta", columnas, null,
 		// null, null, null, null);
 		Cursor c = this.getReadableDatabase().rawQuery("SELECT * FROM cesta",
 				null);
 
-		int id, nombre, precio, marca; // aqui ponemos los indices de las
-										// columnas en
-										// cada integer que hemos creado
+		int idproducto, id, nombre, precio, marca; // aqui ponemos los indices
+													// de las
+		// columnas en
+		// cada integer que hemos creado
+		idproducto = c.getColumnIndex("idproducto");
 		id = c.getColumnIndex("id");
 		nombre = c.getColumnIndex("nombre");
 		precio = c.getColumnIndex("precio");
@@ -104,17 +111,19 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 		int a = Integer.parseInt(numtotal);
 		String result[] = new String[a];
-		String columnas[] = { "id", "nombre", "precio", "marca" };// declaramos
-																	// las
-																	// columnas
+		String columnas[] = { "idproducto", "id", "nombre", "precio", "marca" };// declaramos
+		// las
+		// columnas
 		// Cursor c = this.getReadableDatabase().query("ruleta", columnas, null,
 		// null, null, null, null);
 		Cursor c = this.getReadableDatabase().rawQuery("SELECT * FROM cesta",
 				null);
 
-		int id, nombre, precio, marca; // aqui ponemos los indices de las
-										// columnas en
-										// cada integer que hemos creado
+		int idproducto, id, nombre, precio, marca; // aqui ponemos los indices
+													// de las
+		// columnas en
+		// cada integer que hemos creado
+		idproducto = c.getColumnIndex("idproducto");
 		id = c.getColumnIndex("id");
 		nombre = c.getColumnIndex("nombre");
 		precio = c.getColumnIndex("precio");
@@ -133,53 +142,50 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	// este método se encarga de eliminar los precioeros seleccionados
 	public String Buscar_Eliminar(String nombreeliminar) {
 
-		try {
-			SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getWritableDatabase();
 
-			// Eliminar la marca del String de entrada
+		// Eliminar la marca del String de entrada
 
-			nombreeliminar = nombreeliminar.substring(0,
-					nombreeliminar.indexOf("="));
+		nombreeliminar = nombreeliminar.substring(0,
+				nombreeliminar.indexOf("="));
 
-			int posespacio = nombreeliminar.indexOf(" ", 0); // Encontramos la
-																// posición del
-																// espacio
-																// (separador
-																// para marca)
+		int posespacio = nombreeliminar.indexOf(" ", 0); // Encontramos la
+															// posición del
+															// espacio
+															// (separador
+															// para marca)
 
-			Log.e("String", nombreeliminar);
+		Log.e("String", nombreeliminar);
 
-			Cursor c = this.getReadableDatabase()
-					.rawQuery(
-							"SELECT * FROM cesta WHERE nombre='"
-									+ nombreeliminar + "'", null);
+		Cursor c = this.getReadableDatabase().rawQuery(
+				"SELECT * FROM cesta WHERE nombre='" + nombreeliminar + "'",
+				null);
 
-			int id, nombre, precio, marca; // aqui ponemos los indices de las
-											// columnas
-											// en
-											// cada integer que hemos creado
-			id = c.getColumnIndex("id");
-			nombre = c.getColumnIndex("nombre");
-			precio = c.getColumnIndex("precio");
-			marca = c.getColumnIndex("marca");
+		int idproducto, id, nombre, precio, marca; // aqui ponemos los indices
+													// de las
+		// columnas
+		// en
+		// cada integer que hemos creado
+		idproducto = c.getColumnIndex("idproducto");
+		id = c.getColumnIndex("id");
+		nombre = c.getColumnIndex("nombre");
+		precio = c.getColumnIndex("precio");
+		marca = c.getColumnIndex("marca");
 
-			c.moveToLast();
-			String result = c.getString(nombre);
+		c.moveToLast();
+		String result = c.getString(nombre);
+		String ideliminar = c.getString(idproducto);
 
-			Log.e("result= : ", result);
+		Log.e("result= : ", result);
 
-			// db.execSQL("DELETE FROM 1 cesta WHERE nombre='" + result + "'");
-			db.execSQL("DELETE FROM cesta WHERE id IN (SELECT id FROM cesta ORDER BY id LIMIT 1)");
+		// db.execSQL("DELETE FROM 1 cesta WHERE nombre='" + result + "'");
+		db.execSQL("DELETE FROM cesta WHERE nombre='" + result
+				+ "' AND idproducto='" + ideliminar + "'");
 
-			c.close();
+		c.close();
 
-			return id + " " + nombre + " " + precio + " " + marca;
-			
-		} catch (Exception e) {
-			Log.e("Error al eliminar: ", e + "");
-		}
-		
-		return nombreeliminar;
+		return id + " " + nombre + " " + precio + " " + marca;
+
 	}
 
 	public String BuscarExistentes() {// con este método nos devuelve
