@@ -133,44 +133,53 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	// este método se encarga de eliminar los precioeros seleccionados
 	public String Buscar_Eliminar(String nombreeliminar) {
 
-		SQLiteDatabase db = this.getWritableDatabase();
+		try {
+			SQLiteDatabase db = this.getWritableDatabase();
 
-		// Eliminar la marca del String de entrada
+			// Eliminar la marca del String de entrada
 
-		nombreeliminar = nombreeliminar.substring(0,
-				nombreeliminar.indexOf("="));
+			nombreeliminar = nombreeliminar.substring(0,
+					nombreeliminar.indexOf("="));
 
-		int posespacio = nombreeliminar.indexOf(" ", 0); // Encontramos la
-															// posición del
-															// espacio
-															// (separador
-															// para marca)
+			int posespacio = nombreeliminar.indexOf(" ", 0); // Encontramos la
+																// posición del
+																// espacio
+																// (separador
+																// para marca)
 
-		Log.e("String", nombreeliminar);
+			Log.e("String", nombreeliminar);
 
-		Cursor c = this.getReadableDatabase().rawQuery(
-				"SELECT * FROM cesta WHERE nombre='" + nombreeliminar + "'",
-				null);
+			Cursor c = this.getReadableDatabase()
+					.rawQuery(
+							"SELECT * FROM cesta WHERE nombre='"
+									+ nombreeliminar + "'", null);
 
-		int id, nombre, precio, marca; // aqui ponemos los indices de las
-										// columnas
-										// en
-										// cada integer que hemos creado
-		id = c.getColumnIndex("id");
-		nombre = c.getColumnIndex("nombre");
-		precio = c.getColumnIndex("precio");
-		marca = c.getColumnIndex("marca");
+			int id, nombre, precio, marca; // aqui ponemos los indices de las
+											// columnas
+											// en
+											// cada integer que hemos creado
+			id = c.getColumnIndex("id");
+			nombre = c.getColumnIndex("nombre");
+			precio = c.getColumnIndex("precio");
+			marca = c.getColumnIndex("marca");
 
-		c.moveToLast();
-		String result = c.getString(nombre);
+			c.moveToLast();
+			String result = c.getString(nombre);
+
+			Log.e("result= : ", result);
+
+			// db.execSQL("DELETE FROM 1 cesta WHERE nombre='" + result + "'");
+			db.execSQL("DELETE FROM cesta WHERE id IN (SELECT id FROM cesta ORDER BY id LIMIT 1)");
+
+			c.close();
+
+			return id + " " + nombre + " " + precio + " " + marca;
+			
+		} catch (Exception e) {
+			Log.e("Error al eliminar: ", e + "");
+		}
 		
-		Log.e("result= : ", result);
-
-		db.execSQL("DELETE FROM cesta WHERE nombre='" + result + "'");
-
-		c.close();
-
-		return id + " " + nombre + " " + precio + " " + marca;
+		return nombreeliminar;
 	}
 
 	public String BuscarExistentes() {// con este método nos devuelve

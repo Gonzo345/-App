@@ -19,7 +19,7 @@ public class MostrarProducto extends Activity {
 	private String URL = "http://www.menorcapp.net/mostrarproductoid.php?id=",
 			id = "";
 	private Button btno, btok;
-	private TextView txname, txcost, txid, txmarca;
+	private TextView txcost, txid, txmarca, txname;
 	Handler_sqlite DBH = new Handler_sqlite(MostrarProducto.this);
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +29,10 @@ public class MostrarProducto extends Activity {
 		btno = (Button) findViewById(R.id.btcancel);
 		btok = (Button) findViewById(R.id.btok);
 
-		txname = (TextView) findViewById(R.id.txname);
 		txcost = (TextView) findViewById(R.id.txcost);
 		txid = (TextView) findViewById(R.id.txid);
 		txmarca = (TextView) findViewById(R.id.txmarca);
+		txname= (TextView)findViewById(R.id.txname);
 
 		if (savedInstanceState == null) {
 			savedInstanceState = getIntent().getExtras();
@@ -60,10 +60,9 @@ public class MostrarProducto extends Activity {
 					System.out.println(response);
 
 					// toast(response);
-//					toast(response.substring(ini, response.indexOf("&")));
-					String texto=response.substring(0, response.indexOf("&"));
 					
-					txname.setText(texto);
+//					toast(txname.getText().toString());
+					txname.setText(response.substring(1,response.indexOf("&")));
 					txcost.setText(response.substring(response.indexOf("&") + 1,response.lastIndexOf("&")));
 					txmarca.setText(response.substring(response.lastIndexOf("&") + 1, response.length()));
 
