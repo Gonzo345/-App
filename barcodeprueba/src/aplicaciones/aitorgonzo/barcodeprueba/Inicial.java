@@ -172,7 +172,7 @@ public class Inicial extends Activity {
 
 			float total = 0;
 			for (int j = 0; j < PrecioProductos.length; j++) {
-				total += Integer.parseInt(PrecioProductos[j]);
+				total += Float.parseFloat(PrecioProductos[j]);
 
 			}
 
