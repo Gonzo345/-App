@@ -77,12 +77,9 @@ public class CrearProducto extends Activity {
 
 		// name= Environment.getExternalStorageDirectory() + "/test.jpg";
 		// //Usando variables de entorno
-		name = "sdcard/DCIM/camara/test.jpg"; // Poniendo ruta fija para luego
-												// subir por FTP
+		name = "sdcard/DCIM/camara/test.jpg"; // Poniendo ruta fija para luego subir por FTP
 
-		Button btenviar = (Button) findViewById(R.id.btenviar); // Confirmamos
-																// env’o de
-																// datos
+		Button btenviar = (Button) findViewById(R.id.btenviar); // Confirmamos env’o de datos
 		Button btfoto = (Button) findViewById(R.id.btfoto); // Bot—n para foto
 
 		rbfull = (RadioButton) findViewById(R.id.rbcamara);
@@ -100,21 +97,27 @@ public class CrearProducto extends Activity {
 
 				new Thread(new Runnable() {
 				    public void run() {
-				    	File archivo = new File("/sdcard/DCIM/camara/test.jpg");
+				    	
+//				    	String ruta = "/sdcard/DCIM/camara/";	//Ruta del archivo a tratar
+//				    	File archivooriginal = new File("/sdcard/DCIM/camara/test.jpg");	//Archivo original			    	
+				    	
+				    	String ruta = "/sdcard/DCIM/camara/";	//Ruta del archivo a tratar
+				    	File archivooriginal = new File("/sdcard/DCIM/camara/test.jpg");	//Archivo original
+				    	File renombrar = new File(ruta + str_id + ".jpg");	//Archivo renombrado con el c—digo de barras actual
+				
+				    	archivooriginal.renameTo(renombrar);	//Renombramos el archivo
 
 						try {
+							//Conexi—n por FTP para subida de imagen
 							FTPClient ftpClient = new FTPClient();
 							ftpClient.connect(InetAddress.getByName(SERVER));
 							ftpClient.login(USER, PASSWORD);
-							ftpClient.changeWorkingDirectory("/images"); // Carpeta
-																			// remota de
-																			// trabajo
+							ftpClient.changeWorkingDirectory("/images"); //Carpeta remota de subida
 							ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 							BufferedInputStream buffIn = null;
-							buffIn = new BufferedInputStream(new FileInputStream(
-									archivo));
+							buffIn = new BufferedInputStream(new FileInputStream(archivooriginal));
 							ftpClient.enterLocalPassiveMode();
-							ftpClient.storeFile("test.jpg", buffIn);
+							ftpClient.storeFile(str_id, buffIn);
 							buffIn.close();
 							ftpClient.logout();
 							ftpClient.disconnect();
