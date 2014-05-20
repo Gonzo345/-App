@@ -1,12 +1,20 @@
 package aplicaciones.aitorgonzo.barcodeprueba;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +28,9 @@ public class MostrarProducto extends Activity {
 			id = "";
 	private Button btno, btok;
 	private TextView txcost, txid, txmarca, txname;
+	private Bitmap bm;
+	private ImageView iv;
+
 	Handler_sqlite DBH = new Handler_sqlite(MostrarProducto.this);
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +39,8 @@ public class MostrarProducto extends Activity {
 
 		btno = (Button) findViewById(R.id.btcancel);
 		btok = (Button) findViewById(R.id.btok);
+
+		iv = (ImageView) findViewById(R.id.imagen);
 
 		txcost = (TextView) findViewById(R.id.txcost);
 		txid = (TextView) findViewById(R.id.txid);
@@ -46,7 +59,7 @@ public class MostrarProducto extends Activity {
 			id = (String) savedInstanceState.getSerializable("id");
 			txid.setText(id);
 		}
-		toast(id);
+//		toast(id);
 
 		try {
 
@@ -69,18 +82,16 @@ public class MostrarProducto extends Activity {
 					txmarca.setText(response.substring(
 							response.lastIndexOf("&") + 1, response.length()));
 
-					try {
-					} catch (Exception e) {
-
-					}
-
 				}
 			});
 
+			// CargarImagen("http://menorcapp.net/images/"+id+".jpg",iv);
+			CargarImagen("http://menorcapp.net/images/logo.png", iv);
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
-			toast("Error al intentar connectar");
+			toast("Error al intentar connectar " + e);
 		}
+
 		// Boton cancelar
 		btno.setOnClickListener(new OnClickListener() {
 
@@ -98,9 +109,9 @@ public class MostrarProducto extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				DBH.Insertar("Hola", txid.getText().toString(), txname.getText()
-						.toString(), txcost.getText().toString(), txmarca
-						.getText().toString());
+				DBH.Insertar("Hola", txid.getText().toString(), txname
+						.getText().toString(), txcost.getText().toString(),
+						txmarca.getText().toString());
 				Intent i = new Intent(MostrarProducto.this, Inicial.class);
 				startActivity(i);
 				finish();
@@ -112,4 +123,28 @@ public class MostrarProducto extends Activity {
 		// TODO Auto-generated method stub
 		Toast.makeText(MostrarProducto.this, string, Toast.LENGTH_LONG).show();
 	}
+
+	public boolean CargarImagen(String fileUrl, ImageView iv) {
+		try {
+
+			URL myFileUrl = new URL(fileUrl);
+			HttpURLConnection conn = (HttpURLConnection) myFileUrl
+					.openConnection();
+			conn.setDoInput(true);
+			conn.connect();
+
+			InputStream is = conn.getInputStream();
+			iv.setImageBitmap(BitmapFactory.decodeStream(is));
+
+			return true;
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 }
