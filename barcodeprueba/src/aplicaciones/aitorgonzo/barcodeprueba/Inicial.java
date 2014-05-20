@@ -19,9 +19,11 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -48,16 +50,18 @@ public class Inicial extends Activity {
 	private Connection conexionMySQL;
 	private TextView textResultadoSQL, text, txtotal;
 
-	Button btBorrarSeleccionados;
+	Button bteliminar;
 	ListView listacesta;
 	Handler_sqlite DBH = new Handler_sqlite(Inicial.this);
 	String[] NombresProductos = {};
 	String[] PrecioProductos = {};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button button1 = (Button) findViewById(R.id.button1);
+		bteliminar = (Button) findViewById(R.id.bteliminar);
 
 		text = (TextView) findViewById(R.id.text);// label grande
 		txtotal = (TextView) findViewById(R.id.txtotal);
@@ -81,7 +85,19 @@ public class Inicial extends Activity {
 			}
 		});
 		// ************ FIN DE LA LLAMADA AL SCANER ********************
+		bteliminar.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SparseBooleanArray seleccionados = listacesta
+						.getCheckedItemPositions();
+
+				EliminarSeleccionados(seleccionados);
+
+			}
+
+		});
 	}
 
 	// metodo que nos devuelve el resultado del scanner
@@ -100,7 +116,7 @@ public class Inicial extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 
-					Log.e("falllalalalalalallal", "error");
+					   Log.e("falllalalalalalallal", "error");
 
 					// toast("Hola desde catch del try encargado de sacar el codigo fuente");
 				}
@@ -135,37 +151,34 @@ public class Inicial extends Activity {
 	public void RecuperarCesta() {
 
 		String numtotal = DBH.BuscarExistentes();// buscar
-		toast(numtotal);
+//		toast(numtotal);
 		// numeros
 		// que
 		// pertenecen
 		// a una
 		// mesa en
 		// concreto
-		NombresProductos = DBH.leerArray(numtotal);	// recupera los valores de la cesta
-		PrecioProductos = DBH.leerArrayPrecio(numtotal);	// recupera los valores de la cesta
+		NombresProductos = DBH.leerArray(numtotal); // recupera los valores de
+													// la cesta
+		PrecioProductos = DBH.leerArrayPrecio(numtotal); // recupera los valores
+															// de la cesta
 		listacesta = (ListView) findViewById(R.id.listacompra);
 		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_checked, NombresProductos);
-		
+
 		listacesta.setAdapter(adaptador);
 		listacesta.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		try {
-			
-			int total = 0;
+
+			float total = 0;
 			for (int j = 0; j < PrecioProductos.length; j++) {
 				total += Integer.parseInt(PrecioProductos[j]);
-				toast("precio del producto: " + j + "->"
-						+ Integer.parseInt(PrecioProductos[j]) + "");
-				
+
 			}
 
-			Toast.makeText(Inicial.this, "Total cesta: " + total,
-					Toast.LENGTH_LONG).show();
 			txtotal.setText(total + "");
 		} catch (Exception e) {
-			toast("peta");
-			toast(e+"");
+			toast("peta: " + e);
 		}
 
 	}
@@ -255,7 +268,7 @@ public class Inicial extends Activity {
 				@Override
 				public void onSuccess(String response) {
 					System.out.println(response);
-					text.setText(response);
+//					text.setText(response);
 
 					// toast(response);
 
@@ -289,61 +302,102 @@ public class Inicial extends Activity {
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
-			text.append(" ERROR ");
+//			text.append(" ERROR ");
 		}
 		// return "ERROR";
 	}
 
 	// ############### Declaraci—n de los getters y setters para poder acceder a
-		// los parametros que tenemos que ir rellenando de los productos
+	// los parametros que tenemos que ir rellenando de los productos
 
-		public String getStr_id() {
-			return str_id;
+	public String getStr_id() {
+		return str_id;
+	}
+
+	public void setStr_id(String str_id) {
+		this.str_id = str_id;
+	}
+
+	public String getStr_nombre() {
+		return str_nombre;
+	}
+
+	public void setStr_nombre(String str_nombre) {
+		this.str_nombre = str_nombre;
+	}
+
+	public String getStr_precio() {
+		return str_precio;
+	}
+
+	public void setStr_precio(String str_precio) {
+		this.str_precio = str_precio;
+	}
+
+	public String getStr_descripcion() {
+		return str_descripcion;
+	}
+
+	public void setStr_descripcion(String str_descripcion) {
+		this.str_descripcion = str_descripcion;
+	}
+
+	public String getStr_supermercado() {
+		return str_supermercado;
+	}
+
+	public void setStr_supermercado(String str_supermercado) {
+		this.str_supermercado = str_supermercado;
+	}
+
+	public String getStr_marca() {
+		return str_marca;
+	}
+
+	public void setStr_marca(String str_marca) {
+		this.str_marca = str_marca;
+	}
+
+	// ############### FIN getters setters#####################
+
+	// Metodo que se encargara de eliminar los items seleccionados
+	private void EliminarSeleccionados(SparseBooleanArray seleccionados) {
+
+		SQLiteDatabase db = DBH.getWritableDatabase();
+
+		if (seleccionados == null || seleccionados.size() == 0) {
+
+			Toast.makeText(this, "No hay elementos seleccionados",
+					Toast.LENGTH_SHORT).show();
+
+		} else {
+			// si los había, miro sus valores
+
+			// Esto es para ir creando un mensaje largo que mostraré al final
+			StringBuilder resultado = new StringBuilder();
+			resultado
+					.append("Se eliminarán los siguientes elementos:\n VALOR         Posicion \n");
+
+			// Recorro my "array" de elementos seleccionados
+			final int size = seleccionados.size();
+			for (int i = 0; i < size; i++) {
+				// Si valueAt(i) es true, es que estaba seleccionado
+				if (seleccionados.valueAt(i)) {
+					// en keyAt(i) obtengo su posición
+					resultado.append(listacesta.getItemAtPosition(
+							seleccionados.keyAt(i)).toString()
+							+ "   ----------->  "
+							+ seleccionados.keyAt(i)
+							+ "\n");
+
+					DBH.Buscar_Eliminar(listacesta.getItemAtPosition(
+							seleccionados.keyAt(i)).toString());
+				}
+			}
+			
+			RecuperarCesta();
+
 		}
+	}
 
-		public void setStr_id(String str_id) {
-			this.str_id = str_id;
-		}
-
-		public String getStr_nombre() {
-			return str_nombre;
-		}
-
-		public void setStr_nombre(String str_nombre) {
-			this.str_nombre = str_nombre;
-		}
-
-		public String getStr_precio() {
-			return str_precio;
-		}
-
-		public void setStr_precio(String str_precio) {
-			this.str_precio = str_precio;
-		}
-
-		public String getStr_descripcion() {
-			return str_descripcion;
-		}
-
-		public void setStr_descripcion(String str_descripcion) {
-			this.str_descripcion = str_descripcion;
-		}
-
-		public String getStr_supermercado() {
-			return str_supermercado;
-		}
-
-		public void setStr_supermercado(String str_supermercado) {
-			this.str_supermercado = str_supermercado;
-		}
-
-		public String getStr_marca() {
-			return str_marca;
-		}
-
-		public void setStr_marca(String str_marca) {
-			this.str_marca = str_marca;
-		}
-
-		// ############### FIN getters setters#####################
 }
