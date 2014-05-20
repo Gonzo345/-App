@@ -228,6 +228,7 @@ public class CrearProducto extends Activity{
 				respuesta = datos;
 				
 				Intent intent = new Intent(CrearProducto.this,MostrarProducto.class);
+				intent.putExtra("id", id);
 				startActivityForResult(intent, 0);
 
 			} catch (ClientProtocolException e) {
