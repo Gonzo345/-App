@@ -44,12 +44,13 @@
                 android:text="@string/Precio"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+
             <EditText
                 android:id="@+id/txcost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
 
             <TextView
                 android:id="@+id/lbid"
@@ -91,27 +92,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="@string/foto" />
-				<RadioGroup
-				    android:id="@+id/radiogrupo"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:orientation="horizontal"
-				    android:layout_alignParentTop="true"
-				    android:layout_alignParentLeft="true">
-				    
-	                <RadioButton
-	                    android:id="@+id/rbgaleria"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:layout_marginTop="20dp"
-	                    android:text="@string/galeria" />
-	
-	                <RadioButton
-	                    android:id="@+id/rbcamara"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:layout_marginTop="20dp"
-	                    android:text="@string/cam" />
+
+                <RadioGroup
+                    android:id="@+id/radiogrupo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/rbgaleria"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/galeria" />
+
+                    <RadioButton
+                        android:id="@+id/rbcamara"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/cam" />
                 </RadioGroup>
 
                 <ImageView
@@ -131,9 +133,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:text="@string/Enviar" />
-
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>
