@@ -66,10 +66,7 @@ public class Inicial extends Activity {
 		text = (TextView) findViewById(R.id.text);// label grande
 		txtotal = (TextView) findViewById(R.id.txtotal);
 
-		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);// label
-																			// para
-																			// el
-																			// id
+		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);// label para el id
 		textResultadoSQL = (TextView) findViewById(R.id.textResultadoSQL);
 
 		// llamada a la recuperaci—n de la cesta
