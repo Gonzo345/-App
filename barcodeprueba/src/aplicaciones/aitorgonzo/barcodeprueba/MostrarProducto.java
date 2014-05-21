@@ -1,14 +1,18 @@
 package aplicaciones.aitorgonzo.barcodeprueba;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -86,7 +90,8 @@ public class MostrarProducto extends Activity {
 			});
 
 			// CargarImagen("http://menorcapp.net/images/"+id+".jpg",iv);
-			CargarImagen("http://menorcapp.net/images/logo.png", iv);
+			new DownloadImageTask().execute("http://www.menorcapp.net/images/"+id+".jpg");
+
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 			toast("Error al intentar connectar " + e);
@@ -147,4 +152,50 @@ public class MostrarProducto extends Activity {
 		return false;
 	}
 
+	 class DownloadImageTask extends AsyncTask<String, Void, Drawable>
+     {
+
+
+            protected void onPreExecute()
+            {
+            }
+            protected Drawable doInBackground(String... urls)
+            {
+                Log.d("DEBUG", "drawable");
+
+                return downloadImage(urls[0]);
+
+            }
+
+            protected void onPostExecute(Drawable imagen)
+            {
+
+                iv.setImageDrawable(imagen);
+            }
+
+            /**
+ * Devuelve una imagen desde una URL
+ * @param url Url de la imagen
+ * @return Una imagen
+ */
+            private Drawable downloadImage(String imageUrl)
+            {
+                try
+                {
+                    URL url = new URL(imageUrl);
+                    InputStream is = (InputStream)url.getContent();
+                    return Drawable.createFromStream(is, "src");
+                }
+                catch (MalformedURLException e)
+                {
+                    e.printStackTrace();
+                    return null;
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+     }
 }
