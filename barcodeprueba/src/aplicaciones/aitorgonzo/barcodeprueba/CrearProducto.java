@@ -33,6 +33,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -98,14 +99,9 @@ public class CrearProducto extends Activity {
 				new Thread(new Runnable() {
 				    public void run() {
 				    	
-//				    	String ruta = "/sdcard/DCIM/camara/";	//Ruta del archivo a tratar
-//				    	File archivooriginal = new File("/sdcard/DCIM/camara/test.jpg");	//Archivo original			    	
-				    	
 				    	String ruta = "/sdcard/DCIM/camara/";	//Ruta del archivo a tratar
-				    	File archivooriginal = new File("/sdcard/DCIM/camara/test.jpg");	//Archivo original
-				    	File renombrar = new File(ruta + str_id + ".jpg");	//Archivo renombrado con el c—digo de barras actual
-				
-				    	archivooriginal.renameTo(renombrar);	//Renombramos el archivo
+				    	File archivooriginal = new File("/sdcard/DCIM/camara/test.jpg");	//Archivo original			    	
+				    	
 
 						try {
 							//Conexi—n por FTP para subida de imagen
@@ -117,13 +113,14 @@ public class CrearProducto extends Activity {
 							BufferedInputStream buffIn = null;
 							buffIn = new BufferedInputStream(new FileInputStream(archivooriginal));
 							ftpClient.enterLocalPassiveMode();
-							ftpClient.storeFile(str_id, buffIn);
+							ftpClient.storeFile(str_id+".jpg", buffIn);
 							buffIn.close();
 							ftpClient.logout();
 							ftpClient.disconnect();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
+							Log.e("error","estamos en el error de la subida ima");
 						}
 				    }
 				}).start();
