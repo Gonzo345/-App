@@ -63,7 +63,7 @@ public class MostrarProducto extends Activity {
 
 		try {
 
-			// toast("dins de la connexi— amnb " + URL + id);
+			// toast("dins de la connexi— amb " + URL + id);
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(URL + id, new AsyncHttpResponseHandler() {
 
@@ -84,13 +84,14 @@ public class MostrarProducto extends Activity {
 
 				}
 			});
-
-			// CargarImagen("http://menorcapp.net/images/"+id+".jpg",iv);
-			CargarImagen("http://menorcapp.net/images/logo.png", iv);
+			
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 			toast("Error al intentar connectar " + e);
 		}
+		
+		
+		
 
 		// Boton cancelar
 		btno.setOnClickListener(new OnClickListener() {
@@ -124,27 +125,6 @@ public class MostrarProducto extends Activity {
 		Toast.makeText(MostrarProducto.this, string, Toast.LENGTH_LONG).show();
 	}
 
-	public boolean CargarImagen(String fileUrl, ImageView iv) {
-		try {
-
-			URL myFileUrl = new URL(fileUrl);
-			HttpURLConnection conn = (HttpURLConnection) myFileUrl
-					.openConnection();
-			conn.setDoInput(true);
-			conn.connect();
-
-			InputStream is = conn.getInputStream();
-			iv.setImageBitmap(BitmapFactory.decodeStream(is));
-
-			return true;
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
-	}
+	
 
 }

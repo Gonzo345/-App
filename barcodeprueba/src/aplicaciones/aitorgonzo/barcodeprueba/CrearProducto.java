@@ -101,7 +101,6 @@ public class CrearProducto extends Activity {
 				    	
 				    	String ruta = "/sdcard/DCIM/camara/";	//Ruta del archivo a tratar
 				    	File archivooriginal = new File("/sdcard/DCIM/camara/test.jpg");	//Archivo original			    	
-				    	
 
 						try {
 							//Conexi—n por FTP para subida de imagen
@@ -175,11 +174,9 @@ public class CrearProducto extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// Comprobamos si la imagen viene de la c‡mara (TAKE_PICTURE) o de la
-		// galer’a (SELECT_PICTURE)
+		// Comprobamos si la imagen viene de la c‡mara (TAKE_PICTURE) o de la galer’a (SELECT_PICTURE)
 		if (requestCode == TAKE_PICTURE) {
-			// Si se reciben datos en el intent tenemos una vista previa
-			// (thumbnail)
+			// Si se reciben datos en el intent tenemos una vista previa (thumbnail)
 
 			if (data != null) {
 
