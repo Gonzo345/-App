@@ -88,14 +88,9 @@ public class MostrarProducto extends Activity {
 
 				}
 			});
-<<<<<<< HEAD
-			
-=======
 
-			// CargarImagen("http://menorcapp.net/images/"+id+".jpg",iv);
 			new DownloadImageTask().execute("http://www.menorcapp.net/images/"+id+".jpg");
 
->>>>>>> origin/Aitor
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 			toast("Error al intentar connectar " + e);
