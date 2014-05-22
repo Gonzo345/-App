@@ -1108,7 +1108,6 @@ containing a value of this type.
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
-        public static final int editText1=0x7f050045;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
@@ -1160,6 +1159,7 @@ containing a value of this type.
         public static final int titulo=0x7f050047;
         public static final int top_action_bar=0x7f050020;
         public static final int txalias=0x7f050053;
+        public static final int txamigo=0x7f050045;
         public static final int txpassword=0x7f05004f;
         public static final int txuser=0x7f05004d;
         public static final int up=0x7f050021;
