@@ -24,6 +24,7 @@ public class Login extends ActionBarActivity {
 
 	private EditText txpassword;	//Declarado para capturarlo posteriormente
 	private EditText txuser;
+	private String id="";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class Login extends ActionBarActivity {
 				//Procesado de login en remoto
 				String username = txuser.getText().toString();
 				String password = txpassword.getText().toString();
+				id=username;
 				
 				try {
 					// URL de ejemplo: http://www.menorcapp.net/DEMA/%20login.php?id=gonzo&pass=1234567890
@@ -142,6 +144,7 @@ public class Login extends ActionBarActivity {
 						
 						//Como ha ido todo bien, lanza activity ListarAmigos
 						Intent i = new Intent(Login.this, ListarAmigos.class);
+						i.putExtra("id", id);
 						startActivity(i);
 						toast("1");
 					} else {
