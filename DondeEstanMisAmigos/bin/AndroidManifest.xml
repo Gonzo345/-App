@@ -23,7 +23,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.dondeestanmisamigos.ListarAmigos"
+            android:name="com.example.dondeestanmisamigos.Login"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,7 @@
         </activity>
         <activity android:name="Invitar" >
         </activity>
-        <activity android:name="Login" >
+        <activity android:name="ListarAmigos" >
         </activity>
         <activity android:name="MostrarPosicion" >
         </activity>

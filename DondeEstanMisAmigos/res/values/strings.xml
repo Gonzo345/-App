@@ -18,5 +18,6 @@
     <string name="lbmailfriend"> E-mail del amigo (debe existir) </string>
     <string name="lbinvitaciones"> Estado de las invitaciones </string>
 	<string name="lbenviadas"> Invitaciones enviadas </string>
-	<string name="lbrecibidas"> Invitaciones recibidas </string>    
+	<string name="lbrecibidas"> Invitaciones recibidas </string>
+	<string name="lbalias"> Alias de usuario</string>
 </resources>
