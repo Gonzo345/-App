@@ -2,6 +2,9 @@ package com.example.dondeestanmisamigos;
 
 import java.io.BufferedReader;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
