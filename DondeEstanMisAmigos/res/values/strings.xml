@@ -4,5 +4,8 @@
     <string name="app_name">Donde estan mis amigos</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="tituloamigos">Amigos</string>
+    <string name="btsolicitudes">Solicitudes</string>
+    <string name="btagregar">Añadir contacto</string>
 
 </resources>
