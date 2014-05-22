@@ -41,6 +41,7 @@ public class ListarAmigos extends Activity {
 		}
 		//________________________
 
+		toast(id);
 		// comprobamos si tenemos solicitudes pendientes
 		try {
 			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="+id);
@@ -75,7 +76,9 @@ public class ListarAmigos extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(ListarAmigos.this, Invitar.class);
+				Intent i = new Intent(ListarAmigos.this,
+						Invitar.class);
+				i.putExtra("id",id);
 				startActivity(i);
 			}
 		});
