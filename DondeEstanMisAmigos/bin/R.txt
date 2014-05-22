@@ -247,6 +247,7 @@ int id action_context_bar 0x7f05001d
 int id action_menu_divider 0x7f050016
 int id action_menu_presenter 0x7f050017
 int id action_mode_close_button 0x7f050024
+<<<<<<< HEAD
 int id action_settings 0x7f05004c
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
@@ -257,6 +258,17 @@ int id btregistro 0x7f05004a
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
 int id container 0x7f050044
+=======
+int id action_settings 0x7f050043
+int id activity_chooser_view_content 0x7f050025
+int id always 0x7f05000b
+int id beginning 0x7f050011
+int id btanadir 0x7f050040
+int id btsolicitudes 0x7f05003f
+int id checkbox 0x7f05002d
+int id collapseActionView 0x7f05000d
+int id container 0x7f050042
+>>>>>>> origin/Aitor
 int id default_activity_button 0x7f050028
 int id dialog 0x7f05000e
 int id disableHome 0x7f050008
@@ -277,6 +289,7 @@ int id lbpassword 0x7f050047
 int id lbtitle 0x7f05004b
 int id lbuser 0x7f050045
 int id listMode 0x7f050001
+int id listView1 0x7f050041
 int id list_item 0x7f050029
 int id middle 0x7f050012
 int id never 0x7f050009
@@ -306,6 +319,7 @@ int id tabMode 0x7f050002
 int id textView1 0x7f05003e
 int id textView2 0x7f05003f
 int id title 0x7f05002b
+int id titulo 0x7f05003e
 int id top_action_bar 0x7f050020
 int id txpassword 0x7f050048
 int id txuser 0x7f050046
@@ -361,6 +375,7 @@ int string abc_shareactionprovider_share_with 0x7f0a000c
 int string abc_shareactionprovider_share_with_application 0x7f0a000b
 int string action_settings 0x7f0a000f
 int string app_name 0x7f0a000d
+<<<<<<< HEAD
 int string enviarinvit 0x7f0a0017
 int string hello_world 0x7f0a000e
 int string iniciar 0x7f0a0012
@@ -370,6 +385,12 @@ int string registrar 0x7f0a0013
 int string registro_title 0x7f0a0015
 int string usuario 0x7f0a0010
 int string usuario_registro 0x7f0a0014
+=======
+int string btagregar 0x7f0a0012
+int string btsolicitudes 0x7f0a0011
+int string hello_world 0x7f0a000e
+int string tituloamigos 0x7f0a0010
+>>>>>>> origin/Aitor
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008c
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f0b0063
