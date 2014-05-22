@@ -37,6 +37,7 @@ public class Invitar extends Activity {
 				    id= (String) savedInstanceState.getSerializable("id");
 				}
 
+				toast(id);
 		
 		btenviar = (Button)findViewById(R.id.btenviar);
 		
@@ -52,6 +53,7 @@ public class Invitar extends Activity {
 	
 	public void CogerResultadoPHP(String url) throws Exception {
 		BufferedReader in = null;
+		toast(url);
 		try {
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(url, new AsyncHttpResponseHandler() {
@@ -74,6 +76,7 @@ public class Invitar extends Activity {
 
 						// Como ha ido todo bien, lanza activity ListarAmigos
 						Intent i = new Intent(Invitar.this, EstadoInvitaciones.class);
+						i.putExtra("id",id);
 						startActivity(i);
 						toast("Invitaci—n registrada con Žxito");
 					} else {
@@ -102,7 +105,7 @@ public class Invitar extends Activity {
 			
 			// URL ejemplo
 			// http://www.menorcapp.net/dema/crearinvitacion.php?emisor=andorid&receptor=gonzo
-			CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?emisor="
+			CogerResultadoPHP("http://www.menorcapp.net/dema/crearinvitacionz.php?emisor="
 					+ id + "&receptor=" + amigo);
 			Log.e("Emisor", id);
 			Log.e("Receptor", amigo);
