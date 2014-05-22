@@ -80,21 +80,6 @@ public class Registro extends Activity {
 					} catch (Exception e) {
 
 					}
-<<<<<<< HEAD
-=======
-
-//					// Si va bien devuelve 1
-//					if (response.equals("1")) {
-//
-//						// Como ha ido todo bien, lanza activity ListarAmigos
-//						Intent i = new Intent(Registro.this, Login.class);
-//						startActivity(i);
-//						toast("1. Registrado con Žxito");
-//					} else {
-//						// Si va mal devuelve 0
-//						toast("0");
-//					}
->>>>>>> origin/Aitor
 					
 					switch(Integer.parseInt(response))
 					{
@@ -117,9 +102,7 @@ public class Registro extends Activity {
 							toast("WTF?");
 							break;
 					}
-					
-					
-<<<<<<< HEAD
+				
 
 //					// Si va bien devuelve 1
 //					if (response.equals("1")) {
@@ -132,8 +115,7 @@ public class Registro extends Activity {
 //						// Si va mal devuelve 0
 //						toast("El usuario ya existe. Elige otro");
 //					}
-=======
->>>>>>> origin/Aitor
+
 				}
 			});
 

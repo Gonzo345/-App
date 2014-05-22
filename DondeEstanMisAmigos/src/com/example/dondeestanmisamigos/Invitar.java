@@ -104,6 +104,8 @@ public class Invitar extends Activity {
 			// http://www.menorcapp.net/dema/crearinvitacion.php?emisor=andorid&receptor=gonzo
 			CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?emisor="
 					+ id + "&receptor=" + amigo);
+			Log.e("Emisor", id);
+			Log.e("Receptor", amigo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
