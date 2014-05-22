@@ -102,10 +102,12 @@ public class Invitar extends Activity {
 			
 			// URL ejemplo
 			// http://www.menorcapp.net/dema/crearinvitacion.php?emisor=andorid&receptor=gonzo
+			String URLt = "http://www.menorcapp.net/dema/registro.php?emisor="
+					+ id + "&receptor=" + amigo;
 			CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?emisor="
 					+ id + "&receptor=" + amigo);
-			Log.e("Emisor", id);
-			Log.e("Receptor", amigo);
+			toast(URLt);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
