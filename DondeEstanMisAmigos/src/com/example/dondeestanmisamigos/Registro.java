@@ -81,17 +81,41 @@ public class Registro extends Activity {
 
 					}
 
-					// Si va bien devuelve 1
-					if (response.equals("1")) {
-
-						// Como ha ido todo bien, lanza activity ListarAmigos
-						Intent i = new Intent(Registro.this, Login.class);
-						startActivity(i);
-						toast("1. Registrado con Žxito");
-					} else {
-						// Si va mal devuelve 0
-						toast("0");
+//					// Si va bien devuelve 1
+//					if (response.equals("1")) {
+//
+//						// Como ha ido todo bien, lanza activity ListarAmigos
+//						Intent i = new Intent(Registro.this, Login.class);
+//						startActivity(i);
+//						toast("1. Registrado con Žxito");
+//					} else {
+//						// Si va mal devuelve 0
+//						toast("0");
+//					}
+					
+					switch(Integer.parseInt(response))
+					{
+						case 0:
+							toast("ERROR - No se ha podido insertar");
+							break;
+							
+						case 1:
+							Intent i = new Intent(Registro.this, Login.class);
+							startActivity(i);
+							
+							toast("Se ha registrado correctamente");
+							break;
+							
+						case 3:
+							toast("Este usuario ya existe. Elige otro");
+							break;
+							
+						default:
+							toast("WTF?");
+							break;
 					}
+					
+					
 				}
 			});
 

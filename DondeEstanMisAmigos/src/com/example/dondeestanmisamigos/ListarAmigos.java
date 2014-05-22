@@ -19,6 +19,7 @@ public class ListarAmigos extends Activity {
 
 	private Button btsolicitudes, btanadir;
 	private ListView listaamigos;
+	private String id="";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,17 +27,30 @@ public class ListarAmigos extends Activity {
 
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
 		btanadir = (Button) findViewById(R.id.btanadir);
+		
+		//_______ Recuperamos el putextra_____________
+		if (savedInstanceState == null) {
+		    savedInstanceState = getIntent().getExtras();
+		    if(savedInstanceState == null) {
+		        id= null;
+		    } else {
+		        id= savedInstanceState.getString("id");
+		    }
+		} else {
+		    id= (String) savedInstanceState.getSerializable("id");
+		}
+		//________________________
 
 		// comprobamos si tenemos solicitudes pendientes
 		try {
-			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email=aitorcosta@gmail.com");
+			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="+id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		try {
-			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email=aitorcosta@gmail.com");
+			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email="+id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,6 +64,7 @@ public class ListarAmigos extends Activity {
 
 				Intent i = new Intent(ListarAmigos.this,
 						EstadoInvitaciones.class);
+				i.putExtra("id",id);
 				startActivity(i);
 
 			}
