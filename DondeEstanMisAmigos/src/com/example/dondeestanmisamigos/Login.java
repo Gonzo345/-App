@@ -1,14 +1,21 @@
 package com.example.dondeestanmisamigos;
 
+import java.io.BufferedReader;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 import android.os.Build;
 
 public class Login extends ActionBarActivity {
@@ -22,6 +29,35 @@ public class Login extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		
+		Button btregistro = (Button)findViewById(R.id.btregistro);
+		Button btlogin = (Button)findViewById(R.id.btlogin);
+		
+		//Al hacer click en Login, si todo est‡ ok nos lleva a ListarAmigos
+		btlogin.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+				
+				
+				Intent i = new Intent(Login.this, ListarAmigos.class);
+				startActivity(i);
+				// finish();
+			}
+		});
+		
+		
+		//Al hacer click en Registro, nos lleva a la activity de registrarse como usuario
+		btregistro.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Login.this, Registro.class);
+				startActivity(i);
+				// finish();
+			}
+		});
 	}
 
 	@Override
@@ -59,6 +95,47 @@ public class Login extends ActionBarActivity {
 					container, false);
 			return rootView;
 		}
+	}
+	
+	public void CogerResultadoPHP(String url) throws Exception {
+		BufferedReader in = null;
+
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(url, new AsyncHttpResponseHandler() {
+				@Override
+				public void onSuccess(String response) {
+					System.out.println(response);
+//					text.setText(response);
+
+					// toast(response);
+
+					try {
+
+						int ini = response.indexOf("1");
+						response = response.substring(ini, ini + 1);
+
+					} catch (Exception e) {
+
+					}
+
+					if (response.equals("1")) {
+						toast("1");
+					} else {
+						toast("0");
+					}
+				}
+			});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+//			text.append(" ERROR ");
+		}
+	}
+	
+	public void toast(String msg){
+		Toast.makeText(Login.this, msg, Toast.LENGTH_LONG).show();
 	}
 
 }
