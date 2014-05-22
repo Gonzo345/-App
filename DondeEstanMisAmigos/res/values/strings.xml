@@ -4,7 +4,6 @@
     <string name="app_name">Donde estan mis amigos</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-<<<<<<< HEAD
     <string name="usuario"> Usuario </string>
     <string name="pass"> Password </string>
     <string name="iniciar"> Iniciar sesión </string>
@@ -13,10 +12,11 @@
     <string name="registro_title"> Registro de usuario </string>
     <string name="invitar_title"> Invitar a amigo </string>
     <string name="enviarinvit"> Enviar invitación </string>
-=======
     <string name="tituloamigos">Amigos</string>
     <string name="btsolicitudes">Solicitudes</string>
     <string name="btagregar">Añadir contacto</string>
->>>>>>> origin/Aitor
-
+    <string name="lbmailfriend"> E-mail del amigo (debe existir) </string>
+    <string name="lbinvitaciones"> Estado de las invitaciones </string>
+	<string name="lbenviadas"> Invitaciones enviadas </string>
+	<string name="lbrecibidas"> Invitaciones recibidas </string>    
 </resources>

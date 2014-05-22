@@ -58,20 +58,22 @@
 
                 <Button
                     android:id="@+id/btlogin"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:text="@string/iniciar" />
 
                 <Button
                     android:id="@+id/btregistro"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:text="@string/registrar" />
             </LinearLayout>
 

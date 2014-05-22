@@ -14,9 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-
+            
+            
             <TextView
-<<<<<<< HEAD
                 android:id="@+id/lbinvitar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:text="Medium Text"
+                android:text="@string/lbmailfriend"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -51,41 +51,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:text="@string/enviarinvit" />
-=======
-                android:id="@+id/titulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/tituloamigos"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" >
-
-                <Button
-                    android:id="@+id/btsolicitudes"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/btsolicitudes" />
-
-                <Button
-                    android:id="@+id/btanadir"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btagregar" />
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/listView1"
-                android:layout_width="match_parent"
-                android:layout_height="316dp" >
-            </ListView>
->>>>>>> origin/Aitor
 
         </LinearLayout>
     </ScrollView>

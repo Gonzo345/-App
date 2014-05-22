@@ -16,22 +16,47 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/lbtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:text="Medium Text"
+                android:text="@string/lbinvitaciones"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/lbrecibidas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:text="Medium Text"
+                android:text="@string/lbrecibidas"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ListView
+                android:id="@+id/listrecibidas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" >
+
+            </ListView>
+
+            <TextView
+                android:id="@+id/lbenviadas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/lbenviadas"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ListView
+                android:id="@+id/listenviadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" >
+
+            </ListView>
 
         </LinearLayout>
     </ScrollView>
