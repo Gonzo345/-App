@@ -15,84 +15,112 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Registro extends Activity{
-	
-	private EditText txpassword;	//Declarado para capturarlo posteriormente
-	private EditText txuser;
-	private EditText txalias;
-	
+public class Registro extends Activity {
+
+	private EditText txpassword, txuser, txalias;
+	private Button btregistro;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registro);
-		
-		Button btregistro = (Button)findViewById(R.id.btsolicitudes);
-		txuser = (EditText)findViewById(R.id.txuser);
-		txpassword = (EditText)findViewById(R.id.txpassword);
-		txalias = (EditText)findViewById(R.id.txalias);
+
+		btregistro = (Button) findViewById(R.id.btregistro);
+		txuser = (EditText) findViewById(R.id.txuser);
+		txpassword = (EditText) findViewById(R.id.txpassword);
+		txalias = (EditText) findViewById(R.id.txalias);
+
+		// btregistro.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// try {
+		//
+		// // Registro de usuario en servidor remoto
+		// String username = txuser.getText().toString();
+		// String password = txpassword.getText().toString();
+		// String alias = txalias.getText().toString();
+		//
+		// // URL ejemplo
+		// http://www.menorcapp.net/dema/registro.php?email=userprueba&pass=prueba&alias=prueba
+		// CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?email="
+		// + username + "&pass=" + password + "&alias=" + alias);
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
+		// });
 		
 		btregistro.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				try {
-					
-					// Registro de usuario en servidor remoto
-					String username = txuser.getText().toString();
-					String password = txpassword.getText().toString();
-					String alias = txalias.getText().toString();
-					
-					// URL ejemplo http://www.menorcapp.net/dema/registro.php?email=userprueba&pass=prueba&alias=prueba
-					CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?email=" + username + "&pass=" + password + "&alias=" + alias);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Registrar();
 			}
 		});
 
+
 	}
-	
-	//MŽtodo para procesado en remoto
+
+	// MŽtodo para procesado en remoto
 	public void CogerResultadoPHP(String url) throws Exception {
 		BufferedReader in = null;
 		try {
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(url, new AsyncHttpResponseHandler() {
-			
-			@Override
-			public void onSuccess(String response) {
-			System.out.println(response);
 
-			try {
-				int ini = response.indexOf("1");
-				response = response.substring(ini, ini + 1);
+				@Override
+				public void onSuccess(String response) {
+					System.out.println(response);
 
-			} catch (Exception e) {
-						
-			}
+					try {
+						int ini = response.indexOf("1");
+						response = response.substring(ini, ini + 1);
 
-			//Si va bien devuelve 1
-			if (response.equals("1")) {
-							
-				//Como ha ido todo bien, lanza activity ListarAmigos
-				Intent i = new Intent(Registro.this, Login.class);
-				startActivity(i);
-				toast("1. Registrado con Žxito");
-			} else {		
-				//Si va mal devuelve 0
-				toast("0");
-				}
+					} catch (Exception e) {
+
 					}
-				});
 
-			} catch (Exception e) {
-				Log.e("log_tag", "Error in http connection " + e.toString());
-//				text.append(" ERROR ");
-			}
+					// Si va bien devuelve 1
+					if (response.equals("1")) {
+
+						// Como ha ido todo bien, lanza activity ListarAmigos
+						Intent i = new Intent(Registro.this, Login.class);
+						startActivity(i);
+						toast("1. Registrado con Žxito");
+					} else {
+						// Si va mal devuelve 0
+						toast("0");
+					}
+				}
+			});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+			// text.append(" ERROR ");
 		}
-		
-		public void toast(String msg){
-			Toast.makeText(Registro.this, msg, Toast.LENGTH_LONG).show();
+	}
+
+	public void toast(String msg) {
+		Toast.makeText(Registro.this, msg, Toast.LENGTH_LONG).show();
+	}
+
+	public void Registrar() {
+		try {
+
+			// Registro de usuario en servidor remoto
+			String username = txuser.getText().toString();
+			String password = txpassword.getText().toString();
+			String alias = txalias.getText().toString();
+
+			// URL ejemplo
+			// http://www.menorcapp.net/dema/registro.php?email=userprueba&pass=prueba&alias=prueba
+			CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?email="
+					+ username + "&pass=" + password + "&alias=" + alias);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
 
 }

@@ -2,30 +2,29 @@ package com.example.dondeestanmisamigos;
 
 import java.io.BufferedReader;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.os.Build;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class Login extends ActionBarActivity {
 
 	private EditText txpassword;	//Declarado para capturarlo posteriormente
 	private EditText txuser;
+	private String id="";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +50,7 @@ public class Login extends ActionBarActivity {
 				//Procesado de login en remoto
 				String username = txuser.getText().toString();
 				String password = txpassword.getText().toString();
+				id=username;
 				
 				try {
 					// URL de ejemplo: http://www.menorcapp.net/DEMA/%20login.php?id=gonzo&pass=1234567890
@@ -144,6 +144,7 @@ public class Login extends ActionBarActivity {
 						
 						//Como ha ido todo bien, lanza activity ListarAmigos
 						Intent i = new Intent(Login.this, ListarAmigos.class);
+						i.putExtra("id", id);
 						startActivity(i);
 						toast("1");
 					} else {

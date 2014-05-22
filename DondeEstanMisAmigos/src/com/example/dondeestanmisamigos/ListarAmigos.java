@@ -3,6 +3,7 @@ package com.example.dondeestanmisamigos;
 import java.io.BufferedReader;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,35 +16,58 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class ListarAmigos extends Activity {
-	
+
 	private Button btsolicitudes, btanadir;
 	private ListView listaamigos;
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listaramigos);
-		
-		btsolicitudes= (Button)findViewById(R.id.btsolicitudes);
-		btanadir= (Button)findViewById(R.id.btanadir);
-		
-		
-		
+
+		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
+		btanadir = (Button) findViewById(R.id.btanadir);
+
+		// comprobamos si tenemos solicitudes pendientes
+		try {
+			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email=aitorcosta@gmail.com");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email=aitorcosta@gmail.com");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Boton que nos lleva a las solicitudes pendientes
 		btsolicitudes.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				try {
-					CogerResultadoPHP("http://www.menorcapp.net/dema/comprovarinvitaciones.php?email=aitorcosta@gmail.com");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
+				Intent i = new Intent(ListarAmigos.this,
+						EstadoInvitaciones.class);
+				startActivity(i);
+
+			}
+		});
+
+		// Boton que no lleva para agregar a un nuevo ususario
+		btanadir.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(ListarAmigos.this, Invitar.class);
+				startActivity(i);
 			}
 		});
 
 	}
-	
-	public void CogerResultadoPHP(String url) throws Exception {
+
+	public void ComprobarSolicitudes(String url) throws Exception {
 		BufferedReader in = null;
 
 		try {
@@ -53,7 +77,7 @@ public class ListarAmigos extends Activity {
 				@Override
 				public void onSuccess(String response) {
 					System.out.println(response);
-//					text.setText(response);
+					// text.setText(response);
 
 					// toast(response);
 
@@ -66,21 +90,51 @@ public class ListarAmigos extends Activity {
 
 					}
 
-					if (response.equals("1")) {
-						toast("1");
-					} else {
+					if (response.equals("0")) {
 						toast("0");
+					} else {
+						toast("Tienes " + response + " soliditudes pendientes");
 					}
 				}
 			});
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
-//			text.append(" ERROR ");
+			// text.append(" ERROR ");
 		}
 	}
-	
-	public void toast(String msg){
+
+	public void ObtenerLista(String url) throws Exception {
+		BufferedReader in = null;
+
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(url, new AsyncHttpResponseHandler() {
+				@Override
+				public void onSuccess(String response) {
+					System.out.println(response);
+					// text.setText(response);
+
+					// toast(response);
+
+					try {
+
+						toast(response);
+
+					} catch (Exception e) {
+
+					}
+				}
+			});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+			// text.append(" ERROR ");
+		}
+	}
+
+	public void toast(String msg) {
 		Toast.makeText(ListarAmigos.this, msg, Toast.LENGTH_LONG).show();
 	}
 
