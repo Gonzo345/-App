@@ -1092,7 +1092,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050052;
+        public static final int action_settings=0x7f050054;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1118,6 +1118,7 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
+        public static final int lbalias=0x7f050052;
         public static final int lbenviadas=0x7f050041;
         public static final int lbinvitar=0x7f050043;
         public static final int lbmail=0x7f050044;
@@ -1158,6 +1159,7 @@ containing a value of this type.
         public static final int title=0x7f05002b;
         public static final int titulo=0x7f050047;
         public static final int top_action_bar=0x7f050020;
+        public static final int txalias=0x7f050053;
         public static final int txpassword=0x7f05004f;
         public static final int txuser=0x7f05004d;
         public static final int up=0x7f050021;
@@ -1275,6 +1277,7 @@ containing a value of this type.
         public static final int hello_world=0x7f0a000e;
         public static final int iniciar=0x7f0a0012;
         public static final int invitar_title=0x7f0a0016;
+        public static final int lbalias=0x7f0a001f;
         public static final int lbenviadas=0x7f0a001d;
         public static final int lbinvitaciones=0x7f0a001c;
         public static final int lbmailfriend=0x7f0a001b;

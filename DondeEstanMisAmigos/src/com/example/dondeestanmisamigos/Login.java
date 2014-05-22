@@ -18,11 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Build;
 
 public class Login extends ActionBarActivity {
 
+	private EditText txpassword;	//Declarado para capturarlo posteriormente
+	private EditText txuser;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,6 +39,8 @@ public class Login extends ActionBarActivity {
 		
 		Button btregistro = (Button)findViewById(R.id.btregistro);
 		Button btlogin = (Button)findViewById(R.id.btlogin);
+		txuser = (EditText)findViewById(R.id.txuser);
+		txpassword = (EditText)findViewById(R.id.txpassword);
 		
 		//Al hacer click en Login, si todo est‡ ok nos lleva a ListarAmigos
 		btlogin.setOnClickListener(new OnClickListener() {
@@ -42,10 +48,19 @@ public class Login extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				
+				//Procesado de login en remoto
+				String username = txuser.getText().toString();
+				String password = txpassword.getText().toString();
+				
+				try {
+					// URL de ejemplo: http://www.menorcapp.net/DEMA/%20login.php?id=gonzo&pass=1234567890
+					CogerResultadoPHP("http://www.menorcapp.net/DEMA/login.php?id="+ username + "&pass=" + password);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				
-				Intent i = new Intent(Login.this, ListarAmigos.class);
-				startActivity(i);
 				// finish();
 			}
 		});
@@ -100,6 +115,7 @@ public class Login extends ActionBarActivity {
 		}
 	}
 	
+	//MŽtodo para procesado en remoto
 	public void CogerResultadoPHP(String url) throws Exception {
 		BufferedReader in = null;
 
@@ -123,9 +139,16 @@ public class Login extends ActionBarActivity {
 
 					}
 
+					//Si va bien devuelve 1
 					if (response.equals("1")) {
+						
+						//Como ha ido todo bien, lanza activity ListarAmigos
+						Intent i = new Intent(Login.this, ListarAmigos.class);
+						startActivity(i);
 						toast("1");
 					} else {
+					
+					//Si va mal devuelve 0
 						toast("0");
 					}
 				}
