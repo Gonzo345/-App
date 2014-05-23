@@ -146,11 +146,11 @@ public class Login extends ActionBarActivity {
 						Intent i = new Intent(Login.this, ListarAmigos.class);
 						i.putExtra("id", id);
 						startActivity(i);
-						toast("1");
+						//toast("1");
 					} else {
 					
 					//Si va mal devuelve 0
-						toast("0");
+						//toast("0");
 					}
 				}
 			});
