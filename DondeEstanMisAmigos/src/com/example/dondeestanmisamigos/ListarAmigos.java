@@ -41,7 +41,7 @@ public class ListarAmigos extends Activity {
 		}
 		//________________________
 
-		toast(id);
+		//toast(id);
 		// comprobamos si tenemos solicitudes pendientes
 		try {
 			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="+id);
@@ -109,7 +109,7 @@ public class ListarAmigos extends Activity {
 					}
 
 					if (response.equals("0")) {
-						toast("0");
+						//toast("0");
 					} else {
 						toast("Tienes " + response + " soliditudes pendientes");
 					}
@@ -134,11 +134,11 @@ public class ListarAmigos extends Activity {
 					System.out.println(response);
 					// text.setText(response);
 
-					// toast(response);
+					// //toast(response);
 
 					try {
 
-						toast(response);
+						//toast(response);
 
 					} catch (Exception e) {
 

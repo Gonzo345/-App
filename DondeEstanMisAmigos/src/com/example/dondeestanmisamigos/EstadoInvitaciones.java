@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,8 +18,10 @@ public class EstadoInvitaciones extends Activity {
 
 	private String id = "";
 	private ListView listrecibidas, listenviadas;
-	private String[] listarec;
-	private String[] listaenv;
+	private String[] listarec = {};
+	private String[] listaenv = {};
+	private String resp_solicitudes, resp_invitaciones;
+	private ArrayAdapter<String> adaptadoruno;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,51 +40,84 @@ public class EstadoInvitaciones extends Activity {
 		}
 		// ________________________
 
+		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
+		adaptadoruno = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_checked, listarec);
+
 		RellenarListas();
 	}
 
 	private void RellenarListas() {
 
-//		String[] listarec;
-//		String[] listaenv;
+		// String[] listarec;
+		// String[] listaenv;
 
 		try {
-			ObtenerSolicitudes("http://www.menorcapp.net/dema/arraysolicitudes.php?id="+ id);
+			ObtenerSolicitudes("http://www.menorcapp.net/dema/arraysolicitudes.php?id="
+					+ id);
+			// toast("final try");
 		} catch (Exception e) {
+			// toast("dins de catch");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			ObtenerSolicitudes("http://www.menorcapp.net/dema/arrayinvitaciones.php?id="+ id);
+			ObtenerInvitaciones("http://www.menorcapp.net/dema/arrayinvitaciones.php?id="
+					+ id);
+			// toast("final try");
 		} catch (Exception e) {
+			// toast("dins de catch");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		for(int a=0; a<listaenv.length;a++){
-//			toast(listaenv[a]);
-//		}
-//		for(int a=0; a<listarec.length;a++){
-//			toast(listarec[a]);
-//		}
 
-		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-		ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_checked, listarec);
-		listrecibidas.setAdapter(adaptadoruno);
-		listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		// // *********************************************
+		// listarec = Parseo(resp_invitaciones);
+		// listaenv = Parseo(resp_solicitudes);
+		// // *********************************************
+		// *********************************************
+		listarec = Parseo(resp_invitaciones);
 
-		listenviadas = (ListView) findViewById(R.id.listenviadas);
-		ArrayAdapter<String> adaptadordos = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_checked, listaenv);
-		listenviadas.setAdapter(adaptadordos);
-		listenviadas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		// *********************************************
 
+		// listrecibidas = (ListView) findViewById(R.id.listrecibidas);
+		// ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_checked, listarec);
+		// listrecibidas.setAdapter(adaptadoruno);
+		// listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		//
+		// listenviadas = (ListView) findViewById(R.id.listenviadas);
+		// ArrayAdapter<String> adaptadordos = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_checked, listaenv);
+		// listenviadas.setAdapter(adaptadordos);
+		// listenviadas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+	}
+
+	private String[] Parseo(String chorizo) {
+
+		// for(String token : chorizo.split(";")){
+		// toast(token);
+		// }
+		String[] trozos = {};
+		int a = 0;
+		for (int j = 0; j < chorizo.lastIndexOf(";"); j++) {
+
+			trozos[a] = chorizo.substring(j, chorizo.indexOf(";"));
+			j = chorizo.indexOf(";");
+			chorizo = chorizo.substring(j, chorizo.lastIndexOf(";"));
+			a++;
+
+		}
+
+		toast(chorizo);
+
+		return null;
 	}
 
 	public void ObtenerSolicitudes(String url) throws Exception {
 		BufferedReader in = null;
-		String [] listasalida;
+		String[] listasalida = {};
 		try {
 
 			AsyncHttpClient client = new AsyncHttpClient();
@@ -90,17 +126,19 @@ public class EstadoInvitaciones extends Activity {
 				public void onSuccess(String response) {
 
 					try {
-						String[] lista;
-						StringTokenizer stresponse = new StringTokenizer(
-								response, ";");
 
-						int a = 0;
-						while (stresponse.hasMoreTokens()) {
-							listarec[a]=stresponse.nextToken();
-							toast(stresponse.nextToken());
-						}
+						resp_solicitudes = response;
+						// toast("dins del try " + response);
+						toast("asignado: " + resp_solicitudes);
+
+						listaenv = Parseo(resp_solicitudes);
+
+						listrecibidas.setAdapter(adaptadoruno);
+						listrecibidas
+								.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 					} catch (Exception e) {
+						// toast("Final del catch onsucces");
 
 					}
 				}
@@ -114,7 +152,7 @@ public class EstadoInvitaciones extends Activity {
 
 	public void ObtenerInvitaciones(String url) throws Exception {
 		BufferedReader in = null;
-		String [] listasalida;
+		String[] listasalida;
 		try {
 
 			AsyncHttpClient client = new AsyncHttpClient();
@@ -123,14 +161,7 @@ public class EstadoInvitaciones extends Activity {
 				public void onSuccess(String response) {
 
 					try {
-						String[] lista;
-						StringTokenizer stresponse = new StringTokenizer(
-								response, ";");
-
-						int a = 0;
-						while (stresponse.hasMoreTokens()) {
-							listaenv[a]=stresponse.nextToken();
-						}
+						resp_invitaciones = response;
 
 					} catch (Exception e) {
 
@@ -143,7 +174,7 @@ public class EstadoInvitaciones extends Activity {
 			// text.append(" ERROR ");
 		}
 	}
-	
+
 	public void toast(String msg) {
 		Toast.makeText(EstadoInvitaciones.this, msg, Toast.LENGTH_LONG).show();
 	}
