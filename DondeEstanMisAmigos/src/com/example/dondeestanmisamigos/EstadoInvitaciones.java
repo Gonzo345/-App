@@ -76,7 +76,6 @@ public class EstadoInvitaciones extends Activity {
 		// listaenv = Parseo(resp_solicitudes);
 		// // *********************************************
 		// *********************************************
-		listarec = Parseo(resp_invitaciones);
 
 		// *********************************************
 
@@ -110,9 +109,9 @@ public class EstadoInvitaciones extends Activity {
 
 		}
 
-		toast(chorizo);
+//		toast(chorizo);
 
-		return null;
+		return trozos;
 	}
 
 	public void ObtenerSolicitudes(String url) throws Exception {
@@ -129,17 +128,24 @@ public class EstadoInvitaciones extends Activity {
 
 						resp_solicitudes = response;
 						// toast("dins del try " + response);
+						toast("1");
 						toast("asignado: " + resp_solicitudes);
+						toast("2");
 
-						listaenv = Parseo(resp_solicitudes);
+						listarec = Parseo(resp_solicitudes);
+						toast("3");
+					
 
 						listrecibidas.setAdapter(adaptadoruno);
+						toast("4");
 						listrecibidas
 								.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+						toast("5");
 
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
-
+						Log.e("peta",e+"");
+						toast("peta");
 					}
 				}
 			});
