@@ -128,6 +128,7 @@ public class EstadoInvitaciones extends Activity {
 					try {
 
 						resp_solicitudes = response;
+						Log.e("Resp_solicitudes!!!", resp_solicitudes);
 						// toast("dins del try " + response);
 						toast("asignado: " + resp_solicitudes);
 
@@ -162,6 +163,8 @@ public class EstadoInvitaciones extends Activity {
 
 					try {
 						resp_invitaciones = response;
+
+						Log.e("Response!!!", response);
 
 					} catch (Exception e) {
 

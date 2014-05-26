@@ -109,12 +109,8 @@ public class Invitar extends Activity {
 			// http://www.menorcapp.net/dema/crearinvitacion.php?emisor=andorid&receptor=gonzo
 			String URLt = "http://www.menorcapp.net/dema/registro.php?emisor="
 					+ id + "&receptor=" + amigo;
-<<<<<<< HEAD
-			
-			CogerResultadoPHP("http://www.menorcapp.net/dema/crearinvitacionz.php?emisor="
-=======
+
 			CogerResultadoPHP("http://www.menorcapp.net/dema/crearinvitacion.php?emisor="
->>>>>>> origin/Aitor
 					+ id + "&receptor=" + amigo);
 			// toast(URLt);
 
