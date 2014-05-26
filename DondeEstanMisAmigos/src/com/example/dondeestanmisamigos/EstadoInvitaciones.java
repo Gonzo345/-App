@@ -39,86 +39,55 @@ public class EstadoInvitaciones extends Activity {
 			id = (String) savedInstanceState.getSerializable("id");
 		}
 		// ________________________
+		RellenarListas();
 
 		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
 		adaptadoruno = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_checked, listarec);
 
-		RellenarListas();
 	}
 
 	private void RellenarListas() {
 
-		// String[] listarec;
-		// String[] listaenv;
-
-		try {
+		try {//obtenemos las solicitudes
 			ObtenerSolicitudes("http://www.menorcapp.net/dema/arraysolicitudes.php?id="
 					+ id);
-			// toast("final try");
 		} catch (Exception e) {
-			// toast("dins de catch");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
+		try {//obtenemos las invitaciones
 			ObtenerInvitaciones("http://www.menorcapp.net/dema/arrayinvitaciones.php?id="
 					+ id);
-			// toast("final try");
 		} catch (Exception e) {
-			// toast("dins de catch");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// // *********************************************
-		// listarec = Parseo(resp_invitaciones);
-		// listaenv = Parseo(resp_solicitudes);
-		// // *********************************************
-		// *********************************************
-
-		// *********************************************
-
-		// listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-		// ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_checked, listarec);
-		// listrecibidas.setAdapter(adaptadoruno);
-		// listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		//
-		// listenviadas = (ListView) findViewById(R.id.listenviadas);
-		// ArrayAdapter<String> adaptadordos = new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_checked, listaenv);
-		// listenviadas.setAdapter(adaptadordos);
-		// listenviadas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 	}
 
 	private String[] Parseo(String chorizo) {
 
-		// for(String token : chorizo.split(";")){
-		// toast(token);
-		// }
-		String[] trozos = {};
-		int a = 0;
-		for (int j = 0; j < chorizo.lastIndexOf(";"); j++) {
-
-			trozos[a] = chorizo.substring(j, chorizo.indexOf(";"));
-			j = chorizo.indexOf(";");
-			chorizo = chorizo.substring(j, chorizo.lastIndexOf(";"));
-			a++;
-
+		//Controlamos en numero de caracteres que pasamos en el response
+		int contador=0;
+		for(int j =0; j<chorizo.length();j++){
+			if(chorizo.charAt(j)==';'){
+				contador++;
+			}
 		}
-
-//		toast(chorizo);
+		
+		String trozos[]= new String[contador];
+		
+		for (int j = 0; j < contador; j++) {
+			trozos[contador-1] = chorizo.split(";").toString();
+			chorizo = chorizo.substring(chorizo.indexOf(";"),
+					chorizo.lastIndexOf(";"));
+		}
 
 		return trozos;
 	}
 
 	public void ObtenerSolicitudes(String url) throws Exception {
-		BufferedReader in = null;
-		String[] listasalida = {};
-		try {
 
+		try {
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(url, new AsyncHttpResponseHandler() {
 				@Override
@@ -128,37 +97,36 @@ public class EstadoInvitaciones extends Activity {
 
 						resp_solicitudes = response;
 						// toast("dins del try " + response);
-						toast("1");
 						toast("asignado: " + resp_solicitudes);
-						toast("2");
-
+						
 						listarec = Parseo(resp_solicitudes);
-						toast("3");
-					
-
-						listrecibidas.setAdapter(adaptadoruno);
-						toast("4");
-						listrecibidas
-								.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-						toast("5");
+						
+						CargarSolicitudes(listarec);
 
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
-						Log.e("peta",e+"");
+						Log.e("peta", e + "");
 						toast("peta");
 					}
 				}
+
 			});
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
-			// text.append(" ERROR ");
 		}
 	}
 
+	private void CargarSolicitudes(String[] solicitudes) {
+
+		ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
+				 android.R.layout.simple_list_item_checked, solicitudes);
+				 listrecibidas.setAdapter(adaptadoruno);
+				 listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		
+	}
 	public void ObtenerInvitaciones(String url) throws Exception {
-		BufferedReader in = null;
-		String[] listasalida;
+
 		try {
 
 			AsyncHttpClient client = new AsyncHttpClient();
@@ -177,7 +145,6 @@ public class EstadoInvitaciones extends Activity {
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
-			// text.append(" ERROR ");
 		}
 	}
 
