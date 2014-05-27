@@ -64,7 +64,7 @@ public class EstadoInvitaciones extends Activity {
 				//Procesado de rechazar en remoto
 				SparseBooleanArray seleccionados = listrecibidas.getCheckedItemPositions();
 				
-				aceptarSeleccionados(seleccionados);
+				rechazarSeleccionados(seleccionados);
 				
 //				id=username;
 //				
@@ -116,13 +116,21 @@ public class EstadoInvitaciones extends Activity {
                 	// Toast.makeText(this, "Vuelta empezada", Toast.LENGTH_SHORT).show();	
                 	
                 	//Valor de la fila
-                    resultado.append(listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString()+"   ----------->  "+seleccionados.keyAt(i)+"\n");
+                    resultado.append(listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString()+"   ----------->  "+seleccionados.keyAt(i));
             
                     //Texto del emisor a aceptarle la invitaci—n
                     String invitacionde = listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString();
                     // Conectamos al server y le pasamos el valor de la ListView marcados
                     try {
-						CogerResultadoPHP("http://www.menorcapp.net/crearamistad.php?email1=" + id + "&email2=" + invitacionde);
+                    	toast("ID = " + id);
+                    	
+                    	System.out.println(invitacionde.contains("\n"));
+                    	
+                    	//Nos cargamos los saltos de l’nea que nos matan la inserci—n
+                    	invitacionde = invitacionde.replaceAll("\\n", "");
+                    	System.out.println(invitacionde.contains("\n"));
+                    	toast("Invitacionde = " + invitacionde);
+						CogerResultadoPHP("http://www.menorcapp.net/dema/crearamistad.php?email1=" + id + "&email2=" + invitacionde);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -155,14 +163,22 @@ public class EstadoInvitaciones extends Activity {
             	// Toast.makeText(this, "Vuelta empezada", Toast.LENGTH_SHORT).show();	
             	
             	//Valor de la fila
-                resultado.append(listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString()+"   ----------->  "+seleccionados.keyAt(i)+"\n");
+                resultado.append(listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString()+"   ----------->  "+seleccionados.keyAt(i));
         
                 //Texto del emisor a aceptarle la invitaci—n
                 String invitacionde = listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString();
                 
                 // Conectamos al server y le pasamos el valor de la ListView marcados
                 try {
-					CogerResultadoPHP("http://www.menorcapp.net/crearamistad.php?email1=" + id + "&email2=" + invitacionde + "&cancelar=si");
+                	toast("ID = " + id);
+                	
+                	System.out.println(invitacionde.contains("\n"));
+                	
+                	//Nos cargamos los saltos de l’nea que nos matan la inserci—n
+                	invitacionde = invitacionde.replaceAll("\\n", "");
+                	System.out.println(invitacionde.contains("\n"));
+                	toast("Invitacionde = " + invitacionde);
+					CogerResultadoPHP("http://www.menorcapp.net/dema/crearamistad.php?email1=" + id + "&email2=" + invitacionde + "&cancelar=si");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -250,7 +266,6 @@ public class EstadoInvitaciones extends Activity {
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
-//			text.append(" ERROR ");
 		}
 	}
 
