@@ -93,6 +93,7 @@ public class EstadoInvitaciones extends Activity {
 		
 		RellenarListas();
 
+<<<<<<< HEAD
 	}
 	
 	public void aceptarSeleccionados(SparseBooleanArray seleccionados) {
@@ -175,6 +176,10 @@ public class EstadoInvitaciones extends Activity {
     }
 	}
 	
+=======
+
+	}
+>>>>>>> origin/Aitor
 	public void CargarSolicitudes() {
 
 		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
@@ -291,8 +296,11 @@ public class EstadoInvitaciones extends Activity {
 					try {
 
 						resp_solicitudes = response;
+<<<<<<< HEAD
 						// toast("dins del try " + response);
 						//toast("asignado: " + resp_solicitudes);
+=======
+>>>>>>> origin/Aitor
 
 						listarec = Parseo(resp_solicitudes);
 
@@ -324,11 +332,19 @@ public class EstadoInvitaciones extends Activity {
 						resp_invitaciones = response;
 						// toast("dins del try " + response);
 						//toast("asignado: " + resp_invitaciones);
+<<<<<<< HEAD
 
 						listaenv = Parseo(resp_invitaciones);
 
 						CargarInvitaciones();
 
+=======
+
+						listaenv = Parseo(resp_invitaciones);
+
+						CargarInvitaciones();
+
+>>>>>>> origin/Aitor
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
 						Log.e("peta", e + "");

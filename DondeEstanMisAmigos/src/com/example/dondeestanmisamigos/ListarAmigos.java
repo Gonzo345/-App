@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -19,39 +22,41 @@ public class ListarAmigos extends Activity {
 
 	private Button btsolicitudes, btanadir;
 	private ListView listaamigos;
-	private String id="";
+	private String[] lista = {};
+	private String id = "", resp_amigos="";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listaramigos);
 
+		listaamigos = (ListView) findViewById(R.id.listView1);
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
 		btanadir = (Button) findViewById(R.id.btanadir);
-		
-		//_______ Recuperamos el putextra_____________
-		if (savedInstanceState == null) {
-		    savedInstanceState = getIntent().getExtras();
-		    if(savedInstanceState == null) {
-		        id= null;
-		    } else {
-		        id= savedInstanceState.getString("id");
-		    }
-		} else {
-		    id= (String) savedInstanceState.getSerializable("id");
-		}
-		//________________________
 
-		//toast(id);
-		// comprobamos si tenemos solicitudes pendientes
+		// _______ Recuperamos el putextra_____________
+		if (savedInstanceState == null) {
+			savedInstanceState = getIntent().getExtras();
+			if (savedInstanceState == null) {
+				id = null;
+			} else {
+				id = savedInstanceState.getString("id");
+			}
+		} else {
+			id = (String) savedInstanceState.getSerializable("id");
+		}
+		// ________________________
+
 		try {
-			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="+id);
+			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="
+					+ id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		try {
-			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email="+id);
+			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email="
+					+ id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +70,7 @@ public class ListarAmigos extends Activity {
 
 				Intent i = new Intent(ListarAmigos.this,
 						EstadoInvitaciones.class);
-				i.putExtra("id",id);
+				i.putExtra("id", id);
 				startActivity(i);
 
 			}
@@ -76,13 +81,20 @@ public class ListarAmigos extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(ListarAmigos.this,
-						Invitar.class);
-				i.putExtra("id",id);
+				Intent i = new Intent(ListarAmigos.this, Invitar.class);
+				i.putExtra("id", id);
 				startActivity(i);
 			}
 		});
-
+		
+		//tratamos la selecci—n de un contacto al clicar en Žl
+		listaamigos.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
+			    {
+			      String selectedFromList = (listaamigos.getItemAtPosition(position).toString());
+			      toast(selectedFromList);
+			    }});
+		
 	}
 
 	public void ComprobarSolicitudes(String url) throws Exception {
@@ -109,7 +121,7 @@ public class ListarAmigos extends Activity {
 					}
 
 					if (response.equals("0")) {
-						//toast("0");
+						// toast("0");
 					} else {
 						toast("Tienes " + response + " soliditudes pendientes");
 					}
@@ -132,16 +144,18 @@ public class ListarAmigos extends Activity {
 				@Override
 				public void onSuccess(String response) {
 					System.out.println(response);
-					// text.setText(response);
-
-					// //toast(response);
-
 					try {
 
-						//toast(response);
+						resp_amigos = response;
+
+						lista = Parseo(resp_amigos);
+
+						CargarSolicitudes();
 
 					} catch (Exception e) {
-
+						// toast("Final del catch onsucces");
+						Log.e("peta", e + "");
+						// toast("peta por " + e);
 					}
 				}
 			});
@@ -150,6 +164,38 @@ public class ListarAmigos extends Activity {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 			// text.append(" ERROR ");
 		}
+	}
+	public void CargarSolicitudes() {
+
+//		listaamigos = (ListView) findViewById(R.id.listView1);
+		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, lista);
+
+		listaamigos.setAdapter(adaptador);
+		listaamigos.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+	}
+	
+	private String[] Parseo(String chorizo) {
+
+		// Controlamos en numero de caracteres que pasamos en el response
+		int contador = 0;
+		for (int j = 0; j < chorizo.length(); j++) {
+			if (chorizo.charAt(j) == ';') {
+				contador++;
+			}
+		}
+
+		String trozos[] = new String[contador];
+
+		for (int j = 0; j < contador; j++) {
+			trozos[j] = chorizo.substring(0, chorizo.indexOf(";"));
+
+			chorizo = chorizo.substring(chorizo.indexOf(";") + 1,
+					chorizo.lastIndexOf(";") + 1);
+		}
+		
+		return trozos;
 	}
 
 	public void toast(String msg) {
