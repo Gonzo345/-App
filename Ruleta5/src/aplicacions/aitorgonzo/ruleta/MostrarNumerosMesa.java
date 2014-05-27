@@ -62,14 +62,10 @@ public class MostrarNumerosMesa extends Analytics{
 				SparseBooleanArray seleccionados = listnumeros.getCheckedItemPositions();
 				
 				EliminarSeleccionados(seleccionados, IdRuletaDeterminada);
-				
-				
 			}
 
 		});
 
-
-		
 	}
 
 	public void EliminarSeleccionados(SparseBooleanArray seleccionados, String num_id_concreto) {

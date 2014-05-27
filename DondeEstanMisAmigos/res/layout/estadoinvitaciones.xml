@@ -9,6 +9,7 @@
         android:id="@+id/lbtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:text="@string/lbinvitaciones"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -17,7 +18,7 @@
         android:id="@+id/lbrecibidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="@string/lbrecibidas"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -25,8 +26,29 @@
         android:id="@+id/listrecibidas"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="15dp" >
     </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btaceptar"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btaceptar" />
+
+        <Button
+            android:id="@+id/btrechazar"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btrechazar" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/lbenviadas"
@@ -39,8 +61,8 @@
     <ListView
         android:id="@+id/listenviadas"
         android:layout_width="match_parent"
-        android:layout_height="139dp"
-        android:layout_marginTop="20dp" >
+        android:layout_height="128dp"
+        android:layout_marginTop="15dp" >
     </ListView>
 
 </LinearLayout>

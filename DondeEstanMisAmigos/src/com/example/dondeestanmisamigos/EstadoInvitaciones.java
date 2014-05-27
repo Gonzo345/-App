@@ -1,9 +1,16 @@
 package com.example.dondeestanmisamigos;
 
+import java.io.BufferedReader;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +29,55 @@ public class EstadoInvitaciones extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.estadoinvitaciones);
+		
+		// Botones de aceptar y rechazar invitaci—n
+		Button btaceptar = (Button)findViewById(R.id.btaceptar);
+		Button btrechazar = (Button)findViewById(R.id.btrechazar);
+		
+		btaceptar.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+				//Procesado de aceptar en remoto
+				SparseBooleanArray seleccionados = listrecibidas.getCheckedItemPositions();
+				
+				aceptarSeleccionados(seleccionados);
+//				id=username;
+//				
+//				try {
+//					// URL de ejemplo: http://www.menorcapp.net/DEMA/%20login.php?id=gonzo&pass=1234567890
+//					CogerResultadoPHP("http://www.menorcapp.net/DEMA/login.php?id="+ username + "&pass=" + password);
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				
+			}
+		});
+		
+		btrechazar.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+				//Procesado de rechazar en remoto
+				SparseBooleanArray seleccionados = listrecibidas.getCheckedItemPositions();
+				
+				aceptarSeleccionados(seleccionados);
+				
+//				id=username;
+//				
+//				try {
+//					// URL de ejemplo: http://www.menorcapp.net/DEMA/%20login.php?id=gonzo&pass=1234567890
+//					CogerResultadoPHP("http://www.menorcapp.net/DEMA/login.php?id="+ username + "&pass=" + password);
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				
+			}
+		});
 
 		// _______ Recuperamos el putextra_____________
 		if (savedInstanceState == null) {
@@ -34,22 +90,92 @@ public class EstadoInvitaciones extends Activity {
 		} else {
 			id = (String) savedInstanceState.getSerializable("id");
 		}
-		// ________________________
+		
 		RellenarListas();
-<<<<<<< HEAD
-
-		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-//		adaptadoruno = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_checked, listarec);
-
-=======
-
-//		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-//		adaptadoruno = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_checked, listarec);
 
 	}
-	public void RecuperarCesta() {
+	
+	public void aceptarSeleccionados(SparseBooleanArray seleccionados) {
+		// MŽtodo para aceptar invitaciones
+		
+			if(seleccionados == null || seleccionados.size() == 0){
+				// Si no se ha marcado ninguno
+				toast("No hay invitaciones a aceptar");
+			}
+			else{
+            // Si se han seleccionado, miro sus valores
+            //Esto es para ir creando un mensaje largo que mostrar‡ al final
+            StringBuilder resultado=new StringBuilder();
+ 
+            //Recorro mi "array" de elementos seleccionados
+            final int size=seleccionados.size();
+            for (int i=0; i<size; i++) {
+                //Si valueAt(i) es true, es que estaba seleccionado
+                if (seleccionados.valueAt(i)) {
+                    // en keyAt(i) obtengo su posici—n
+                	// Toast.makeText(this, "Vuelta empezada", Toast.LENGTH_SHORT).show();	
+                	
+                	//Valor de la fila
+                    resultado.append(listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString()+"   ----------->  "+seleccionados.keyAt(i)+"\n");
+            
+                    //Texto del emisor a aceptarle la invitaci—n
+                    String invitacionde = listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString();
+                    // Conectamos al server y le pasamos el valor de la ListView marcados
+                    try {
+						CogerResultadoPHP("http://www.menorcapp.net/crearamistad.php?email1=" + id + "&email2=" + invitacionde);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                    
+                }
+            }
+            //Actualizamos resultados en el activity
+            RellenarListas();
+        }
+	}
+	
+	public void rechazarSeleccionados(SparseBooleanArray seleccionados) {
+		// MŽtodo para rechazar invitaciones
+		if(seleccionados == null || seleccionados.size() == 0){
+			// Si no se ha marcado ninguno
+			toast("No hay invitaciones a rechazar");
+		}
+		else{
+        // Si se han seleccionado, miro sus valores
+        // Esto es para ir creando un mensaje largo que mostrar‡ al final
+        StringBuilder resultado=new StringBuilder();
+
+        //Recorro mi "array" de elementos seleccionados
+        final int size=seleccionados.size();
+        for (int i=0; i<size; i++) {
+            //Si valueAt(i) es true, es que estaba seleccionado
+            if (seleccionados.valueAt(i)) {
+                // en keyAt(i) obtengo su posici—n
+            	// Toast.makeText(this, "Vuelta empezada", Toast.LENGTH_SHORT).show();	
+            	
+            	//Valor de la fila
+                resultado.append(listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString()+"   ----------->  "+seleccionados.keyAt(i)+"\n");
+        
+                //Texto del emisor a aceptarle la invitaci—n
+                String invitacionde = listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString();
+                
+                // Conectamos al server y le pasamos el valor de la ListView marcados
+                try {
+					CogerResultadoPHP("http://www.menorcapp.net/crearamistad.php?email1=" + id + "&email2=" + invitacionde + "&cancelar=si");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                
+            }
+        }
+        //Actualizamos resultados en el activity
+        RellenarListas();
+    }
+	}
+	
+	public void CargarSolicitudes() {
 
 		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
 		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
@@ -58,26 +184,27 @@ public class EstadoInvitaciones extends Activity {
 		listrecibidas.setAdapter(adaptador);
 		listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
->>>>>>> origin/Aitor
+	}
+	public void CargarInvitaciones() {
+		
+		listenviadas = (ListView) findViewById(R.id.listenviadas);
+		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, listaenv);
+		
+		listenviadas.setAdapter(adaptador);
+//		listenviadas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		
 	}
 
 	private void RellenarListas() {
 
-<<<<<<< HEAD
-		try {//obtenemos las solicitudes
-=======
 		try {// obtenemos las solicitudes
->>>>>>> origin/Aitor
 			ObtenerSolicitudes("http://www.menorcapp.net/dema/arraysolicitudes.php?id="
 					+ id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-		try {//obtenemos las invitaciones
-=======
 		try {// obtenemos las invitaciones
->>>>>>> origin/Aitor
 			ObtenerInvitaciones("http://www.menorcapp.net/dema/arrayinvitaciones.php?id="
 					+ id);
 		} catch (Exception e) {
@@ -85,31 +212,50 @@ public class EstadoInvitaciones extends Activity {
 		}
 
 	}
+	
+	public void CogerResultadoPHP(String url) throws Exception {
+		BufferedReader in = null;
+
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(url, new AsyncHttpResponseHandler() {
+				@Override
+				public void onSuccess(String response) {
+					System.out.println(response);
+					//text.setText(response);
+
+					// toast(response);
+
+					try {
+
+						int ini = response.indexOf("1");
+						response = response.substring(ini, ini + 1);
+
+					} catch (Exception e) {
+
+					}
+
+					//Si va bien devuelve 1
+					if (response.equals("1")) {
+						
+						toast("Invitaci—n/es aceptada/s con Žxito");
+					} else {
+					
+					//Si va mal devuelve 0
+						toast("Algo ha salido mal aceptando la/s invitaci—n/es");
+					}
+				}
+			});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+//			text.append(" ERROR ");
+		}
+	}
 
 	private String[] Parseo(String chorizo) {
 
-<<<<<<< HEAD
-		//Controlamos en numero de caracteres que pasamos en el response
-		int contador=0;
-		for(int j =0; j<chorizo.length();j++){
-			if(chorizo.charAt(j)==';'){
-				contador++;
-			}
-		}
-		
-		String trozos[]= new String[contador];
-		
-		for (int j = 0; j < contador; j++) {
-            trozos[j-1] = chorizo.substring(0,chorizo.indexOf(";"));
-            
-            chorizo = chorizo.substring(chorizo.indexOf(";")+1,
-                            chorizo.lastIndexOf(";")+1);
-            String cadena=trozos[contador-1].toString();
-            toast("Dentro de trozos: " + cadena);
-            toast(chorizo);
-    }
-		
-=======
 		// Controlamos en numero de caracteres que pasamos en el response
 		int contador = 0;
 		for (int j = 0; j < chorizo.length(); j++) {
@@ -127,20 +273,15 @@ public class EstadoInvitaciones extends Activity {
 					chorizo.lastIndexOf(";") + 1);
 		}
 		
-		for(int j=0; j<trozos.length;j++){
-			toast("valor en la pos "+j+" "+trozos[j]);
-		}
+//		for (int j = 0; j < trozos.length; j++) {
+//			toast("valor en la pos " + j + " " + trozos[j]);
+//		}
 
->>>>>>> origin/Aitor
 		return trozos;
 	}
 
 	public void ObtenerSolicitudes(String url) throws Exception {
-<<<<<<< HEAD
-			// Solicitudes entrantes
-=======
 
->>>>>>> origin/Aitor
 		try {
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(url, new AsyncHttpResponseHandler() {
@@ -151,30 +292,16 @@ public class EstadoInvitaciones extends Activity {
 
 						resp_solicitudes = response;
 						// toast("dins del try " + response);
-						toast("asignado: " + resp_solicitudes);
-<<<<<<< HEAD
-						
-						toast("2");
-						listarec = Parseo(resp_solicitudes);
-						
-						CargarSolicitudes(listarec);
-
-					} catch (Exception e) {
-						// toast("Final del catch onsuccess");
-						Log.e("peta", e + "");
-						toast("peta");
-=======
+						//toast("asignado: " + resp_solicitudes);
 
 						listarec = Parseo(resp_solicitudes);
 
-//						CargarSolicitudes();
-						RecuperarCesta();
+						CargarSolicitudes();
 
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
 						Log.e("peta", e + "");
-						toast("peta por " + e);
->>>>>>> origin/Aitor
+						//toast("peta por " + e);
 					}
 				}
 
@@ -184,58 +311,38 @@ public class EstadoInvitaciones extends Activity {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 		}
 	}
-
-<<<<<<< HEAD
-	private void CargarSolicitudes(String[] solicitudes) {
-
-		ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
-				 android.R.layout.simple_list_item_checked, solicitudes);
-				 listrecibidas.setAdapter(adaptadoruno);
-				 listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		
-	}
-	public void ObtenerInvitaciones(String url) throws Exception {
-			// Invitaciones salientes
-=======
-//	private void CargarSolicitudes() {
-//
-//		// ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
-//		// android.R.layout.simple_list_item_checked, listarec);
-//		// listrecibidas.setAdapter(adaptadoruno);
-//		// listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-//
-//		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-//		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_checked, listarec);
-//
-//		listrecibidas.setAdapter(adaptador);
-//		listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-//
-//	}
-
 	public void ObtenerInvitaciones(String url) throws Exception {
 
->>>>>>> origin/Aitor
 		try {
-
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(url, new AsyncHttpResponseHandler() {
 				@Override
 				public void onSuccess(String response) {
 
 					try {
-						resp_invitaciones = response;
-					} catch (Exception e) {
 
+						resp_invitaciones = response;
+						// toast("dins del try " + response);
+						//toast("asignado: " + resp_invitaciones);
+
+						listaenv = Parseo(resp_invitaciones);
+
+						CargarInvitaciones();
+
+					} catch (Exception e) {
+						// toast("Final del catch onsucces");
+						Log.e("peta", e + "");
+						//toast("peta por " + e);
 					}
 				}
+
 			});
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 		}
 	}
-
+	
 	public void toast(String msg) {
 		Toast.makeText(EstadoInvitaciones.this, msg, Toast.LENGTH_LONG).show();
 	}

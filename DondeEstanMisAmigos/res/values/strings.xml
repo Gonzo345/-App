@@ -20,4 +20,6 @@
 	<string name="lbenviadas"> Invitaciones enviadas </string>
 	<string name="lbrecibidas"> Invitaciones recibidas </string>
 	<string name="lbalias"> Alias de usuario</string>
+	<string name="btaceptar"> Aceptar invitación</string>
+	<string name="btrechazar"> Rechazar invitación</string>
 </resources>
