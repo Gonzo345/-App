@@ -37,9 +37,6 @@ public class EstadoInvitaciones extends Activity {
 		// ________________________
 		RellenarListas();
 
-//		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-//		adaptadoruno = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_checked, listarec);
 
 	}
 	public void CargarSolicitudes() {
@@ -56,10 +53,10 @@ public class EstadoInvitaciones extends Activity {
 		
 		listenviadas = (ListView) findViewById(R.id.listenviadas);
 		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_checked, listaenv);
+				android.R.layout.simple_spinner_item, listaenv);
 		
 		listenviadas.setAdapter(adaptador);
-		listenviadas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+//		listenviadas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 	}
 
@@ -99,9 +96,9 @@ public class EstadoInvitaciones extends Activity {
 					chorizo.lastIndexOf(";") + 1);
 		}
 		
-		for(int j=0; j<trozos.length;j++){
-			toast("valor en la pos "+j+" "+trozos[j]);
-		}
+//		for (int j = 0; j < trozos.length; j++) {
+//			toast("valor en la pos " + j + " " + trozos[j]);
+//		}
 
 		return trozos;
 	}
@@ -117,8 +114,6 @@ public class EstadoInvitaciones extends Activity {
 					try {
 
 						resp_solicitudes = response;
-						// toast("dins del try " + response);
-						toast("asignado: " + resp_solicitudes);
 
 						listarec = Parseo(resp_solicitudes);
 
@@ -127,7 +122,7 @@ public class EstadoInvitaciones extends Activity {
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
 						Log.e("peta", e + "");
-						toast("peta por " + e);
+						//toast("peta por " + e);
 					}
 				}
 
@@ -149,7 +144,7 @@ public class EstadoInvitaciones extends Activity {
 
 						resp_invitaciones = response;
 						// toast("dins del try " + response);
-						toast("asignado: " + resp_invitaciones);
+						//toast("asignado: " + resp_invitaciones);
 
 						listaenv = Parseo(resp_invitaciones);
 
@@ -158,7 +153,7 @@ public class EstadoInvitaciones extends Activity {
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
 						Log.e("peta", e + "");
-						toast("peta por " + e);
+						//toast("peta por " + e);
 					}
 				}
 
