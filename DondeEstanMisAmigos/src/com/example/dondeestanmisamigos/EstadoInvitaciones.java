@@ -1,24 +1,20 @@
 package com.example.dondeestanmisamigos;
 
-import java.io.BufferedReader;
-import java.util.StringTokenizer;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class EstadoInvitaciones extends Activity {
 
 	private String id = "";
 	private ListView listrecibidas, listenviadas;
-	private String[] listarec = {};
+	private String[] listarec = {}, mierda={"hola","kaka","adios"};
 	private String[] listaenv = {};
 	private String resp_solicitudes, resp_invitaciones;
 	private ArrayAdapter<String> adaptadoruno;
@@ -41,21 +37,31 @@ public class EstadoInvitaciones extends Activity {
 		// ________________________
 		RellenarListas();
 
+//		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
+//		adaptadoruno = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_checked, listarec);
+
+	}
+	public void RecuperarCesta() {
+
 		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-		adaptadoruno = new ArrayAdapter<String>(this,
+		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_checked, listarec);
+
+		listrecibidas.setAdapter(adaptador);
+		listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 	}
 
 	private void RellenarListas() {
 
-		try {//obtenemos las solicitudes
+		try {// obtenemos las solicitudes
 			ObtenerSolicitudes("http://www.menorcapp.net/dema/arraysolicitudes.php?id="
 					+ id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		try {//obtenemos las invitaciones
+		try {// obtenemos las invitaciones
 			ObtenerInvitaciones("http://www.menorcapp.net/dema/arrayinvitaciones.php?id="
 					+ id);
 		} catch (Exception e) {
@@ -66,20 +72,25 @@ public class EstadoInvitaciones extends Activity {
 
 	private String[] Parseo(String chorizo) {
 
-		//Controlamos en numero de caracteres que pasamos en el response
-		int contador=0;
-		for(int j =0; j<chorizo.length();j++){
-			if(chorizo.charAt(j)==';'){
+		// Controlamos en numero de caracteres que pasamos en el response
+		int contador = 0;
+		for (int j = 0; j < chorizo.length(); j++) {
+			if (chorizo.charAt(j) == ';') {
 				contador++;
 			}
 		}
-		
-		String trozos[]= new String[contador];
-		
+
+		String trozos[] = new String[contador];
+
 		for (int j = 0; j < contador; j++) {
-			trozos[contador-1] = chorizo.split(";").toString();
-			chorizo = chorizo.substring(chorizo.indexOf(";"),
-					chorizo.lastIndexOf(";"));
+			trozos[j] = chorizo.substring(0, chorizo.indexOf(";"));
+
+			chorizo = chorizo.substring(chorizo.indexOf(";") + 1,
+					chorizo.lastIndexOf(";") + 1);
+		}
+		
+		for(int j=0; j<trozos.length;j++){
+			toast("valor en la pos "+j+" "+trozos[j]);
 		}
 
 		return trozos;
@@ -98,15 +109,16 @@ public class EstadoInvitaciones extends Activity {
 						resp_solicitudes = response;
 						// toast("dins del try " + response);
 						toast("asignado: " + resp_solicitudes);
-						
+
 						listarec = Parseo(resp_solicitudes);
-						
-						CargarSolicitudes(listarec);
+
+//						CargarSolicitudes();
+						RecuperarCesta();
 
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
 						Log.e("peta", e + "");
-						toast("peta");
+						toast("peta por " + e);
 					}
 				}
 
@@ -117,14 +129,22 @@ public class EstadoInvitaciones extends Activity {
 		}
 	}
 
-	private void CargarSolicitudes(String[] solicitudes) {
+//	private void CargarSolicitudes() {
+//
+//		// ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
+//		// android.R.layout.simple_list_item_checked, listarec);
+//		// listrecibidas.setAdapter(adaptadoruno);
+//		// listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+//
+//		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
+//		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_checked, listarec);
+//
+//		listrecibidas.setAdapter(adaptador);
+//		listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+//
+//	}
 
-		ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
-				 android.R.layout.simple_list_item_checked, solicitudes);
-				 listrecibidas.setAdapter(adaptadoruno);
-				 listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		
-	}
 	public void ObtenerInvitaciones(String url) throws Exception {
 
 		try {
@@ -136,7 +156,6 @@ public class EstadoInvitaciones extends Activity {
 
 					try {
 						resp_invitaciones = response;
-
 					} catch (Exception e) {
 
 					}
