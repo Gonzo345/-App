@@ -42,7 +42,7 @@ public class EstadoInvitaciones extends Activity {
 //				android.R.layout.simple_list_item_checked, listarec);
 
 	}
-	public void RecuperarCesta() {
+	public void CargarSolicitudes() {
 
 		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
 		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
@@ -51,6 +51,16 @@ public class EstadoInvitaciones extends Activity {
 		listrecibidas.setAdapter(adaptador);
 		listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
+	}
+	public void CargarInvitaciones() {
+		
+		listenviadas = (ListView) findViewById(R.id.listenviadas);
+		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_checked, listaenv);
+		
+		listenviadas.setAdapter(adaptador);
+		listenviadas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		
 	}
 
 	private void RellenarListas() {
@@ -112,8 +122,7 @@ public class EstadoInvitaciones extends Activity {
 
 						listarec = Parseo(resp_solicitudes);
 
-//						CargarSolicitudes();
-						RecuperarCesta();
+						CargarSolicitudes();
 
 					} catch (Exception e) {
 						// toast("Final del catch onsucces");
@@ -128,45 +137,38 @@ public class EstadoInvitaciones extends Activity {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 		}
 	}
-
-//	private void CargarSolicitudes() {
-//
-//		// ArrayAdapter<String> adaptadoruno = new ArrayAdapter<String>(this,
-//		// android.R.layout.simple_list_item_checked, listarec);
-//		// listrecibidas.setAdapter(adaptadoruno);
-//		// listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-//
-//		listrecibidas = (ListView) findViewById(R.id.listrecibidas);
-//		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_checked, listarec);
-//
-//		listrecibidas.setAdapter(adaptador);
-//		listrecibidas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-//
-//	}
-
 	public void ObtenerInvitaciones(String url) throws Exception {
 
 		try {
-
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(url, new AsyncHttpResponseHandler() {
 				@Override
 				public void onSuccess(String response) {
 
 					try {
-						resp_invitaciones = response;
-					} catch (Exception e) {
 
+						resp_invitaciones = response;
+						// toast("dins del try " + response);
+						toast("asignado: " + resp_invitaciones);
+
+						listaenv = Parseo(resp_invitaciones);
+
+						CargarInvitaciones();
+
+					} catch (Exception e) {
+						// toast("Final del catch onsucces");
+						Log.e("peta", e + "");
+						toast("peta por " + e);
 					}
 				}
+
 			});
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 		}
 	}
-
+	
 	public void toast(String msg) {
 		Toast.makeText(EstadoInvitaciones.this, msg, Toast.LENGTH_LONG).show();
 	}
