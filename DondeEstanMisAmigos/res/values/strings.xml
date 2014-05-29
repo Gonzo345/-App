@@ -22,4 +22,5 @@
 	<string name="lbalias"> Alias de usuario</string>
 	<string name="btaceptar"> Aceptar invitación</string>
 	<string name="btrechazar"> Rechazar invitación</string>
+	<integer name="google_play_services_version">4323000</integer>
 </resources>
