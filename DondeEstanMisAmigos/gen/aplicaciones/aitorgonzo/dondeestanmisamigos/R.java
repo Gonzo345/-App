@@ -1276,6 +1276,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f06003f;
+        public static final int RelativeLayout1=0x7f060057;
         public static final int action_bar=0x7f06001f;
         public static final int action_bar_activity_content=0x7f060018;
         public static final int action_bar_container=0x7f06001e;
@@ -1287,7 +1288,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060019;
         public static final int action_menu_presenter=0x7f06001a;
         public static final int action_mode_close_button=0x7f060027;
-        public static final int action_settings=0x7f060059;
+        public static final int action_settings=0x7f06005b;
         public static final int activity_chooser_view_content=0x7f060028;
         public static final int always=0x7f06000f;
         public static final int beginning=0x7f060014;
@@ -1315,7 +1316,7 @@ containing a value of this type.
         public static final int icon=0x7f06002d;
         public static final int ifRoom=0x7f06000e;
         public static final int image=0x7f06002a;
-        public static final int lbalias=0x7f060057;
+        public static final int lbalias=0x7f060059;
         public static final int lbenviadas=0x7f060045;
         public static final int lbinvitar=0x7f060048;
         public static final int lbmail=0x7f060049;
@@ -1328,6 +1329,7 @@ containing a value of this type.
         public static final int list_item=0x7f06002c;
         public static final int listenviadas=0x7f060046;
         public static final int listrecibidas=0x7f060042;
+        public static final int map=0x7f060058;
         public static final int middle=0x7f060015;
         public static final int never=0x7f06000d;
         public static final int none=0x7f060000;
@@ -1358,7 +1360,7 @@ containing a value of this type.
         public static final int title=0x7f06002e;
         public static final int titulo=0x7f06004c;
         public static final int top_action_bar=0x7f060023;
-        public static final int txalias=0x7f060058;
+        public static final int txalias=0x7f06005a;
         public static final int txamigo=0x7f06004a;
         public static final int txpassword=0x7f060054;
         public static final int txuser=0x7f060052;
@@ -1430,6 +1432,8 @@ containing a value of this type.
         public static final int login=0x7f0c0000;
     }
     public static final class string {
+        public static final int Aitor=0x7f07003d;
+        public static final int Gonzo=0x7f07003e;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f07001c;
