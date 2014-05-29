@@ -23,7 +23,7 @@ public class ListarAmigos extends Activity {
 	private Button btsolicitudes, btanadir;
 	private ListView listaamigos;
 	private String[] lista = {};
-	private String id = "", resp_amigos="";
+	private String id = "", resp_amigos = "";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,15 +86,21 @@ public class ListarAmigos extends Activity {
 				startActivity(i);
 			}
 		});
-		
-		//tratamos la selecci—n de un contacto al clicar en Žl
+
+		// tratamos la selecci—n de un contacto al clicar en Žl
 		listaamigos.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
-			    {
-			      String selectedFromList = (listaamigos.getItemAtPosition(position).toString());
-			      toast(selectedFromList);
-			    }});
-		
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				String selectedFromList = (listaamigos
+						.getItemAtPosition(position).toString());
+				Intent i = new Intent(ListarAmigos.this, MostrarPosicion.class);
+				i.putExtra("id", id);
+				i.putExtra("amigo",selectedFromList);
+				startActivity(i);
+
+			}
+		});
+
 	}
 
 	public void ComprobarSolicitudes(String url) throws Exception {
@@ -165,9 +171,10 @@ public class ListarAmigos extends Activity {
 			// text.append(" ERROR ");
 		}
 	}
+
 	public void CargarSolicitudes() {
 
-//		listaamigos = (ListView) findViewById(R.id.listView1);
+		// listaamigos = (ListView) findViewById(R.id.listView1);
 		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, lista);
 
@@ -175,7 +182,7 @@ public class ListarAmigos extends Activity {
 		listaamigos.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 	}
-	
+
 	private String[] Parseo(String chorizo) {
 
 		// Controlamos en numero de caracteres que pasamos en el response
@@ -194,7 +201,7 @@ public class ListarAmigos extends Activity {
 			chorizo = chorizo.substring(chorizo.indexOf(";") + 1,
 					chorizo.lastIndexOf(";") + 1);
 		}
-		
+
 		return trozos;
 	}
 
