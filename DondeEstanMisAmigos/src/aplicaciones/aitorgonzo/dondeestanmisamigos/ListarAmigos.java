@@ -24,7 +24,7 @@ public class ListarAmigos extends Activity {
 	private Button btsolicitudes, btanadir;
 	private ListView listaamigos;
 	private String[] lista = {};
-	private String id = "", resp_amigos = "";
+	private String iduser = "", resp_amigos = "";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,18 +38,18 @@ public class ListarAmigos extends Activity {
 		if (savedInstanceState == null) {
 			savedInstanceState = getIntent().getExtras();
 			if (savedInstanceState == null) {
-				id = null;
+				iduser = null;
 			} else {
-				id = savedInstanceState.getString("id");
+				iduser = savedInstanceState.getString("id");
 			}
 		} else {
-			id = (String) savedInstanceState.getSerializable("id");
+			iduser = (String) savedInstanceState.getSerializable("id");
 		}
 		// ________________________
 
 		try {
 			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="
-					+ id);
+					+ iduser);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class ListarAmigos extends Activity {
 
 		try {
 			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email="
-					+ id);
+					+ iduser);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class ListarAmigos extends Activity {
 
 				Intent i = new Intent(ListarAmigos.this,
 						EstadoInvitaciones.class);
-				i.putExtra("id", id);
+				i.putExtra("id", iduser);
 				startActivity(i);
 
 			}
@@ -83,7 +83,7 @@ public class ListarAmigos extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(ListarAmigos.this, Invitar.class);
-				i.putExtra("id", id);
+				i.putExtra("id", iduser);
 				startActivity(i);
 			}
 		});
@@ -95,8 +95,8 @@ public class ListarAmigos extends Activity {
 				String selectedFromList = (listaamigos
 						.getItemAtPosition(position).toString());
 				Intent i = new Intent(ListarAmigos.this, MostrarPosicion.class);
-				i.putExtra("id", id);
-				i.putExtra("amigo",selectedFromList);
+				i.putExtra("id",iduser);
+				i.putExtra("amigo", selectedFromList);
 				startActivity(i);
 
 			}

@@ -9,16 +9,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+public class respaldoLocalizacion extends Activity implements LocationListener {
 
-public class MostrarPosicion extends Activity implements LocationListener {
+	private Inicial ini = new Inicial();
 
-	private String id = "", amigo = "";
 	private static final long TIEMPO_MIN = 10 * 1000; // 10 segundos
 	private static final long DISTANCIA_MIN = 5; // 5 metros
 	private static final String[] A = { "n/d", "preciso", "impreciso" };
@@ -26,33 +23,16 @@ public class MostrarPosicion extends Activity implements LocationListener {
 	private static final String[] E = { "fuera de servicio",
 			"temporalmente no disponible ", "disponible" };
 	private LocationManager manejador;
-	private String proveedor, salida;
-	private GoogleMap mMap;
+	private String proveedor;
+	private TextView salida;
 
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mostrarposicion);
-
-		// _______ Recuperamos el putextra_____________
-		if (savedInstanceState == null) {
-			savedInstanceState = getIntent().getExtras();
-			if (savedInstanceState == null) {
-				id = null;
-				amigo = null;
-			} else {
-				id = savedInstanceState.getString("id");
-				amigo = savedInstanceState.getString("amigo");
-			}
-		} else {
-			id = (String) savedInstanceState.getSerializable("id");
-			amigo = (String) savedInstanceState.getSerializable("amigo");
-		}
-
-		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
-				.getMap();
+		setContentView(R.layout.localizacion);
+		salida = (TextView) findViewById(R.id.salida);
 
 		manejador = (LocationManager) getSystemService(LOCATION_SERVICE);
-		log("Proveedores de localizacion: \n ");
+		log("Proveedores de localizaci—n: \n ");
 		muestraProveedores();
 
 		Criteria criterio = new Criteria();
@@ -61,16 +41,16 @@ public class MostrarPosicion extends Activity implements LocationListener {
 		criterio.setAccuracy(Criteria.ACCURACY_FINE);
 		proveedor = manejador.getBestProvider(criterio, true);
 		log("Mejor proveedor: " + proveedor + "\n");
-		log("Comenzamos con la ultima localizacion conocida:");
+		log("Comenzamos con la œltima localizaci—n conocida:");
 		Location localizacion = manejador.getLastKnownLocation(proveedor);
 		muestraLocaliz(localizacion);
 	}
 
-	// MÅ½todos del ciclo de vida de la actividad
+	// MŽtodos del ciclo de vida de la actividad
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// Activamos notificaciones de localizaciâ€”n
+		// Activamos notificaciones de localizaci—n
 		manejador.requestLocationUpdates(proveedor, TIEMPO_MIN, DISTANCIA_MIN,
 				this);
 	}
@@ -81,11 +61,11 @@ public class MostrarPosicion extends Activity implements LocationListener {
 		manejador.removeUpdates(this);
 	}
 
-	// MÅ½todos de la interfaz LocationListener
+	// MŽtodos de la interfaz LocationListener
 	public void onLocationChanged(Location location) {
-		log("Nueva localizaciâ€”n: ");
+		log("Nueva localizaci—n: ");
 		muestraLocaliz(location);
-		// Toast.makeText(this, location.toString(), Toast.LENGTH_LONG).show();
+		Toast.makeText(this, location.toString(), Toast.LENGTH_LONG).show();
 	}
 
 	public void onProviderDisabled(String proveedor) {
@@ -101,42 +81,22 @@ public class MostrarPosicion extends Activity implements LocationListener {
 				+ E[Math.max(0, estado)] + ", extras=" + extras + "\n");
 	}
 
-	// MÅ½todos para mostrar informaciâ€”n
+	// MŽtodos para mostrar informaci—n
 	private void log(String cadena) {
-		salida = salida + cadena;
-		// Toast.makeText(MostrarPosicion.this, salida,
-		// Toast.LENGTH_LONG).show();
-
+		salida.append(cadena + "\n");
 	}
 
 	private void muestraLocaliz(Location localizacion) {
 		if (localizacion == null)
-			log("Localizaciâ€”n desconocida\n");
-		else {
+			log("Localizaci—n desconocida\n");
+		else
 			log(localizacion.toString() + "\n");
-			Toast.makeText(
-					this,
-					proveedor + " " + localizacion.getLatitude() + " "
-							+ localizacion.getLongitude(), Toast.LENGTH_LONG)
-					.show();
-			Toast.makeText(this, proveedor, Toast.LENGTH_LONG).show();
-
-			localizacion.getLatitude();
-			localizacion.getLongitude();
-
-			try {
-				mMap.addMarker(new MarkerOptions().position(
-						new LatLng(localizacion.getLatitude(), localizacion
-								.getLongitude())).title("El id es: " + id + "\n El amigo es: "+amigo));
-			} catch (Exception e) {
-
-			}
-		}
+		ini.CrearMarcador(localizacion.getAltitude(), localizacion.getLongitude(), "Tu est‡s aqu’!");
 
 	}
 
 	private void muestraProveedores() {
-		log("Proveedor de localizaciâ€”n: \n");
+		log("Proveedor de localizaci—n: \n");
 		List<String> proveedores = manejador.getAllProviders();
 		for (String proveedor : proveedores) {
 			muestraProveedor(proveedor);
