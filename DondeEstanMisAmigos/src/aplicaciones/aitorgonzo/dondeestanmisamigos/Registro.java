@@ -1,7 +1,8 @@
-package com.example.dondeestanmisamigos;
+package aplicaciones.aitorgonzo.dondeestanmisamigos;
 
 import java.io.BufferedReader;
 
+import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 

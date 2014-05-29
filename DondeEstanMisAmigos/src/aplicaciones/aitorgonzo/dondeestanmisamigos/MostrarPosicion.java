@@ -1,9 +1,7 @@
-package com.example.dondeestanmisamigos;
+package aplicaciones.aitorgonzo.dondeestanmisamigos;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ListView;
 
 public class MostrarPosicion extends Activity {
 	

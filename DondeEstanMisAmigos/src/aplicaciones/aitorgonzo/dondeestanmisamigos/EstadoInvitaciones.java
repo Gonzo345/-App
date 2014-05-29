@@ -1,4 +1,4 @@
-package com.example.dondeestanmisamigos;
+package aplicaciones.aitorgonzo.dondeestanmisamigos;
 
 import java.io.BufferedReader;
 
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
