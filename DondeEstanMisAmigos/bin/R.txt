@@ -293,6 +293,10 @@ int drawable ic_plusone_small_off_client 0x7f020071
 int drawable ic_plusone_standard_off_client 0x7f020072
 int drawable ic_plusone_tall_off_client 0x7f020073
 int id LinearLayout1 0x7f06003f
+<<<<<<< HEAD
+=======
+int id RelativeLayout1 0x7f060057
+>>>>>>> origin/Aitor
 int id action_bar 0x7f06001f
 int id action_bar_activity_content 0x7f060018
 int id action_bar_container 0x7f06001e
@@ -304,7 +308,11 @@ int id action_context_bar 0x7f060020
 int id action_menu_divider 0x7f060019
 int id action_menu_presenter 0x7f06001a
 int id action_mode_close_button 0x7f060027
+<<<<<<< HEAD
 int id action_settings 0x7f060059
+=======
+int id action_settings 0x7f06005b
+>>>>>>> origin/Aitor
 int id activity_chooser_view_content 0x7f060028
 int id always 0x7f06000f
 int id beginning 0x7f060014
@@ -332,7 +340,11 @@ int id hybrid 0x7f060004
 int id icon 0x7f06002d
 int id ifRoom 0x7f06000e
 int id image 0x7f06002a
+<<<<<<< HEAD
 int id lbalias 0x7f060057
+=======
+int id lbalias 0x7f060059
+>>>>>>> origin/Aitor
 int id lbenviadas 0x7f060045
 int id lbinvitar 0x7f060048
 int id lbmail 0x7f060049
@@ -345,6 +357,10 @@ int id listView1 0x7f06004f
 int id list_item 0x7f06002c
 int id listenviadas 0x7f060046
 int id listrecibidas 0x7f060042
+<<<<<<< HEAD
+=======
+int id map 0x7f060058
+>>>>>>> origin/Aitor
 int id middle 0x7f060015
 int id never 0x7f06000d
 int id none 0x7f060000
@@ -375,7 +391,11 @@ int id terrain 0x7f060003
 int id title 0x7f06002e
 int id titulo 0x7f06004c
 int id top_action_bar 0x7f060023
+<<<<<<< HEAD
 int id txalias 0x7f060058
+=======
+int id txalias 0x7f06005a
+>>>>>>> origin/Aitor
 int id txamigo 0x7f06004a
 int id txpassword 0x7f060054
 int id txuser 0x7f060052

@@ -1,11 +1,12 @@
 package aplicaciones.aitorgonzo.dondeestanmisamigos;
+<<<<<<< HEAD:DondeEstanMisAmigos/src/aplicaciones/aitorgonzo/dondeestanmisamigos/MostrarPosicion.java
 
 import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
+=======
+>>>>>>> origin/Aitor:DondeEstanMisAmigos/src/aplicaciones/aitorgonzo/dondeestanmisamigos/MostrarPosicion.java
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ListView;
 
 public class MostrarPosicion extends Activity {
 	
