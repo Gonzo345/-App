@@ -267,6 +267,8 @@ public class EstadoInvitaciones extends Activity {
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 		}
+		
+		RellenarListas();
 	}
 
 	private String[] Parseo(String chorizo) {
