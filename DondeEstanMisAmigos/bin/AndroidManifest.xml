@@ -27,6 +27,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <service android:name="ServicioLocalizacion"></service>
         <activity
             android:name="aplicaciones.aitorgonzo.dondeestanmisamigos.Login"
             android:label="@string/app_name" >

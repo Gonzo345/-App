@@ -29,6 +29,9 @@ public class ListarAmigos extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listaramigos);
+		
+		 startService(new Intent(ListarAmigos.this,
+                 ServicioLocalizacion.class));
 
 		listaamigos = (ListView) findViewById(R.id.listView1);
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
