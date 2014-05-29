@@ -2,11 +2,8 @@ package com.example.dondeestanmisamigos;
 
 import android.app.Activity;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.widget.Button;
 import android.widget.ListView;
-=======
->>>>>>> origin/Aitor
 
 public class MostrarPosicion extends Activity {
 	
@@ -30,15 +27,4 @@ public class MostrarPosicion extends Activity {
 		}
 		
 	}
-
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mostrarposicion);
-		
-		
-		
-		
-		
-	}
-
 }
