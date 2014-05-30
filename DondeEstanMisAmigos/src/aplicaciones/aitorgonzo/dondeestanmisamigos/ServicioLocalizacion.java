@@ -42,7 +42,7 @@ public class ServicioLocalizacion extends Service {
 
 	Location localizacion;
 
-	static final int UPDATE_INTERVAL = 30000;
+	static final int UPDATE_INTERVAL = 180000;
 	static final int UPDATE_INTERVAL2 = 10000;
 	// static final int UPDATE_INTERVAL = 18000000;
 	private Timer timer = new Timer();
@@ -245,7 +245,7 @@ public class ServicioLocalizacion extends Service {
 				.setTicker("Coordenadas: " + latit + "," + longi)
 				.setWhen(System.currentTimeMillis())
 				.setContentIntent(pendingIntent)
-				.setDefaults(Notification.DEFAULT_LIGHTS).setAutoCancel(true)
+//				.setDefaults(Notification.DEFAULT_LIGHTS).setAutoCancel(true)
 				.setSmallIcon(R.drawable.ic_launcher).build();
 
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
