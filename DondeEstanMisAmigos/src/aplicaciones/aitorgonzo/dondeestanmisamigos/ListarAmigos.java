@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +15,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-
 import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -30,9 +31,12 @@ public class ListarAmigos extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listaramigos);
 		
+		//Arrancamos el servicio
 		 startService(new Intent(ListarAmigos.this,
                  ServicioLocalizacion.class));
 
+		 
+		 
 		listaamigos = (ListView) findViewById(R.id.listView1);
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
 		btanadir = (Button) findViewById(R.id.btanadir);
@@ -49,6 +53,14 @@ public class ListarAmigos extends Activity {
 			iduser = (String) savedInstanceState.getSerializable("id");
 		}
 		// ________________________
+		// __________GUARDAMOS LAS VARIABLES EN SHAREDPREFERENCES PARA UTILIZARLAS EN EL SERVICIO______________
+		SharedPreferences prefes= getSharedPreferences("pref_variables", MODE_PRIVATE);
+		SharedPreferences.Editor editor= prefes.edit();
+		editor.putString("id", iduser);
+		editor.commit();
+		// ________________________
+		
+		
 
 		try {
 			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="

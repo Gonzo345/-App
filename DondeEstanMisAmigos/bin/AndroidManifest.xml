@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -27,7 +28,20 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <service android:name="ServicioLocalizacion"></service>
+        <service android:name="ServicioLocalizacion" >
+            <intent-filter>
+                <action android:name="ServicioLocalizacion" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".IniciadorServicios" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="aplicaciones.aitorgonzo.dondeestanmisamigos.Login"
             android:label="@string/app_name" >

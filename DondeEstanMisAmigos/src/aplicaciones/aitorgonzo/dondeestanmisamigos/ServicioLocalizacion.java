@@ -1,5 +1,6 @@
 package aplicaciones.aitorgonzo.dondeestanmisamigos;
 
+import java.io.BufferedReader;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,6 +12,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -19,8 +21,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class ServicioLocalizacion extends Service {
 	private static final long TIEMPO_MIN = 10 * 1000; // 10 segundos
@@ -37,11 +42,13 @@ public class ServicioLocalizacion extends Service {
 
 	Location localizacion;
 
-	static final int UPDATE_INTERVAL = 18000000;
+	static final int UPDATE_INTERVAL = 30000;
+	static final int UPDATE_INTERVAL2 = 10000;
+	// static final int UPDATE_INTERVAL = 18000000;
 	private Timer timer = new Timer();
 
 	private LocationManager manejador;
-	private String proveedor, salida, latit, longi;
+	private String proveedor, salida, latit, longi, iduser;
 	private GoogleMap mMap;
 
 	@Override
@@ -51,11 +58,11 @@ public class ServicioLocalizacion extends Service {
 	}
 
 	public void toast(String cadena) {
-		//toast.makeText(this, cadena, toast.LENGTH_LONG).show();
+		// toast.makeText(this, cadena, toast.LENGTH_LONG).show();
 	}
 
 	public void onDestroy() {
-		//toast("destruido");
+		// toast("destruido");
 	}
 
 	// ################################
@@ -68,13 +75,27 @@ public class ServicioLocalizacion extends Service {
 			}
 
 		}, 0, UPDATE_INTERVAL);
+		// #############################
+		timer.scheduleAtFixedRate(new TimerTask() {
 
-		
+			@Override
+			public void run() {
+				Comprobacion();
+			}
+
+		}, 0, UPDATE_INTERVAL2);
+
+		// #############################
+		SharedPreferences prefes = getSharedPreferences("pref_variables",
+				MODE_PRIVATE);
+
+		iduser = prefes.getString("id", "");
+
 	}
 
 	public void Inicio() {
 		// TODO Auto-generated method stub
-		//toast("servicio creado");
+		// toast("servicio creado");
 
 		manejador = (LocationManager) getSystemService(LOCATION_SERVICE);
 		log("Proveedores de localizacion: \n ");
@@ -95,7 +116,8 @@ public class ServicioLocalizacion extends Service {
 	public void onLocationChanged(Location location) {
 		log("Nueva localizaci—n: ");
 		muestraLocaliz(location);
-		// //toast.makeText(this, location.toString(), //toast.LENGTH_LONG).show();
+		// //toast.makeText(this, location.toString(),
+		// //toast.LENGTH_LONG).show();
 	}
 
 	public void onProviderDisabled(String proveedor) {
@@ -121,25 +143,71 @@ public class ServicioLocalizacion extends Service {
 			log("Localizaci—n desconocida\n");
 		else {
 			log(localizacion.toString() + "\n");
-			//toast.makeText(
-//					this,
-//					proveedor + " " + localizacion.getLatitude() + " "
-//							+ localizacion.getLongitude(), toast.LENGTH_LONG)
-//					.show();
 
 			latit = localizacion.getLatitude() + "";
 			longi = localizacion.getLongitude() + "";
 
 			Notificacion();
+			InsertarCoordenadas(latit, longi);
 
 		}
 
 	}
 
+	private void InsertarCoordenadas(String latit2, String longi2) {
+		BufferedReader in = null;
+
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(
+					"http://www.menorcapp.net/dema/insertarcoordenadas.php?id="
+							+ iduser + "&latitud=" + latit2 + "&longitud="
+							+ longi2, new AsyncHttpResponseHandler() {
+						@Override
+						public void onSuccess(String response) {
+							System.out.println(response);
+
+						}
+
+					});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+			// text.append(" ERROR ");
+		}
+
+	}
+
+	private void Comprobacion() {
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(
+					"http://www.menorcapp.net/dema/comprobacionpeticiones.php?id="
+							+ iduser, new AsyncHttpResponseHandler() {
+						@Override
+						public void onSuccess(String response) {
+							System.out.println(response);
+
+							if (response.equals("1")) {
+								Inicio();
+							}
+
+						}
+
+					});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+			// text.append(" ERROR ");
+		}
+	}
+
 	private void muestraProveedores() {
 		log("Proveedor de localizaci—n: \n");
 		List<String> proveedores = manejador.getAllProviders();
-		
+
 		for (String proveedor : proveedores) {
 			muestraProveedor(proveedor);
 		}
