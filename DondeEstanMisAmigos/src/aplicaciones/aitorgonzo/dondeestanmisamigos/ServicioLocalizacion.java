@@ -190,8 +190,10 @@ public class ServicioLocalizacion extends Service {
 						public void onSuccess(String response) {
 							System.out.println(response);
 
-							if (response.equals("1")) {
+							if (response!="0") {
 								Inicio();
+							}else{
+								
 							}
 
 						}
@@ -239,11 +241,11 @@ public class ServicioLocalizacion extends Service {
 				Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		myNotification = new Notification.Builder(context)
-				.setContentTitle("Servicio rastreando").setContentText("")
+				.setContentTitle("Servicio rastreando").setContentText(latit+"  "+longi)
 				.setTicker("Coordenadas: " + latit + "," + longi)
 				.setWhen(System.currentTimeMillis())
 				.setContentIntent(pendingIntent)
-				.setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true)
+				.setDefaults(Notification.DEFAULT_LIGHTS).setAutoCancel(true)
 				.setSmallIcon(R.drawable.ic_launcher).build();
 
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

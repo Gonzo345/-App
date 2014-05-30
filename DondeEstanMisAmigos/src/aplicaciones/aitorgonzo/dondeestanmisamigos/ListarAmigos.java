@@ -109,11 +109,48 @@ public class ListarAmigos extends Activity {
 					int position, long id) {
 				String selectedFromList = (listaamigos
 						.getItemAtPosition(position).toString());
+				
+				CrearPeticiona(selectedFromList);
+				
 				Intent i = new Intent(ListarAmigos.this, MostrarPosicion.class);
 				i.putExtra("id",iduser);
 				i.putExtra("amigo", selectedFromList);
 				startActivity(i);
 
+			}
+
+			private void CrearPeticiona(String selectedFromList) {
+				try {
+
+					AsyncHttpClient client = new AsyncHttpClient();
+					client.get("http://www.menorcapp.net/dema/crearpeticion.php?emisor="+iduser+"&receptor="+selectedFromList, new AsyncHttpResponseHandler() {
+						@Override
+						public void onSuccess(String response) {
+							System.out.println(response);
+							// text.setText(response);
+
+							// toast(response);
+
+							try {
+
+								int ini = response.indexOf("0");
+								response = response.substring(ini, ini + 1);
+
+							} catch (Exception e) {
+
+							}
+
+							if (response.equals("0")) {
+								// toast("0");
+							} else {
+								toast("No se ha podido crear la peticion...");
+							}
+						}
+					});
+
+				} catch (Exception e) {
+					Log.e("log_tag", "Error in http connection " + e.toString());
+				}
 			}
 		});
 
