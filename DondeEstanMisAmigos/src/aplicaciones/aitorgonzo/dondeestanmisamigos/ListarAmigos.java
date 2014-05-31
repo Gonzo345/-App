@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +15,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-
 import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -24,12 +25,18 @@ public class ListarAmigos extends Activity {
 	private Button btsolicitudes, btanadir;
 	private ListView listaamigos;
 	private String[] lista = {};
-	private String id = "", resp_amigos = "";
+	private String iduser = "", resp_amigos = "";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listaramigos);
+		
+		//Arrancamos el servicio
+		 startService(new Intent(ListarAmigos.this,
+                 ServicioLocalizacion.class));
 
+		 
+		 
 		listaamigos = (ListView) findViewById(R.id.listView1);
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
 		btanadir = (Button) findViewById(R.id.btanadir);
@@ -38,18 +45,26 @@ public class ListarAmigos extends Activity {
 		if (savedInstanceState == null) {
 			savedInstanceState = getIntent().getExtras();
 			if (savedInstanceState == null) {
-				id = null;
+				iduser = null;
 			} else {
-				id = savedInstanceState.getString("id");
+				iduser = savedInstanceState.getString("id");
 			}
 		} else {
-			id = (String) savedInstanceState.getSerializable("id");
+			iduser = (String) savedInstanceState.getSerializable("id");
 		}
 		// ________________________
+		// __________GUARDAMOS LAS VARIABLES EN SHAREDPREFERENCES PARA UTILIZARLAS EN EL SERVICIO______________
+		SharedPreferences prefes= getSharedPreferences("pref_variables", MODE_PRIVATE);
+		SharedPreferences.Editor editor= prefes.edit();
+		editor.putString("id", iduser);
+		editor.commit();
+		// ________________________
+		
+		
 
 		try {
 			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="
-					+ id);
+					+ iduser);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +72,7 @@ public class ListarAmigos extends Activity {
 
 		try {
 			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email="
-					+ id);
+					+ iduser);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +86,7 @@ public class ListarAmigos extends Activity {
 
 				Intent i = new Intent(ListarAmigos.this,
 						EstadoInvitaciones.class);
-				i.putExtra("id", id);
+				i.putExtra("id", iduser);
 				startActivity(i);
 
 			}
@@ -83,7 +98,7 @@ public class ListarAmigos extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(ListarAmigos.this, Invitar.class);
-				i.putExtra("id", id);
+				i.putExtra("id", iduser);
 				startActivity(i);
 			}
 		});
@@ -94,11 +109,48 @@ public class ListarAmigos extends Activity {
 					int position, long id) {
 				String selectedFromList = (listaamigos
 						.getItemAtPosition(position).toString());
+				
+				CrearPeticiona(selectedFromList);
+				
 				Intent i = new Intent(ListarAmigos.this, MostrarPosicion.class);
-				i.putExtra("id", id);
-				i.putExtra("amigo",selectedFromList);
+				i.putExtra("id",iduser);
+				i.putExtra("amigo", selectedFromList);
 				startActivity(i);
 
+			}
+
+			private void CrearPeticiona(String selectedFromList) {
+				try {
+
+					AsyncHttpClient client = new AsyncHttpClient();
+					client.get("http://www.menorcapp.net/dema/crearpeticion.php?emisor="+iduser+"&receptor="+selectedFromList, new AsyncHttpResponseHandler() {
+						@Override
+						public void onSuccess(String response) {
+							System.out.println(response);
+							// text.setText(response);
+
+							// toast(response);
+
+							try {
+
+								int ini = response.indexOf("0");
+								response = response.substring(ini, ini + 1);
+
+							} catch (Exception e) {
+
+							}
+
+							if (response.equals("0")) {
+								// toast("0");
+							} else {
+								toast("No se ha podido crear la peticion...");
+							}
+						}
+					});
+
+				} catch (Exception e) {
+					Log.e("log_tag", "Error in http connection " + e.toString());
+				}
 			}
 		});
 
