@@ -7,6 +7,11 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+    
+    <permission android:name="aplicaciones.aitorgonzo.dondeestanmisamigos.permission.C2D_MESSAGE"
+   		android:protectionLevel="signature"/>
+	<uses-permission android:name="aplicaciones.aitorgonzo.dondeestanmisamigos.permission.C2D_MESSAGE"/>
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
