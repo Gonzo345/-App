@@ -13,8 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -94,6 +94,14 @@ public class EstadoInvitaciones extends Activity {
 		
 		RellenarListas();
 
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		toast("onResume! Volviendo a cargar invitaciones...");
+		RellenarListas();
+		
 	}
 	
 	public void aceptarSeleccionados(SparseBooleanArray seleccionados) {

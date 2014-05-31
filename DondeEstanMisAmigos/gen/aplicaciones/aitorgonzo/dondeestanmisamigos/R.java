@@ -1276,7 +1276,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f06003f;
-        public static final int RelativeLayout1=0x7f060057;
+        public static final int RelativeLayout1=0x7f06005b;
         public static final int action_bar=0x7f06001f;
         public static final int action_bar_activity_content=0x7f060018;
         public static final int action_bar_container=0x7f06001e;
@@ -1288,20 +1288,22 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060019;
         public static final int action_menu_presenter=0x7f06001a;
         public static final int action_mode_close_button=0x7f060027;
-        public static final int action_settings=0x7f06005b;
+        public static final int action_settings=0x7f06005f;
         public static final int activity_chooser_view_content=0x7f060028;
         public static final int always=0x7f06000f;
         public static final int beginning=0x7f060014;
         public static final int btaceptar=0x7f060043;
-        public static final int btanadir=0x7f06004e;
-        public static final int btenviar=0x7f06004b;
-        public static final int btlogin=0x7f060055;
+        public static final int btanadir=0x7f060051;
+        public static final int bteliminar=0x7f06004a;
+        public static final int btenviar=0x7f06004e;
+        public static final int btfollowers=0x7f060053;
+        public static final int btlogin=0x7f060059;
         public static final int btrechazar=0x7f060044;
-        public static final int btregistro=0x7f060056;
-        public static final int btsolicitudes=0x7f06004d;
+        public static final int btregistro=0x7f06005a;
+        public static final int btsolicitudes=0x7f060050;
         public static final int checkbox=0x7f060030;
         public static final int collapseActionView=0x7f060011;
-        public static final int container=0x7f060050;
+        public static final int container=0x7f060054;
         public static final int default_activity_button=0x7f06002b;
         public static final int dialog=0x7f060012;
         public static final int disableHome=0x7f06000c;
@@ -1316,20 +1318,22 @@ containing a value of this type.
         public static final int icon=0x7f06002d;
         public static final int ifRoom=0x7f06000e;
         public static final int image=0x7f06002a;
-        public static final int lbalias=0x7f060059;
+        public static final int lbalias=0x7f06005d;
         public static final int lbenviadas=0x7f060045;
-        public static final int lbinvitar=0x7f060048;
-        public static final int lbmail=0x7f060049;
-        public static final int lbpassword=0x7f060053;
+        public static final int lbfollowers=0x7f060048;
+        public static final int lbinvitar=0x7f06004b;
+        public static final int lbmail=0x7f06004c;
+        public static final int lbpassword=0x7f060057;
         public static final int lbrecibidas=0x7f060041;
         public static final int lbtitle=0x7f060040;
-        public static final int lbuser=0x7f060051;
+        public static final int lbuser=0x7f060055;
         public static final int listMode=0x7f060005;
-        public static final int listView1=0x7f06004f;
+        public static final int listView1=0x7f060052;
         public static final int list_item=0x7f06002c;
         public static final int listenviadas=0x7f060046;
+        public static final int listfollowers=0x7f060049;
         public static final int listrecibidas=0x7f060042;
-        public static final int map=0x7f060058;
+        public static final int map=0x7f06005c;
         public static final int middle=0x7f060015;
         public static final int never=0x7f06000d;
         public static final int none=0x7f060000;
@@ -1358,12 +1362,12 @@ containing a value of this type.
         public static final int tabMode=0x7f060006;
         public static final int terrain=0x7f060003;
         public static final int title=0x7f06002e;
-        public static final int titulo=0x7f06004c;
+        public static final int titulo=0x7f06004f;
         public static final int top_action_bar=0x7f060023;
-        public static final int txalias=0x7f06005a;
-        public static final int txamigo=0x7f06004a;
-        public static final int txpassword=0x7f060054;
-        public static final int txuser=0x7f060052;
+        public static final int txalias=0x7f06005e;
+        public static final int txamigo=0x7f06004d;
+        public static final int txpassword=0x7f060058;
+        public static final int txuser=0x7f060056;
         public static final int up=0x7f060024;
         public static final int useLogo=0x7f060007;
         public static final int withText=0x7f060010;
@@ -1420,13 +1424,14 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
         public static final int estadoinvitaciones=0x7f030018;
-        public static final int fragment_login=0x7f030019;
-        public static final int invitar=0x7f03001a;
-        public static final int listaramigos=0x7f03001b;
-        public static final int login=0x7f03001c;
-        public static final int mostrarposicion=0x7f03001d;
-        public static final int registro=0x7f03001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int followers=0x7f030019;
+        public static final int fragment_login=0x7f03001a;
+        public static final int invitar=0x7f03001b;
+        public static final int listaramigos=0x7f03001c;
+        public static final int login=0x7f03001d;
+        public static final int mostrarposicion=0x7f03001e;
+        public static final int registro=0x7f03001f;
+        public static final int support_simple_spinner_dropdown_item=0x7f030020;
     }
     public static final class menu {
         public static final int login=0x7f0c0000;
@@ -1501,6 +1506,8 @@ containing a value of this type.
         public static final int auth_client_using_bad_version_title=0x7f070014;
         public static final int btaceptar=0x7f07003b;
         public static final int btagregar=0x7f070035;
+        public static final int bteliminar=0x7f070040;
+        public static final int btfollowers=0x7f07003f;
         public static final int btrechazar=0x7f07003c;
         public static final int btsolicitudes=0x7f070034;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
@@ -1580,6 +1587,7 @@ containing a value of this type.
         public static final int invitar_title=0x7f070031;
         public static final int lbalias=0x7f07003a;
         public static final int lbenviadas=0x7f070038;
+        public static final int lbfollowers=0x7f070041;
         public static final int lbinvitaciones=0x7f070037;
         public static final int lbmailfriend=0x7f070036;
         public static final int lbrecibidas=0x7f070039;

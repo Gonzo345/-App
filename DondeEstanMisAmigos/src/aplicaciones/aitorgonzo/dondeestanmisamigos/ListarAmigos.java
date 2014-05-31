@@ -22,7 +22,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class ListarAmigos extends Activity {
 
-	private Button btsolicitudes, btanadir;
+	private Button btsolicitudes, btanadir, btfollowers;
 	private ListView listaamigos;
 	private String[] lista = {};
 	private String iduser = "", resp_amigos = "";
@@ -32,14 +32,13 @@ public class ListarAmigos extends Activity {
 		setContentView(R.layout.listaramigos);
 		
 		//Arrancamos el servicio
-		 startService(new Intent(ListarAmigos.this,
-                 ServicioLocalizacion.class));
+		 startService(new Intent(ListarAmigos.this,ServicioLocalizacion.class));
 
-		 
 		 
 		listaamigos = (ListView) findViewById(R.id.listView1);
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
 		btanadir = (Button) findViewById(R.id.btanadir);
+		btfollowers = (Button) findViewById(R.id.btfollowers);
 
 		// _______ Recuperamos el putextra_____________
 		if (savedInstanceState == null) {
@@ -92,12 +91,22 @@ public class ListarAmigos extends Activity {
 			}
 		});
 
-		// Boton que no lleva para agregar a un nuevo ususario
+		// Boton que nos lleva para agregar a un nuevo ususario
 		btanadir.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(ListarAmigos.this, Invitar.class);
+				i.putExtra("id", iduser);
+				startActivity(i);
+			}
+		});
+		
+		// Boton que nos lleva a las solicitudes pendientes
+		btfollowers.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(ListarAmigos.this,Followers.class);
 				i.putExtra("id", iduser);
 				startActivity(i);
 			}
@@ -154,6 +163,20 @@ public class ListarAmigos extends Activity {
 			}
 		});
 
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		toast("onResume! Volviendo a cargar amigos...");
+		try {
+			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email="
+					+ iduser);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void ComprobarSolicitudes(String url) throws Exception {
