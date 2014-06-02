@@ -99,7 +99,6 @@ public class EstadoInvitaciones extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		toast("onResume! Volviendo a cargar invitaciones...");
 		RellenarListas();
 		
 	}
@@ -131,14 +130,13 @@ public class EstadoInvitaciones extends Activity {
                     String invitacionde = listrecibidas.getItemAtPosition(seleccionados.keyAt(i)).toString();
                     // Conectamos al server y le pasamos el valor de la ListView marcados
                     try {
-                    	toast("ID = " + id);
                     	
                     	System.out.println(invitacionde.contains("\n"));
                     	
                     	//Nos cargamos los saltos de l’nea que nos matan la inserci—n
                     	invitacionde = invitacionde.replaceAll("\\n", "");
                     	System.out.println(invitacionde.contains("\n"));
-                    	toast("Invitacionde = " + invitacionde);
+                    	toast("Aceptando invitaci—n de = " + invitacionde);
 						CogerResultadoPHP("http://www.menorcapp.net/dema/crearamistad.php?email1=" + id + "&email2=" + invitacionde);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -179,14 +177,12 @@ public class EstadoInvitaciones extends Activity {
                 
                 // Conectamos al server y le pasamos el valor de la ListView marcados
                 try {
-                	toast("ID = " + id);
-                	
                 	System.out.println(invitacionde.contains("\n"));
                 	
                 	//Nos cargamos los saltos de l’nea que nos matan la inserci—n
                 	invitacionde = invitacionde.replaceAll("\\n", "");
                 	System.out.println(invitacionde.contains("\n"));
-                	toast("Invitacionde = " + invitacionde);
+                	toast("Rechazando invitaci—n de = " + invitacionde);
 					CogerResultadoPHP("http://www.menorcapp.net/dema/crearamistad.php?email1=" + id + "&email2=" + invitacionde + "&cancelar=si");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

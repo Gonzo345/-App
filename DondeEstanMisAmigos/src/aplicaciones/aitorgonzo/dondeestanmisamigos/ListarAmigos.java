@@ -152,7 +152,7 @@ public class ListarAmigos extends Activity {
 							if (response.equals("0")) {
 								// toast("0");
 							} else {
-								toast("No se ha podido crear la peticion...");
+								toast("No se ha podido crear la petici—n...");
 							}
 						}
 					});
@@ -168,7 +168,6 @@ public class ListarAmigos extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		toast("onResume! Volviendo a cargar amigos...");
 		try {
 			ObtenerLista("http://www.menorcapp.net/dema/obtenerlistaamigos.php?email="
 					+ iduser);

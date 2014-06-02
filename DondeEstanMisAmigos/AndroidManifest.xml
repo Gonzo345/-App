@@ -66,6 +66,8 @@
         </activity>
         <activity android:name="Registro" >
         </activity>
+        <activity android:name="Followers" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
