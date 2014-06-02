@@ -38,7 +38,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:ems="10" />
+                android:ems="10"/>
+            
+            <requestFocus />
+<!--             android:inputType="textEmailAddress" -->
+            
 
             <TextView
                 android:id="@+id/lbpassword"
@@ -64,7 +68,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:text="@string/lbalias"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:lines="1"
+				android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/txalias"
@@ -72,8 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:ems="10" >
-
-                <requestFocus />
+          
             </EditText>
 
             <Button

@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:ems="10" />
+<!--             android:inputType="textEmailAddress" -->
 
             <TextView
                 android:id="@+id/lbpassword"

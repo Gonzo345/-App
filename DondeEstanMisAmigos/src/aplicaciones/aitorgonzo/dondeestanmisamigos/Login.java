@@ -1,6 +1,8 @@
 package aplicaciones.aitorgonzo.dondeestanmisamigos;
 
 import java.io.BufferedReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -151,7 +153,7 @@ public class Login extends ActionBarActivity {
 					} else {
 					
 					//Si va mal devuelve 0
-						//toast("0");
+						toast("Nombre de usuario o contrase–a incorrectos");
 					}
 				}
 			});
@@ -159,6 +161,34 @@ public class Login extends ActionBarActivity {
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
 //			text.append(" ERROR ");
+		}
+	}
+	
+	private boolean ComprobarEmail() {
+
+		//MŽtodo para comprobar e-mail con formato correcto
+		String cadena= txuser.getText().toString();
+		String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	        
+	        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+	 
+	        Matcher matcher = pattern.matcher(cadena);
+	        return matcher.matches();
+		
+	}
+	
+	public void btnEnviar() {
+
+		if (txuser.getText().toString().equals("")
+				|| txpassword.getText().toString().equals("")) {
+
+			//toast(R.string.formtoastError);
+		} else {
+
+			if (ComprobarEmail()) {
+				//POR IMPLEMENTAR BT ENVIAR
+			}
 		}
 	}
 	

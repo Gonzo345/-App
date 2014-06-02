@@ -1,13 +1,10 @@
 package aplicaciones.aitorgonzo.dondeestanmisamigos;
 
 import java.io.BufferedReader;
-
-import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +12,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class Registro extends Activity {
 
@@ -89,8 +89,9 @@ public class Registro extends Activity {
 							break;
 							
 						case 1:
-							Intent i = new Intent(Registro.this, Login.class);
-							startActivity(i);
+//							Intent i = new Intent(Registro.this, Login.class);
+//							startActivity(i);
+							finish();	//Finalizamos para que back quede limpio
 							
 							toast("Se ha registrado correctamente");
 							break;
@@ -145,6 +146,35 @@ public class Registro extends Activity {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	private boolean ComprobarEmail() {
+
+		//MŽtodo para comprobar e-mail con formato correcto
+		String cadena= txuser.getText().toString();
+		String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	        
+	        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+	 
+	        Matcher matcher = pattern.matcher(cadena);
+	        return matcher.matches();
+		
+	}
+	
+	public void btnEnviar() {
+
+		if (txuser.getText().toString().equals("")
+				|| txpassword.getText().toString().equals("")
+				|| txalias.getText().toString().equals("")) {
+
+			//toast(R.string.formtoastError);
+		} else {
+
+			if (ComprobarEmail()) {
+				//POR IMPLEMENTAR BT ENVIAR
+			}
 		}
 	}
 

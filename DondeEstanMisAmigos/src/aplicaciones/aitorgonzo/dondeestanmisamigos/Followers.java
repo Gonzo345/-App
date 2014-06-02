@@ -74,7 +74,6 @@ public class Followers extends Activity{
 	@Override
 	protected void onResume() {
 		super.onResume();
-		toast("onResume! Volviendo a cargar amigos...");
 		try {
 			ObtenerLista("http://www.menorcapp.net/dema/listafollowers.php?email=" + iduser);
 		} catch (Exception e) {

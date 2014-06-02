@@ -1,6 +1,8 @@
 package aplicaciones.aitorgonzo.dondeestanmisamigos;
 
 import java.io.BufferedReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,8 +13,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -62,14 +64,14 @@ public class Invitar extends Activity {
 				public void onSuccess(String response) {
 					System.out.println(response);
 
-					toast("dins de succes");
+					
 					try {
 						int ini = response.indexOf("1");
 						response = response.substring(ini, ini + 1);
-						toast("dins de try:");
+						
 
 					} catch (Exception e) {
-						toast("dins de catch");
+						
 					}
 
 					// Si va bien devuelve 1
@@ -81,9 +83,11 @@ public class Invitar extends Activity {
 						i.putExtra("id", id);
 						startActivity(i);
 						toast("Invitaci—n registrada con Žxito");
+						//Finalizamos la actividad porque queremos que nos lleve œnicamente a estadoinvitaciones 
+						finish();
 					} else {
 						// Si va mal devuelve 0
-						toast("Ha habido un problema registrando la invitaci—n");
+						toast("E-mail de amigo incorrecto o no se encuentra registrado");
 					}
 				}
 			});
@@ -118,6 +122,34 @@ public class Invitar extends Activity {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+	}
+	
+	private boolean ComprobarEmail() {
+
+		//MŽtodo para comprobar e-mail con formato correcto
+		String cadena= txamigo.getText().toString();
+		String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	        
+	        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+	 
+	        Matcher matcher = pattern.matcher(cadena);
+	        return matcher.matches();
+		
+	}
+	
+	public void btnEnviar() {
+
+		if (txamigo.getText().toString().equals("")) {
+
+			//toast(R.string.formtoastError);
+		} else {
+
+			if (ComprobarEmail()) {
+				//POR IMPLEMENTAR BT ENVIAR
+			}
 		}
 	}
 
