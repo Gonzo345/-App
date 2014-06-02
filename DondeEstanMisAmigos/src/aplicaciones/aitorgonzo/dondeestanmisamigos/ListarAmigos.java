@@ -112,7 +112,7 @@ public class ListarAmigos extends Activity {
 			}
 		});
 
-		// tratamos la selecci—n de un contacto al clicar en Žl
+		// Tratamos la selecci—n de un contacto al clicar en Žl
 		listaamigos.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
