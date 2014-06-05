@@ -20,6 +20,7 @@ public class Registro extends Activity {
 
 	private EditText txpassword, txuser, txalias;
 	private Button btregistro;
+	private String gcm_code;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,27 +31,7 @@ public class Registro extends Activity {
 		txpassword = (EditText) findViewById(R.id.txpassword);
 		txalias = (EditText) findViewById(R.id.txalias);
 
-		// btregistro.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// try {
-		//
-		// // Registro de usuario en servidor remoto
-		// String username = txuser.getText().toString();
-		// String password = txpassword.getText().toString();
-		// String alias = txalias.getText().toString();
-		//
-		// // URL ejemplo
-		// http://www.menorcapp.net/dema/registro.php?email=userprueba&pass=prueba&alias=prueba
-		// CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?email="
-		// + username + "&pass=" + password + "&alias=" + alias);
-		// } catch (Exception e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// }
-		// });
+		
 		
 		btregistro.setOnClickListener(new OnClickListener() {
 			
@@ -142,7 +123,7 @@ public class Registro extends Activity {
 			// URL ejemplo
 			// http://www.menorcapp.net/dema/registro.php?email=userprueba&pass=prueba&alias=prueba
 			CogerResultadoPHP("http://www.menorcapp.net/dema/registro.php?email="
-					+ username + "&pass=" + password + "&alias=" + alias);
+					+ username + "&pass=" + password + "&alias=" + alias+ "&gcm=" + gcm_code);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

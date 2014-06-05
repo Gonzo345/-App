@@ -10,13 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
 
+import com.google.android.gcm.GCMRegistrar;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -25,16 +25,16 @@ public class ListarAmigos extends Activity {
 	private Button btsolicitudes, btanadir, btfollowers;
 	private ListView listaamigos;
 	private String[] lista = {};
-	private String iduser = "", resp_amigos = "";
+	private String iduser = "", resp_amigos = "", TAG = "GCM",
+			SENDER_ID = "714817077344";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listaramigos);
-		
-		//Arrancamos el servicio
-		 startService(new Intent(ListarAmigos.this,ServicioLocalizacion.class));
 
-		 
+		// Arrancamos el servicio
+		startService(new Intent(ListarAmigos.this, ServicioLocalizacion.class));
+
 		listaamigos = (ListView) findViewById(R.id.listView1);
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
 		btanadir = (Button) findViewById(R.id.btanadir);
@@ -52,14 +52,16 @@ public class ListarAmigos extends Activity {
 			iduser = (String) savedInstanceState.getSerializable("id");
 		}
 		// ________________________
-		// __________GUARDAMOS LAS VARIABLES EN SHAREDPREFERENCES PARA UTILIZARLAS EN EL SERVICIO______________
-		SharedPreferences prefes= getSharedPreferences("pref_variables", MODE_PRIVATE);
-		SharedPreferences.Editor editor= prefes.edit();
+		// __________GUARDAMOS LAS VARIABLES EN SHAREDPREFERENCES PARA
+		// UTILIZARLAS EN EL SERVICIO______________
+		SharedPreferences prefes = getSharedPreferences("pref_variables",
+				MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefes.edit();
 		editor.putString("id", iduser);
 		editor.commit();
 		// ________________________
-		
-		
+		RegistrarGCM();
+		// ______________________
 
 		try {
 			ComprobarSolicitudes("http://www.menorcapp.net/dema/comprobarinvitaciones.php?email="
@@ -101,12 +103,12 @@ public class ListarAmigos extends Activity {
 				startActivity(i);
 			}
 		});
-		
+
 		// Boton que nos lleva a las solicitudes pendientes
 		btfollowers.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(ListarAmigos.this,Followers.class);
+				Intent i = new Intent(ListarAmigos.this, Followers.class);
 				i.putExtra("id", iduser);
 				startActivity(i);
 			}
@@ -118,44 +120,68 @@ public class ListarAmigos extends Activity {
 					int position, long id) {
 				String selectedFromList = (listaamigos
 						.getItemAtPosition(position).toString());
-				
+
 				CrearPeticiona(selectedFromList);
-				
+
 				Intent i = new Intent(ListarAmigos.this, MostrarPosicion.class);
-				i.putExtra("id",iduser);
+				i.putExtra("id", iduser);
 				i.putExtra("amigo", selectedFromList);
 				startActivity(i);
+				
+				HacerPeticion("http://www.menorcapp.net/dema/GCM.php?receptor="+selectedFromList);
 
+			}
+
+				private void HacerPeticion(String url) {
+					// TODO Auto-generated method stub
+					try {
+
+						AsyncHttpClient client = new AsyncHttpClient();
+						client.get(url,
+								new AsyncHttpResponseHandler() {
+									@Override
+									public void onSuccess(String response) {
+										System.out.println(response);
+									}
+								});
+
+					} catch (Exception e) {
+						Log.e("log_tag", "Error in http connection " + e.toString());
+					}
 			}
 
 			private void CrearPeticiona(String selectedFromList) {
 				try {
 
 					AsyncHttpClient client = new AsyncHttpClient();
-					client.get("http://www.menorcapp.net/dema/crearpeticion.php?emisor="+iduser+"&receptor="+selectedFromList, new AsyncHttpResponseHandler() {
-						@Override
-						public void onSuccess(String response) {
-							System.out.println(response);
-							// text.setText(response);
+					client.get(
+							"http://www.menorcapp.net/dema/crearpeticion.php?emisor="
+									+ iduser + "&receptor=" + selectedFromList,
+							new AsyncHttpResponseHandler() {
+								@Override
+								public void onSuccess(String response) {
+									System.out.println(response);
+									// text.setText(response);
 
-							// toast(response);
+									// toast(response);
 
-							try {
+									try {
 
-								int ini = response.indexOf("0");
-								response = response.substring(ini, ini + 1);
+										int ini = response.indexOf("0");
+										response = response.substring(ini,
+												ini + 1);
 
-							} catch (Exception e) {
+									} catch (Exception e) {
 
-							}
+									}
 
-							if (response.equals("0")) {
-								// toast("0");
-							} else {
-								toast("No se ha podido crear la petici—n...");
-							}
-						}
-					});
+									if (response.equals("0")) {
+										// toast("0");
+									} else {
+										toast("No se ha podido crear la petici—n...");
+									}
+								}
+							});
 
 				} catch (Exception e) {
 					Log.e("log_tag", "Error in http connection " + e.toString());
@@ -164,7 +190,37 @@ public class ListarAmigos extends Activity {
 		});
 
 	}
-	
+
+	private void RegistrarGCM() {
+		try {
+
+			GCMRegistrar.checkDevice(this);
+			GCMRegistrar.checkManifest(this);
+
+			final String regId = GCMRegistrar.getRegistrationId(this);
+
+			if (regId.equals("")) {
+				GCMRegistrar.register(this, SENDER_ID);
+//				toast("http://www.menorcapp.net/DEMA/insertargcm.php?email="+iduser+"&gcm="+regId);
+				InsertarGCM("http://www.menorcapp.net/DEMA/insertargcm.php?email="+iduser+"&gcm="+regId);
+//				toast(regId);
+			} else {
+//				toast(regId);
+//				InsertarGCM("http://www.menorcapp.net/DEMA/insertargcm.php?email="+iduser+"&gcm="+regId);
+				
+				Log.v(TAG, "Ya estoy registrado");
+			}
+
+		} catch (UnsupportedOperationException e) {
+			Log.e(TAG, "El dispositivo no soporta GCM.", e);
+		} catch (IllegalStateException e) {
+			Log.e(TAG, "El manifest no est‡ bien configurado.", e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -175,7 +231,7 @@ public class ListarAmigos extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void ComprobarSolicitudes(String url) throws Exception {
@@ -206,6 +262,26 @@ public class ListarAmigos extends Activity {
 					} else {
 						toast("Tienes " + response + " soliditudes pendientes");
 					}
+				}
+			});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+			// text.append(" ERROR ");
+		}
+	}
+
+	public void InsertarGCM(String url) throws Exception {
+		BufferedReader in = null;
+
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(url, new AsyncHttpResponseHandler() {
+				@Override
+				public void onSuccess(String response) {
+					System.out.println(response);
+
 				}
 			});
 
