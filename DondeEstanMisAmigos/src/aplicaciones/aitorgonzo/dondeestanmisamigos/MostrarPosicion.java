@@ -3,6 +3,7 @@ package aplicaciones.aitorgonzo.dondeestanmisamigos;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
