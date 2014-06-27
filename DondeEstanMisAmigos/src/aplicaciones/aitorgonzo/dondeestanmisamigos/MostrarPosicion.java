@@ -45,6 +45,7 @@ public class MostrarPosicion extends Activity implements LocationListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mostrarposicion);
 
+		
 		// _______ Recuperamos el putextra_____________
 		if (savedInstanceState == null) {
 			savedInstanceState = getIntent().getExtras();
