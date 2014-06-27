@@ -3,7 +3,10 @@ package aplicaciones.aitorgonzo.dondeestanmisamigos;
 import java.util.List;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -13,8 +16,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.AsyncHttpClient;
@@ -33,6 +39,7 @@ public class MostrarPosicion extends Activity implements LocationListener {
 	private LocationManager manejador;
 	private String proveedor, salida;
 	private GoogleMap mMap;
+	private AlertDialog alert = null;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,6 +58,13 @@ public class MostrarPosicion extends Activity implements LocationListener {
 		} else {
 			id = (String) savedInstanceState.getSerializable("id");
 			amigo = (String) savedInstanceState.getSerializable("amigo");
+		}
+		
+		final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+		//pregunta para abrir el GPS
+		if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			AlertNoGps();
 		}
 
 		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
@@ -134,15 +148,55 @@ public class MostrarPosicion extends Activity implements LocationListener {
 								response.indexOf(";") + 1,
 								response.length() - 1);
 
-						mMap.addMarker(new MarkerOptions().position(
-								new LatLng(Double.parseDouble(latitud_amigo),
-										Double.parseDouble(longitud_amigo)))
-								.title("Este es el amigo: " + amigo));
+						// mMap.addMarker(new MarkerOptions().position(
+						// new LatLng(Double.parseDouble(latitud_amigo),
+						// Double.parseDouble(longitud_amigo)))
+						// .title("Este es el amigo: " + amigo));
+						AnadirMarcador(Double.parseDouble(latitud_amigo),
+								Double.parseDouble(longitud_amigo), amigo);
+
 					} catch (Exception e) {
 
 					}
 				}
+
 			});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+		}
+	}
+
+	public void AnadirMarcador(double latitud, double longitud, String amigo) {
+
+		try{
+			mMap.addMarker(new MarkerOptions().position(
+				new LatLng(latitud, longitud)).title(amigo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+		}catch(Exception e){
+			Log.e("","No se ha podido añadir el marcador "+e);
+		}
+
+	}
+
+	private void GuardarPosicion(double lati, double longi) {
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(
+					"http://www.menorcapp.net/dema/insertarcoordenadas.php?id="
+							+ id + "&latitud=" + lati + "&longitud=" + longi,
+					new AsyncHttpResponseHandler() {
+						@Override
+						public void onSuccess(String response) {
+							System.out.println(response);
+
+							try {
+								
+							} catch (Exception e) {
+
+							}
+						}
+					});
 
 		} catch (Exception e) {
 			Log.e("log_tag", "Error in http connection " + e.toString());
@@ -153,6 +207,8 @@ public class MostrarPosicion extends Activity implements LocationListener {
 		if (localizacion == null)
 			log("Localizaci—n desconocida\n");
 		else {
+
+
 			log(localizacion.toString() + "\n");
 			Toast.makeText(
 					this,
@@ -164,15 +220,44 @@ public class MostrarPosicion extends Activity implements LocationListener {
 			localizacion.getLatitude();
 			localizacion.getLongitude();
 
+			GuardarPosicion(localizacion.getLatitude(),
+					localizacion.getLongitude());
+
 			try {
 				mMap.addMarker(new MarkerOptions().position(
 						new LatLng(localizacion.getLatitude(), localizacion
-								.getLongitude())).title("Este soy Yo: " + id));
+								.getLongitude())).title(id).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+				
+				 LatLng latlng = new LatLng(localizacion.getLatitude(), localizacion.getLongitude());
+				 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 15);
+				    mMap.animateCamera(cameraUpdate);
 			} catch (Exception e) {
 
 			}
 		}
 
+	}
+
+	private void AlertNoGps() {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("El sistema GPS esta desactivado, ¿Desea activarlo?")
+				.setCancelable(false)
+				.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+					public void onClick(
+							@SuppressWarnings("unused") final DialogInterface dialog,
+							@SuppressWarnings("unused") final int id) {
+						startActivity(new Intent(
+								android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+					}
+				})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog,
+							@SuppressWarnings("unused") final int id) {
+						dialog.cancel();
+					}
+				});
+		alert = builder.create();
+		alert.show();
 	}
 
 	private void muestraProveedores() {

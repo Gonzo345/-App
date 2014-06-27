@@ -3,7 +3,6 @@ package aplicaciones.aitorgonzo.dondeestanmisamigos;
 import java.io.BufferedReader;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -12,29 +11,31 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class ServicioLocalizacion extends Service {
-	private static final long TIEMPO_MIN = 10 * 1000; // 10 segundos
-	private static final long DISTANCIA_MIN = 5; // 5 metros
 
 	private static final String[] A = { "n/d", "preciso", "impreciso" };
 	private static final String[] P = { "n/d", "bajo", "medio", "alto" };
 	private static final String[] E = { "fuera de servicio",
 			"temporalmente no disponible ", "disponible" };
+
+	private MyLocationListener mylistener;
 
 	private static final int MY_NOTIFICATION_ID = 1;
 	NotificationManager notificationManager;
@@ -67,29 +68,7 @@ public class ServicioLocalizacion extends Service {
 
 	// ################################
 	public void onCreate() {
-		timer.scheduleAtFixedRate(new TimerTask() {
-
-			@Override
-			public void run() {
-				Inicio();
-			}
-
-		}, 0, UPDATE_INTERVAL);
-		// #############################
-		timer.scheduleAtFixedRate(new TimerTask() {
-
-			@Override
-			public void run() {
-				Comprobacion();
-			}
-
-		}, 0, UPDATE_INTERVAL2);
-
-		// #############################
-		SharedPreferences prefes = getSharedPreferences("pref_variables",
-				MODE_PRIVATE);
-
-		iduser = prefes.getString("id", "");
+		// Inicio();
 
 	}
 
@@ -106,10 +85,28 @@ public class ServicioLocalizacion extends Service {
 		criterio.setAltitudeRequired(false);
 		criterio.setAccuracy(Criteria.ACCURACY_FINE);
 		proveedor = manejador.getBestProvider(criterio, true);
-		log("Mejor proveedor: " + proveedor + "\n");
-		log("Comenzamos con la ultima localizacion conocida:");
-		localizacion = manejador.getLastKnownLocation(proveedor);
-		muestraLocaliz(localizacion);
+
+		if (proveedor == null) {
+			toast("Actualmente no tienes ningún proveedor de localización");
+		} else {
+
+			log("Mejor proveedor: " + proveedor + "\n");
+			log("Comenzamos con la ultima localizacion conocida:");
+
+			mylistener = new MyLocationListener();
+
+			if (localizacion != null) {
+				mylistener.onLocationChanged(localizacion);
+			} else {
+				Intent intent = new Intent(
+						Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				startActivity(intent);
+			}
+
+			// localizacion = manejador.getLastKnownLocation(proveedor);
+			manejador.requestLocationUpdates(proveedor, 200, 1, mylistener);
+			muestraLocaliz(localizacion);
+		}
 	}
 
 	// MŽtodos de la interfaz LocationListener
@@ -147,7 +144,7 @@ public class ServicioLocalizacion extends Service {
 			latit = localizacion.getLatitude() + "";
 			longi = localizacion.getLongitude() + "";
 
-			Notificacion();
+//			Notificacion();
 			InsertarCoordenadas(latit, longi);
 
 		}
@@ -190,10 +187,10 @@ public class ServicioLocalizacion extends Service {
 						public void onSuccess(String response) {
 							System.out.println(response);
 
-							if (response!="0") {
+							if (response != "0") {
 								Inicio();
-							}else{
-								
+							} else {
+
 							}
 
 						}
@@ -231,25 +228,64 @@ public class ServicioLocalizacion extends Service {
 				+ ", supportsSpeed=" + info.supportsSpeed() + " ]\n");
 	}
 
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	public void Notificacion() {
+//	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//	public void Notificacion() {
+//
+//		Context context = getApplicationContext();
+//		Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("aitor"));
+//		PendingIntent pendingIntent = PendingIntent.getActivity(
+//				ServicioLocalizacion.this, 0, myIntent,
+//				Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//		myNotification = new Notification.Builder(context)
+//				.setContentTitle("Servicio rastreando")
+//				.setContentText(latit + "  " + longi)
+//				.setTicker("Coordenadas: " + latit + "," + longi)
+//				.setWhen(System.currentTimeMillis())
+//				.setContentIntent(pendingIntent)
+//				// .setDefaults(Notification.DEFAULT_LIGHTS).setAutoCancel(true)
+//				.setSmallIcon(R.drawable.ic_launcher).build();
+//
+//		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//		notificationManager.notify(MY_NOTIFICATION_ID, myNotification);
+//
+//	}
 
-		Context context = getApplicationContext();
-		Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("aitor"));
-		PendingIntent pendingIntent = PendingIntent.getActivity(
-				ServicioLocalizacion.this, 0, myIntent,
-				Intent.FLAG_ACTIVITY_NEW_TASK);
+	private class MyLocationListener implements LocationListener {
+		private String loquehace;
 
-		myNotification = new Notification.Builder(context)
-				.setContentTitle("Servicio rastreando").setContentText(latit+"  "+longi)
-				.setTicker("Coordenadas: " + latit + "," + longi)
-				.setWhen(System.currentTimeMillis())
-				.setContentIntent(pendingIntent)
-//				.setDefaults(Notification.DEFAULT_LIGHTS).setAutoCancel(true)
-				.setSmallIcon(R.drawable.ic_launcher).build();
+		@Override
+		public void onLocationChanged(Location location) {
+			// Initialize the location fields
+			loquehace = "Latitude: " + String.valueOf(location.getLatitude());
+			loquehace = loquehace + "Longitude: "
+					+ String.valueOf(location.getLongitude());
+			loquehace = loquehace + proveedor + " provider has been selected.";
 
-		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(MY_NOTIFICATION_ID, myNotification);
+			Toast.makeText(ServicioLocalizacion.this, "Location changed!",
+					Toast.LENGTH_SHORT).show();
+		}
 
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			Toast.makeText(ServicioLocalizacion.this,
+					provider + "'s status changed to " + status + "!",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+			Toast.makeText(ServicioLocalizacion.this,
+					"Provider " + provider + " enabled!", Toast.LENGTH_SHORT)
+					.show();
+
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+			Toast.makeText(ServicioLocalizacion.this,
+					"Provider " + provider + " disabled!", Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
 }

@@ -5,7 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -18,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import aplicaciones.aitorgonzo.dondeestanmisamigos.R;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -27,7 +28,7 @@ public class Login extends ActionBarActivity {
 
 	private EditText txpassword;	//Declarado para capturarlo posteriormente
 	private EditText txuser;
-	private String id="";
+	private String id="", pass="";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,14 @@ public class Login extends ActionBarActivity {
 		txuser = (EditText)findViewById(R.id.txuser);
 		txpassword = (EditText)findViewById(R.id.txpassword);
 		
+		
+		//Comprovamos si el Shared Preferences tiene el login y el pass para hacer el login autom‡tico
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		id = prefs.getString("id", "");
+		pass = prefs.getString("pass", "");
+		
+		toast(id+pass);
+		//________________________
 		//Al hacer click en Login, si todo est‡ ok nos lleva a ListarAmigos
 		btlogin.setOnClickListener(new OnClickListener() {
 
@@ -149,6 +158,20 @@ public class Login extends ActionBarActivity {
 						Intent i = new Intent(Login.this, ListarAmigos.class);
 						i.putExtra("id", id);
 						startActivity(i);
+						
+						// __________GUARDAMOS LAS VARIABLES EN SHAREDPREFERENCES PARA
+						// UTILIZARLAS EN EL SERVICIO______________
+						SharedPreferences prefes = getSharedPreferences("pref_variables",
+								MODE_PRIVATE);
+						SharedPreferences.Editor editor = prefes.edit();
+						editor.putString("id", id);
+						editor.putString("pass", txpassword.getText().toString());
+						editor.commit();
+						
+						toast("guardamos las preferencias");
+						// ________________________
+						
+						
 						//toast("1");
 					} else {
 					

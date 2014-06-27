@@ -1,0 +1,41 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="aplicacions.aitorgonzo.rebootnow.Inicial"
+    tools:ignore="MergeRootFrame" >
+
+<!--     <Button -->
+<!--         android:id="@+id/Reiniciar" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:text="Button" /> -->
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hola Capullina he fet aquest petit programa, que et mostrará una notificació si no tens internet, així el podrás reiniciar just es quedi sense internet..."
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="322dp"
+                android:src="@drawable/box1" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

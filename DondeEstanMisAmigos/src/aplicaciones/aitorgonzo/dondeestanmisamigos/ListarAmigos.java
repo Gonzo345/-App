@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +28,7 @@ public class ListarAmigos extends Activity {
 	private String[] lista = {};
 	private String iduser = "", resp_amigos = "", TAG = "GCM",
 			SENDER_ID = "714817077344";
+	private String cadena;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,7 +41,9 @@ public class ListarAmigos extends Activity {
 		btsolicitudes = (Button) findViewById(R.id.btsolicitudes);
 		btanadir = (Button) findViewById(R.id.btanadir);
 		btfollowers = (Button) findViewById(R.id.btfollowers);
-
+		
+		
+		
 		// _______ Recuperamos el putextra_____________
 		if (savedInstanceState == null) {
 			savedInstanceState = getIntent().getExtras();
@@ -51,15 +55,15 @@ public class ListarAmigos extends Activity {
 		} else {
 			iduser = (String) savedInstanceState.getSerializable("id");
 		}
-		// ________________________
-		// __________GUARDAMOS LAS VARIABLES EN SHAREDPREFERENCES PARA
-		// UTILIZARLAS EN EL SERVICIO______________
-		SharedPreferences prefes = getSharedPreferences("pref_variables",
-				MODE_PRIVATE);
-		SharedPreferences.Editor editor = prefes.edit();
-		editor.putString("id", iduser);
-		editor.commit();
-		// ________________________
+//		// ________________________
+//		// __________GUARDAMOS LAS VARIABLES EN SHAREDPREFERENCES PARA
+//		// UTILIZARLAS EN EL SERVICIO______________
+//		SharedPreferences prefes = getSharedPreferences("pref_variables",
+//				MODE_PRIVATE);
+//		SharedPreferences.Editor editor = prefes.edit();
+//		editor.putString("id", iduser);
+//		editor.commit();
+//		// ________________________
 		RegistrarGCM();
 		// ______________________
 
@@ -128,29 +132,14 @@ public class ListarAmigos extends Activity {
 				i.putExtra("amigo", selectedFromList);
 				startActivity(i);
 				
-				HacerPeticion("http://www.menorcapp.net/dema/GCM.php?receptor="+selectedFromList);
+				HacerPeticion("http://www.menorcapp.net/dema/GCM.php?emisor="+iduser+"&receptor="+selectedFromList);
 
 			}
 
-				private void HacerPeticion(String url) {
-					// TODO Auto-generated method stub
-					try {
-
-						AsyncHttpClient client = new AsyncHttpClient();
-						client.get(url,
-								new AsyncHttpResponseHandler() {
-									@Override
-									public void onSuccess(String response) {
-										System.out.println(response);
-									}
-								});
-
-					} catch (Exception e) {
-						Log.e("log_tag", "Error in http connection " + e.toString());
-					}
-			}
+				
 
 			private void CrearPeticiona(String selectedFromList) {
+				cadena= selectedFromList;
 				try {
 
 					AsyncHttpClient client = new AsyncHttpClient();
@@ -178,7 +167,7 @@ public class ListarAmigos extends Activity {
 									if (response.equals("0")) {
 										// toast("0");
 									} else {
-										toast("No se ha podido crear la petici—n...");
+										toast("No se ha podido crear la petici—n a " + cadena);
 									}
 								}
 							});
@@ -190,6 +179,24 @@ public class ListarAmigos extends Activity {
 		});
 
 	}
+	
+	private void HacerPeticion(String url) {
+		// TODO Auto-generated method stub
+		try {
+
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(url,
+					new AsyncHttpResponseHandler() {
+						@Override
+						public void onSuccess(String response) {
+							System.out.println(response);
+						}
+					});
+
+		} catch (Exception e) {
+			Log.e("log_tag", "Error in http connection " + e.toString());
+		}
+}
 
 	private void RegistrarGCM() {
 		try {
@@ -203,10 +210,10 @@ public class ListarAmigos extends Activity {
 				GCMRegistrar.register(this, SENDER_ID);
 //				toast("http://www.menorcapp.net/DEMA/insertargcm.php?email="+iduser+"&gcm="+regId);
 				InsertarGCM("http://www.menorcapp.net/DEMA/insertargcm.php?email="+iduser+"&gcm="+regId);
-//				toast(regId);
+				toast(regId);
 			} else {
 //				toast(regId);
-//				InsertarGCM("http://www.menorcapp.net/DEMA/insertargcm.php?email="+iduser+"&gcm="+regId);
+				InsertarGCM("http://www.menorcapp.net/DEMA/insertargcm.php?email="+iduser+"&gcm="+regId);
 				
 				Log.v(TAG, "Ya estoy registrado");
 			}
